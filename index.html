@@ -3,3803 +3,805 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Mountain Keep</title>
-
+<title>Mountain Keep Manager</title>
 <style>
-
-/* =========================================================
-   BASIC
-   ========================================================= */
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f3f3f1;
-    color: #222;
-}
-
-header {
-    background: #242424;
-    color: white;
-    padding: 18px 24px;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 22px;
-    font-weight: 500;
-}
-
-header p {
-    margin: 4px 0 0;
-    color: #aaa;
-    font-size: 13px;
-}
-
-nav {
-    display: flex;
-    background: white;
-    border-bottom: 1px solid #ddd;
-    padding: 0 20px;
-    overflow-x: auto;
-}
-
-nav button {
-    border: none;
-    background: none;
-    padding: 14px 18px;
-    color: #666;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-nav button.active {
-    color: #222;
-    border-bottom: 2px solid #222;
-}
-
-main {
-    max-width: 1200px;
-    margin: 25px auto;
-    padding: 0 20px;
-}
-
-.page {
-    display: none;
-}
-
-.page.active {
-    display: block;
-}
-
-
-/* =========================================================
-   LAYOUT
-   ========================================================= */
-
-.grid {
-    display: grid;
-    gap: 15px;
-}
-
-.grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.card {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 18px;
-}
-
-.card h2 {
-    margin: 0 0 15px;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.section-title {
-    margin: 28px 0 12px;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-
-/* =========================================================
-   METRICS
-   ========================================================= */
-
-.metric {
-    font-size: 27px;
-    font-weight: 500;
-    margin-top: 5px;
-}
-
-.label {
-    font-size: 11px;
-    color: #777;
-    text-transform: uppercase;
-    letter-spacing: .05em;
-}
-
-.positive {
-    color: #31734b;
-}
-
-.negative {
-    color: #9a3939;
-}
-
-.warning-text {
-    color: #876522;
-}
-
-
-/* =========================================================
-   TABLES
-   ========================================================= */
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-}
-
-th {
-    text-align: left;
-    color: #777;
-    font-size: 12px;
-    font-weight: normal;
-    border-bottom: 1px solid #ddd;
-    padding: 8px;
-}
-
-td {
-    padding: 9px 8px;
-    border-bottom: 1px solid #eee;
-}
-
-
-/* =========================================================
-   FORMS
-   ========================================================= */
-
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 9px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: white;
-    font-family: inherit;
-}
-
-textarea {
-    resize: vertical;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr auto;
-    gap: 8px;
-    align-items: end;
-}
-
-.form-group label {
-    display: block;
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 5px;
-}
-
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
-
-button {
-    font-family: inherit;
-}
-
-.primary {
-    background: #222;
-    color: white;
-    border: none;
-    padding: 9px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.secondary {
-    background: white;
-    color: #333;
-    border: 1px solid #ccc;
-    padding: 8px 13px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.danger {
-    color: #9a3939;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.primary:hover,
-.secondary:hover {
-    opacity: .8;
-}
-
-
-/* =========================================================
-   STATUS
-   ========================================================= */
-
-.status {
-    display: inline-block;
-    padding: 3px 7px;
-    border-radius: 3px;
-    font-size: 11px;
-}
-
-.status.good {
-    background: #e4eee7;
-    color: #31734b;
-}
-
-.status.warning {
-    background: #f3ead8;
-    color: #876522;
-}
-
-.status.bad {
-    background: #f2e0e0;
-    color: #9a3939;
-}
-
-.status.neutral {
-    background: #eee;
-    color: #666;
-}
-
-
-/* =========================================================
-   ALERTS
-   ========================================================= */
-
-.alert {
-    padding: 12px 14px;
-    margin-bottom: 8px;
-    border-radius: 4px;
-    font-size: 13px;
-}
-
-.alert.warning {
-    background: #f5ecd9;
-    color: #76591c;
-}
-
-.alert.danger {
-    background: #f3e0e0;
-    color: #8b3333;
-}
-
-.alert.good {
-    background: #e4eee7;
-    color: #356b49;
-}
-
-
-/* =========================================================
-   MONTH CONTROL
-   ========================================================= */
-
-.turn-control {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.turn-title {
-    font-size: 18px;
-}
-
-.turn-title span {
-    color: #777;
-    font-size: 13px;
-}
-
-
-/* =========================================================
-   MODAL
-   ========================================================= */
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    inset: 0;
-    background: rgba(0,0,0,.45);
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.modal.show {
-    display: flex;
-}
-
-.modal-content {
-    background: white;
-    width: 100%;
-    max-width: 550px;
-    max-height: 90vh;
-    overflow-y: auto;
-    padding: 22px;
-    border-radius: 5px;
-}
-
-.modal-content h2 {
-    margin-top: 0;
-}
-
-
-/* =========================================================
-   LOG
-   ========================================================= */
-
-.log-entry {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-    font-size: 13px;
-}
-
-.log-date {
-    color: #888;
-    font-size: 11px;
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media(max-width: 850px) {
-
-    .grid-4,
-    .grid-3 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .grid-2 {
-        grid-template-columns: 1fr;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media(max-width: 500px) {
-
-    .grid-4,
-    .grid-3 {
-        grid-template-columns: 1fr;
-    }
-
-    main {
-        padding: 0 12px;
-    }
-
-    header {
-        padding: 15px;
-    }
-}
-
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f3f3f1;color:#222}
+header{background:#242424;color:#fff;padding:18px 24px}
+header h1{margin:0;font-size:22px;font-weight:500}
+header p{margin:4px 0 0;color:#aaa;font-size:13px}
+nav{display:flex;background:#fff;border-bottom:1px solid #ddd;padding:0 12px;overflow-x:auto}
+nav button{border:0;background:none;padding:13px 14px;color:#666;cursor:pointer;white-space:nowrap}
+nav button.active{color:#222;border-bottom:2px solid #222}
+main{max-width:1250px;margin:24px auto;padding:0 18px}
+.page{display:none}.page.active{display:block}
+.grid{display:grid;gap:14px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:#fff;border:1px solid #ddd;border-radius:5px;padding:16px}
+.card h2{font-size:16px;font-weight:500;margin:0 0 14px}
+.section-title{font-size:18px;font-weight:500;margin:25px 0 10px}
+.label{font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.05em}
+.metric{font-size:25px;font-weight:500;margin-top:5px}.positive{color:#31734b}.negative{color:#9a3939}.muted{color:#777}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:#777;font-size:11px;font-weight:normal;border-bottom:1px solid #ddd;padding:7px}
+td{padding:8px 7px;border-bottom:1px solid #eee;vertical-align:middle}
+input,select,textarea{width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;background:#fff;font:inherit}
+textarea{resize:vertical}
+.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;align-items:end}.form-grid5{grid-template-columns:repeat(5,1fr)}
+.form-group label{display:block;font-size:11px;color:#666;margin-bottom:4px}
+button{font:inherit}.primary{background:#222;color:#fff;border:0;padding:8px 13px;border-radius:4px;cursor:pointer}.secondary{background:#fff;color:#333;border:1px solid #ccc;padding:7px 11px;border-radius:4px;cursor:pointer}.danger{background:none;border:0;color:#963b3b;cursor:pointer}
+.status{display:inline-block;padding:3px 6px;border-radius:3px;font-size:10px}.good{background:#e4eee7;color:#31734b}.warning{background:#f3ead8;color:#876522}.bad{background:#f2e0e0;color:#9a3939}.neutral{background:#eee;color:#666}
+.alert{padding:10px 12px;margin:5px 0;border-radius:4px;font-size:13px}.alert.good{background:#e4eee7;color:#356b49}.alert.warning{background:#f5ecd9;color:#76591c}.alert.danger{background:#f3e0e0;color:#8b3333}
+.turnbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.turnbar strong{font-size:18px}.turnbar span{color:#777;font-size:12px}
+.progress{height:7px;background:#eee;border-radius:5px;overflow:hidden}.progress div{height:100%;background:#555}
+.small{font-size:11px;color:#777}
+.inline{display:flex;gap:7px;align-items:center}.right{text-align:right}
+.log-entry{padding:8px 0;border-bottom:1px solid #eee;font-size:13px}.log-date{font-size:10px;color:#888;margin-bottom:2px}
+.modal{display:none;position:fixed;z-index:20;inset:0;background:rgba(0,0,0,.45);align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-content{background:#fff;width:100%;max-width:550px;max-height:90vh;overflow:auto;padding:20px;border-radius:5px}
+canvas{width:100%;height:260px;border:1px solid #eee;background:#fff}
+.tabs{display:flex;gap:6px;margin-bottom:10px}.tabs button{border:1px solid #ccc;background:#fff;padding:7px 10px;border-radius:4px;cursor:pointer}.tabs button.active{background:#222;color:#fff}
+@media(max-width:900px){.g4,.g3{grid-template-columns:repeat(2,1fr)}.form-grid,.form-grid5{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
+@media(max-width:550px){.g4,.g3,.g2,.form-grid,.form-grid5{grid-template-columns:1fr}main{padding:0 10px}.turnbar{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
-
-
 <body>
 
-
-<!-- =========================================================
-     HEADER
-     ========================================================= -->
-
 <header>
-
-    <h1 id="keepName">
-        The Mountain Keep
-    </h1>
-
-    <p>
-        Keep Management Ledger
-    </p>
-
+  <h1 id="keepName">The Mountain Keep</h1>
+  <p>Keep Management Ledger</p>
 </header>
 
-
-<!-- =========================================================
-     NAVIGATION
-     ========================================================= -->
-
-<nav>
-
-    <button
-        class="nav-button active"
-        onclick="showPage('overview', this)">
-        Overview
-    </button>
-
-    <button
-        class="nav-button"
-        onclick="showPage('finance', this)">
-        Finance
-    </button>
-
-    <button
-        class="nav-button"
-        onclick="showPage('keep', this)">
-        Keep
-    </button>
-
-    <button
-        class="nav-button"
-        onclick="showPage('staff', this)">
-        Staff & Stores
-    </button>
-
-    <button
-        class="nav-button"
-        onclick="showPage('log', this)">
-        Log
-    </button>
-
-    <button
-        class="nav-button"
-        onclick="openDM()">
-        DM
-    </button>
-
-</nav>
-
+<nav id="nav"></nav>
 
 <main>
 
+<!-- OVERVIEW -->
+<section id="overview" class="page active">
+  <div class="turnbar">
+    <div><strong id="dateLabel">January, Year 1</strong><br><span id="turnLabel">Turn 1</span></div>
+    <button class="primary" onclick="openAdvance()">Advance Turn</button>
+  </div>
 
-<!-- =========================================================
-     OVERVIEW
-     ========================================================= -->
+  <div class="grid g4">
+    <div class="card"><div class="label">Treasury</div><div class="metric" id="balanceMetric">0 gp</div></div>
+    <div class="card"><div class="label">Expected Monthly Net</div><div class="metric" id="netMetric">0 gp</div></div>
+    <div class="card"><div class="label">Public Order</div><div class="metric" id="orderMetric">0 / 100</div></div>
+    <div class="card"><div class="label">Store Capacity</div><div class="metric" id="capacityMetric">0 / 1000</div></div>
+  </div>
 
-<section
-    id="overview"
-    class="page active">
+  <h2 class="section-title">Keep Status</h2>
+  <div id="alerts"></div>
 
+  <div class="grid g3">
+    <div class="card"><h2>Income</h2><div id="overviewIncome"></div></div>
+    <div class="card"><h2>Expenses</h2><div id="overviewExpenses"></div></div>
+    <div class="card"><h2>Villages & Rents</h2><div id="overviewVillages"></div></div>
+  </div>
 
-    <div class="turn-control">
-
-        <div class="turn-title">
-
-            <strong id="monthName">
-                Month 1
-            </strong>
-
-            <span id="seasonName">
-                Spring
-            </span>
-
-        </div>
-
-        <button
-            class="primary"
-            onclick="openAdvanceModal()">
-
-            Advance Month
-
-        </button>
-
-    </div>
-
-
-    <!-- FINANCIAL METRICS -->
-
-    <div class="grid grid-4">
-
-        <div class="card">
-
-            <div class="label">
-                Current Balance
-            </div>
-
-            <div
-                id="balance"
-                class="metric">
-                0 gp
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="label">
-                Monthly Income
-            </div>
-
-            <div
-                id="monthlyIncome"
-                class="metric positive">
-                0 gp
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="label">
-                Monthly Expenses
-            </div>
-
-            <div
-                id="monthlyExpenses"
-                class="metric negative">
-                0 gp
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="label">
-                Expected Monthly Net
-            </div>
-
-            <div
-                id="monthlyNet"
-                class="metric">
-                0 gp
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ALERTS -->
-
-    <h2 class="section-title">
-        Keep Status
-    </h2>
-
-    <div id="alerts"></div>
-
-
-    <!-- INCOME / EXPENSES -->
-
-    <div
-        class="grid grid-2"
-        style="margin-top:15px;">
-
-        <div class="card">
-
-            <h2>
-                Income Streams
-            </h2>
-
-            <div id="overviewIncome"></div>
-
-        </div>
-
-
-        <div class="card">
-
-            <h2>
-                Regular Expenditures
-            </h2>
-
-            <div id="overviewExpenses"></div>
-
-        </div>
-
-    </div>
-
-
-    <!-- NEXT MONTH -->
-
-    <h2 class="section-title">
-        Next Month Forecast
-    </h2>
-
-    <div class="card">
-
-        <div id="forecast"></div>
-
-    </div>
-
-
+  <h2 class="section-title">Ongoing Upgrades</h2>
+  <div class="card"><div id="overviewUpgrades"></div></div>
 </section>
 
+<!-- FINANCE -->
+<section id="finance" class="page">
+  <h2 class="section-title">Finance</h2>
 
+  <div class="grid g4">
+    <div class="card"><div class="label">Monthly Income</div><div class="metric positive" id="financeIncome">0 gp</div></div>
+    <div class="card"><div class="label">Monthly Expenses</div><div class="metric negative" id="financeExpenses">0 gp</div></div>
+    <div class="card"><div class="label">Tax</div><div class="metric" id="financeTax">0 gp</div></div>
+    <div class="card"><div class="label">Net</div><div class="metric" id="financeNet">0 gp</div></div>
+  </div>
 
-<!-- =========================================================
-     FINANCE
-     ========================================================= -->
-
-<section
-    id="finance"
-    class="page">
-
-
-    <h2 class="section-title">
-        Finance
-    </h2>
-
-
-    <!-- BALANCE -->
-
-    <div class="card">
-
-        <h2>
-            Current Balance
-        </h2>
-
-        <div class="form-row">
-
-            <div class="form-group">
-
-                <label>
-                    Balance
-                </label>
-
-                <input
-                    id="startingBalance"
-                    type="number">
-
-            </div>
-
-            <div></div>
-            <div></div>
-
-            <button
-                class="primary"
-                onclick="setBalance()">
-
-                Update
-
-            </button>
-
-        </div>
-
+  <div class="card" style="margin-top:14px">
+    <h2>Recurring Income</h2>
+    <div class="form-grid">
+      <div class="form-group"><label>Name</label><input id="incomeName" placeholder="Mine lease"></div>
+      <div class="form-group"><label>Monthly Base</label><input id="incomeAmount" type="number"></div>
+      <div class="form-group"><label>Type</label><select id="incomeType"><option value="general">General</option><option value="other">Other</option></select></div>
+      <button class="primary" onclick="addIncome()">Add</button>
     </div>
+    <div id="incomeList" style="margin-top:12px"></div>
+  </div>
 
+  <div class="card" style="margin-top:14px">
+    <h2>Automatic Expenses</h2>
+    <p class="small">Staff wages, maintenance reserve, tax and other recurring costs are calculated automatically.</p>
+    <div id="expenseList"></div>
+  </div>
 
-    <!-- TRANSACTION -->
-
-    <div
-        class="card"
-        style="margin-top:15px;">
-
-        <h2>
-            Record Transaction
-        </h2>
-
-        <div class="form-row">
-
-            <div class="form-group">
-
-                <label>
-                    Description
-                </label>
-
-                <input
-                    id="transactionName"
-                    placeholder="e.g. Merchant caravan">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Amount
-                </label>
-
-                <input
-                    id="transactionAmount"
-                    type="number"
-                    placeholder="0">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Type
-                </label>
-
-                <select id="transactionType">
-
-                    <option value="income">
-                        Income
-                    </option>
-
-                    <option value="expense">
-                        Expense
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <button
-                class="primary"
-                onclick="addTransaction()">
-
-                Add
-
-            </button>
-
-        </div>
-
+  <div class="card" style="margin-top:14px">
+    <h2>One-off Transaction</h2>
+    <div class="form-grid">
+      <div class="form-group"><label>Description</label><input id="txName"></div>
+      <div class="form-group"><label>Amount</label><input id="txAmount" type="number"></div>
+      <div class="form-group"><label>Type</label><select id="txType"><option value="income">Income</option><option value="expense">Expense</option></select></div>
+      <button class="primary" onclick="addTransaction()">Record</button>
     </div>
+  </div>
 
-
-    <!-- RECURRING -->
-
-    <div
-        class="grid grid-2"
-        style="margin-top:15px;">
-
-
-        <div class="card">
-
-            <h2>
-                Recurring Income
-            </h2>
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label>
-                        Income Stream
-                    </label>
-
-                    <input
-                        id="incomeName"
-                        placeholder="e.g. Toll Road">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Monthly
-                    </label>
-
-                    <input
-                        id="incomeAmount"
-                        type="number">
-
-                </div>
-
-
-                <button
-                    class="primary"
-                    onclick="addIncome()">
-
-                    Add
-
-                </button>
-
-            </div>
-
-            <div id="incomeList"></div>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h2>
-                Recurring Expenses
-            </h2>
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label>
-                        Expenditure
-                    </label>
-
-                    <input
-                        id="expenseName"
-                        placeholder="e.g. Guards">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Monthly
-                    </label>
-
-                    <input
-                        id="expenseAmount"
-                        type="number">
-
-                </div>
-
-
-                <button
-                    class="primary"
-                    onclick="addExpense()">
-
-                    Add
-
-                </button>
-
-            </div>
-
-            <div id="expenseList"></div>
-
-        </div>
-
+  <div class="card" style="margin-top:14px">
+    <h2>Trade</h2>
+    <p class="small">Trade uses the keep's spare carrying capacity. Buy or sell goods directly into inventory.</p>
+    <div class="grid g3">
+      <div><div class="label">Trade Capacity</div><div class="metric" id="tradeCapacity"></div></div>
+      <div><div class="label">Merchant</div><div id="merchantStatus"></div></div>
+      <div><div class="label">Wagons</div><div class="metric" id="wagonCount"></div></div>
     </div>
+    <div class="form-grid" style="margin-top:12px">
+      <div class="form-group"><label>Item</label><select id="tradeItem"></select></div>
+      <div class="form-group"><label>Quantity</label><input id="tradeQty" type="number" min="1"></div>
+      <div class="form-group"><label>Price per unit</label><input id="tradePrice" type="number" min="0"></div>
+      <div class="form-group"><label>Action</label><select id="tradeAction"><option value="buy">Buy</option><option value="sell">Sell</option></select></div>
+      <button class="primary" onclick="trade()">Trade</button>
+    </div>
+    <div style="margin-top:12px">
+      <button class="secondary" onclick="buyWagon()">Buy Wagon (+100 capacity)</button>
+      <button class="secondary" onclick="hireMerchant()">Hire Merchant</button>
+    </div>
+  </div>
 
-
+  <div class="card" style="margin-top:14px">
+    <h2>Finance Log</h2>
+    <div id="financeLog"></div>
+  </div>
 </section>
 
+<!-- KEEP -->
+<section id="keep" class="page">
+  <h2 class="section-title">Buildings & Facilities</h2>
+  <div class="card">
+    <div id="buildingList"></div>
+  </div>
 
-
-<!-- =========================================================
-     KEEP
-     ========================================================= -->
-
-<section
-    id="keep"
-    class="page">
-
-
-    <h2 class="section-title">
-        Buildings & Facilities
-    </h2>
-
-
-    <div class="card">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Facility
-                    </th>
-
-                    <th>
-                        Condition
-                    </th>
-
-                    <th>
-                        Maintenance
-                    </th>
-
-                    <th>
-                        Upgrade
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody
-                id="buildingList">
-            </tbody>
-
-        </table>
-
+  <h2 class="section-title">Maintenance Tasks</h2>
+  <div class="card">
+    <div class="form-grid5">
+      <div class="form-group"><label>Task</label><input id="maintName" placeholder="Repair wall"></div>
+      <div class="form-group"><label>Building</label><select id="maintBuilding"></select></div>
+      <div class="form-group"><label>Cost</label><input id="maintCost" type="number"></div>
+      <div class="form-group"><label>Condition Restored</label><input id="maintRestore" type="number" min="0" max="100"></div>
+      <button class="primary" onclick="addMaintenance()">Add</button>
     </div>
+    <div id="maintenanceList" style="margin-top:12px"></div>
+  </div>
 
-
-    <h2 class="section-title">
-        Maintenance
-    </h2>
-
-
-    <div class="card">
-
-        <div id="maintenanceList"></div>
-
+  <h2 class="section-title">Possible Upgrades</h2>
+  <div class="card">
+    <div class="form-grid5">
+      <div class="form-group"><label>Upgrade</label><input id="upgradeName" placeholder="Reinforced Gate"></div>
+      <div class="form-group"><label>Building</label><select id="upgradeBuilding"></select></div>
+      <div class="form-group"><label>Cost</label><input id="upgradeCost" type="number"></div>
+      <div class="form-group"><label>Turns</label><input id="upgradeTurns" type="number" min="1"></div>
+      <button class="primary" onclick="addUpgrade()">Add</button>
     </div>
+    <div id="upgradeList" style="margin-top:12px"></div>
+  </div>
 
+  <h2 class="section-title">Ongoing Upgrades</h2>
+  <div class="card"><div id="ongoingList"></div></div>
 
-    <h2 class="section-title">
-        Available Upgrades
-    </h2>
-
-
-    <div class="card">
-
-        <div id="upgradeList"></div>
-
-    </div>
-
-
+  <h2 class="section-title">Completed Upgrades</h2>
+  <div class="card"><div id="completedList"></div></div>
 </section>
 
-
-
-<!-- =========================================================
-     STAFF & STORES
-     ========================================================= -->
-
-<section
-    id="staff"
-    class="page">
-
-
-    <h2 class="section-title">
-        Staff
-    </h2>
-
-
-    <div class="card">
-
-        <div class="form-row">
-
-            <div class="form-group">
-
-                <label>
-                    Name
-                </label>
-
-                <input
-                    id="staffName"
-                    placeholder="Name">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Role
-                </label>
-
-                <input
-                    id="staffRole"
-                    placeholder="Guard">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Monthly Wage
-                </label>
-
-                <input
-                    id="staffWage"
-                    type="number">
-
-            </div>
-
-
-            <button
-                class="primary"
-                onclick="addStaff()">
-
-                Add
-
-            </button>
-
-        </div>
-
-
-        <div
-            style="margin-top:15px;"
-            id="staffList">
-        </div>
-
+<!-- STAFF -->
+<section id="staff" class="page">
+  <h2 class="section-title">Staff</h2>
+  <div class="card">
+    <div class="form-grid5">
+      <div class="form-group"><label>Name</label><input id="staffName"></div>
+      <div class="form-group"><label>Type / Role</label>
+        <select id="staffType">
+          <option value="Private">Guard — Private</option>
+          <option value="Sergeant">Guard — Sergeant</option>
+          <option value="Captain">Guard — Captain</option>
+          <option value="Steward">Steward</option>
+          <option value="Tradesman">Tradesman</option>
+          <option value="Artisan">Artisan</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Rank (1–5)</label><input id="staffRank" type="number" min="1" max="5" value="1"></div>
+      <div class="form-group"><label>Monthly Wage</label><input id="staffWage" type="number"></div>
+      <button class="primary" onclick="addStaff()">Add</button>
     </div>
+    <p class="small">Guard limits: 45 Privates, 5 Sergeants, 1 Captain. Guard wage is automatically suggested from rank but can be edited.</p>
+  </div>
 
+  <div class="card" style="margin-top:14px"><h2>Non-Guard Staff</h2><div id="staffList"></div></div>
 
-    <h2 class="section-title">
-        Stores
-    </h2>
+  <div class="card" style="margin-top:14px"><h2>Guards</h2><div id="guardList"></div></div>
 
-
-    <div class="card">
-
-        <div class="form-row">
-
-            <div class="form-group">
-
-                <label>
-                    Item
-                </label>
-
-                <input
-                    id="storeName"
-                    placeholder="Food">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Quantity
-                </label>
-
-                <input
-                    id="storeQuantity"
-                    type="number">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Capacity
-                </label>
-
-                <input
-                    id="storeCapacity"
-                    type="number">
-
-            </div>
-
-
-            <button
-                class="primary"
-                onclick="addStore()">
-
-                Add
-
-            </button>
-
-        </div>
-
-
-        <div
-            style="margin-top:15px;"
-            id="storeList">
-        </div>
-
-    </div>
-
-
+  <div class="card" style="margin-top:14px"><h2>Guard Training & Equipment</h2><p class="small">Equipment levels require the next equipment package in inventory. Training requires turns: 0→1 = 1, 1→2 = 2, 2→3 = 3.</p><div id="trainingList"></div></div>
 </section>
 
+<!-- STORES -->
+<section id="stores" class="page">
+  <h2 class="section-title">Stores</h2>
+  <div class="grid g3">
+    <div class="card"><div class="label">Used Capacity</div><div class="metric" id="usedCapacity"></div></div>
+    <div class="card"><div class="label">Overall Capacity</div><div class="metric" id="overallCapacity"></div></div>
+    <div class="card"><div class="label">Remaining</div><div class="metric" id="remainingCapacity"></div></div>
+  </div>
 
-
-<!-- =========================================================
-     LOG
-     ========================================================= -->
-
-<section
-    id="log"
-    class="page">
-
-
-    <h2 class="section-title">
-        Keep Log
-    </h2>
-
-
-    <div class="card">
-
-        <div id="eventLog"></div>
-
+  <div class="card" style="margin-top:14px">
+    <h2>Inventory</h2>
+    <div class="form-grid">
+      <div class="form-group"><label>Item</label><input id="storeName"></div>
+      <div class="form-group"><label>Quantity</label><input id="storeQty" type="number"></div>
+      <div class="form-group"><label>Capacity / Unit</label><input id="storeUnitCap" type="number" value="1"></div>
+      <button class="primary" onclick="addStore()">Add</button>
     </div>
-
-
+    <div id="storeList" style="margin-top:12px"></div>
+  </div>
 </section>
 
-
-
-<!-- =========================================================
-     DM
-     ========================================================= -->
-
-<section
-    id="dm"
-    class="page">
-
-
-    <h2 class="section-title">
-        DM Control
-    </h2>
-
-
-    <div class="card">
-
-        <h2>
-            Campaign
-        </h2>
-
-        <div class="form-group">
-
-            <label>
-                Keep Name
-            </label>
-
-            <input
-                id="dmKeepName">
-
-        </div>
-
-
-        <br>
-
-
-        <button
-            class="primary"
-            onclick="saveCampaignSettings()">
-
-            Save
-
-        </button>
-
+<!-- FACTIONS -->
+<section id="factions" class="page">
+  <h2 class="section-title">Factions</h2>
+  <div class="card">
+    <div class="form-grid">
+      <div class="form-group"><label>Faction</label><input id="factionName"></div>
+      <button class="primary" onclick="addFaction()">Add Faction</button>
     </div>
-
-
-    <div
-        class="card"
-        style="margin-top:15px;">
-
-        <h2>
-            Game State
-        </h2>
-
-        <p>
-            Month:
-            <strong id="dmMonth"></strong>
-        </p>
-
-        <p>
-            Season:
-            <strong id="dmSeason"></strong>
-        </p>
-
-        <button
-            class="secondary"
-            onclick="openAdvanceModal()">
-
-            Advance Month
-
-        </button>
-
-    </div>
-
-
-    <div
-        class="card"
-        style="margin-top:15px;">
-
-        <h2>
-            Save Data
-        </h2>
-
-        <button
-            class="secondary"
-            onclick="exportSave()">
-
-            Export Campaign
-
-        </button>
-
-        <button
-            class="secondary"
-            onclick="document.getElementById('importFile').click()">
-
-            Import Campaign
-
-        </button>
-
-        <input
-            id="importFile"
-            type="file"
-            accept=".json"
-            style="display:none"
-            onchange="importSave(event)">
-
-        <br><br>
-
-        <button
-            class="danger"
-            onclick="resetCampaign()">
-
-            Reset Campaign
-
-        </button>
-
-    </div>
-
-
+    <div id="factionList" style="margin-top:12px"></div>
+  </div>
 </section>
 
+<!-- HISTORY -->
+<section id="history" class="page">
+  <h2 class="section-title">Financial History</h2>
+  <div class="card">
+    <canvas id="historyChart" width="1100" height="280"></canvas>
+  </div>
+  <div class="card" style="margin-top:14px"><div id="historyTable"></div></div>
+</section>
+
+<!-- LOG -->
+<section id="log" class="page">
+  <h2 class="section-title">Campaign Log</h2>
+  <div class="card">
+    <div class="form-grid">
+      <div class="form-group"><label>Event</label><input id="logText" placeholder="The party returned from the northern pass..."></div>
+      <button class="primary" onclick="addPlayerLog()">Add Event</button>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px"><div id="eventLog"></div></div>
+</section>
+
+<!-- DM -->
+<section id="dm" class="page">
+  <h2 class="section-title">DM Control</h2>
+
+  <div class="card">
+    <h2>Campaign</h2>
+    <div class="form-grid">
+      <div class="form-group"><label>Keep Name</label><input id="dmKeepName"></div>
+      <div class="form-group"><label>Calendar Year</label><input id="dmYear" type="number"></div>
+      <div class="form-group"><label>Starting Month</label><select id="dmMonth"></select></div>
+      <div class="form-group"><label>Tax Rate (%)</label><input id="dmTax" type="number" min="0" max="100" step=".1"></div>
+      <button class="primary" onclick="saveDMSettings()">Save</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Public Order</h2>
+    <div class="form-grid">
+      <div class="form-group"><label>Public Order (0–100)</label><input id="dmOrder" type="number" min="0" max="100"></div>
+      <button class="primary" onclick="setOrder()">Update</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Store Capacity</h2>
+    <div class="form-grid">
+      <div class="form-group"><label>Base Capacity</label><input id="dmBaseCapacity" type="number"></div>
+      <button class="primary" onclick="setCapacity()">Update</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Village Rent</h2>
+    <div id="villageDM"></div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Save / Reset</h2>
+    <button class="secondary" onclick="exportSave()">Export Campaign</button>
+    <button class="secondary" onclick="document.getElementById('importFile').click()">Import Campaign</button>
+    <input id="importFile" type="file" accept=".json" style="display:none" onchange="importSave(event)">
+    <button class="danger" onclick="resetCampaign()">Reset Campaign</button>
+  </div>
+</section>
 
 </main>
 
-
-
-<!-- =========================================================
-     ADVANCE MONTH MODAL
-     ========================================================= -->
-
-<div
-    id="advanceModal"
-    class="modal">
-
-
-    <div class="modal-content">
-
-        <h2>
-            Advance Month
-        </h2>
-
-        <p>
-            The following will happen:
-        </p>
-
-        <ul>
-
-            <li>
-                Recurring income will be collected.
-            </li>
-
-            <li>
-                Staff wages will be paid.
-            </li>
-
-            <li>
-                Recurring expenses will be paid.
-            </li>
-
-            <li>
-                Inventory will be consumed.
-            </li>
-
-            <li>
-                Buildings may deteriorate.
-            </li>
-
-            <li>
-                The campaign will move to the next month.
-            </li>
-
-        </ul>
-
-
-        <div
-            id="advancePreview"
-            class="alert warning">
-        </div>
-
-
-        <button
-            class="primary"
-            onclick="advanceMonth()">
-
-            Advance Month
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="closeModal('advanceModal')">
-
-            Cancel
-
-        </button>
-
-    </div>
-
+<div id="dmModal" class="modal">
+  <div class="modal-content">
+    <h2>DM Access</h2>
+    <p>Enter the DM PIN.</p>
+    <input id="dmPin" type="password">
+    <br><br>
+    <button class="primary" onclick="checkDM()">Enter</button>
+    <button class="secondary" onclick="closeModal('dmModal')">Cancel</button>
+  </div>
 </div>
 
-
-
-<!-- =========================================================
-     DM LOGIN
-     ========================================================= -->
-
-<div
-    id="dmModal"
-    class="modal">
-
-
-    <div class="modal-content">
-
-        <h2>
-            DM Access
-        </h2>
-
-        <p>
-            Enter the DM PIN.
-        </p>
-
-        <input
-            id="dmPin"
-            type="password"
-            placeholder="PIN">
-
-
-        <br><br>
-
-
-        <button
-            class="primary"
-            onclick="checkDM()">
-
-            Enter
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="closeModal('dmModal')">
-
-            Cancel
-
-        </button>
-
-    </div>
-
+<div id="advanceModal" class="modal">
+  <div class="modal-content">
+    <h2>Advance Turn</h2>
+    <div id="advancePreview"></div>
+    <br>
+    <button class="primary" onclick="advanceTurn()">Advance Turn</button>
+    <button class="secondary" onclick="closeModal('advanceModal')">Cancel</button>
+  </div>
 </div>
-
-
 
 <script>
-
-/* =========================================================
-   GAME DATA
-   ========================================================= */
-
-let data =
-JSON.parse(localStorage.getItem("mountainKeep")) || {
-
-    keepName: "The Mountain Keep",
-
-    month: 1,
-
-    seasonIndex: 0,
-
-    balance: 1000,
-
-
-    /*
-       Seasonal multipliers.
-
-       These can be changed by the DM.
-    */
-
-    seasons: [
-
-        {
-            name: "Spring",
-            incomeMultiplier: 1.00,
-            expenseMultiplier: 1.00
-        },
-
-        {
-            name: "Summer",
-            incomeMultiplier: 1.20,
-            expenseMultiplier: 0.90
-        },
-
-        {
-            name: "Autumn",
-            incomeMultiplier: 0.70,
-            expenseMultiplier: 1.00
-        },
-
-        {
-            name: "Winter",
-            incomeMultiplier: 0.20,
-            expenseMultiplier: 1.30
-        }
-
-    ],
-
-
-    /*
-       Regular income.
-    */
-
-    income: [
-
-        {
-            name: "Mountain Toll Road",
-            amount: 120
-        },
-
-        {
-            name: "Mine Lease",
-            amount: 80
-        }
-
-    ],
-
-
-    /*
-       Regular expenses.
-    */
-
-    expenses: [
-
-        {
-            name: "Food",
-            amount: 60
-        },
-
-        {
-            name: "Maintenance",
-            amount: 40
-        }
-
-    ],
-
-
-    /*
-       Staff.
-    */
-
-    staff: [
-
-        {
-            name: "Edric",
-            role: "Castellan",
-            wage: 30
-        },
-
-        {
-            name: "Hilda",
-            role: "Cook",
-            wage: 15
-        },
-
-        {
-            name: "Gregor",
-            role: "Guard",
-            wage: 20
-        }
-
-    ],
-
-
-    /*
-       Inventory.
-    */
-
-    stores: [
-
-        {
-            name: "Food",
-            quantity: 74,
-            capacity: 100,
-            monthlyUse: 10
-        },
-
-        {
-            name: "Firewood",
-            quantity: 18,
-            capacity: 50,
-            monthlyUse: 8
-        },
-
-        {
-            name: "Iron",
-            quantity: 12,
-            capacity: 25,
-            monthlyUse: 1
-        }
-
-    ],
-
-
-    /*
-       Buildings.
-    */
-
-    buildings: [
-
-        {
-            name: "Great Hall",
-            condition: 90,
-            maintenance: 20,
-            deterioration: 2
-        },
-
-        {
-            name: "Outer Walls",
-            condition: 65,
-            maintenance: 30,
-            deterioration: 4
-        },
-
-        {
-            name: "Stables",
-            condition: 85,
-            maintenance: 15,
-            deterioration: 2
-        },
-
-        {
-            name: "Granary",
-            condition: 95,
-            maintenance: 10,
-            deterioration: 1
-        }
-
-    ],
-
-
-    /*
-       Maintenance jobs.
-    */
-
-    maintenance: [
-
-        {
-            name: "Repair eastern wall",
-            cost: 150,
-            target: "Outer Walls",
-            condition: 15
-        }
-
-    ],
-
-
-    /*
-       Upgrades.
-    */
-
-    upgrades: [
-
-        {
-            name: "Reinforced Gate",
-            cost: 500,
-            effect: "Improves keep defence",
-            purchased: false
-        },
-
-        {
-            name: "Expanded Granary",
-            cost: 250,
-            effect: "+50 food capacity",
-            purchased: false
-        },
-
-        {
-            name: "Stone Roofs",
-            cost: 400,
-            effect: "Reduces winter deterioration",
-            purchased: false
-        }
-
-    ],
-
-
-    /*
-       Transaction history.
-    */
-
-    transactions: [],
-
-
-    /*
-       Event log.
-    */
-
-    log: []
-
+const DM_PIN="1234";
+
+const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+const GUARD_WAGES={Private:20,Sergeant:40,Captain:75};
+const TRAIN_TURNS={1:1,2:2,3:3};
+
+const DEFAULT_DATA={
+  keepName:"The Mountain Keep",
+  year:1,
+  monthIndex:0,
+  turn:1,
+  balance:1000,
+  taxRate:10,
+  publicOrder:75,
+  baseStoreCapacity:1000,
+  wagons:0,
+  merchant:false,
+
+  income:[
+    {name:"Mine Lease",amount:80,type:"general"},
+    {name:"Mountain Toll Road",amount:0,type:"toll"}
+  ],
+
+  otherExpenses:[
+    {name:"Food",amount:60},
+    {name:"General Maintenance Reserve",amount:40}
+  ],
+
+  buildings:[
+    {name:"Great Hall",condition:90,level:1},
+    {name:"Outer Walls",condition:65,level:1},
+    {name:"Stables",condition:85,level:1},
+    {name:"Granary",condition:95,level:1}
+  ],
+
+  maintenance:[
+    {name:"Repair eastern wall",building:"Outer Walls",cost:150,restore:15}
+  ],
+
+  possibleUpgrades:[
+    {name:"Reinforced Gate",building:"Outer Walls",cost:500,turns:3,description:"Improves defence"},
+    {name:"Expanded Granary",building:"Granary",cost:250,turns:2,description:"+200 overall store capacity"}
+  ],
+
+  ongoingUpgrades:[],
+  completedUpgrades:[],
+
+  staff:[
+    {name:"Edric",type:"Steward",rank:3,wage:30,equipment:0,training:0,trainingRemaining:0},
+    {name:"Gregor",type:"Private",rank:1,wage:20,equipment:0,training:0,trainingRemaining:0}
+  ],
+
+  stores:[
+    {name:"Food",qty:74,unitCap:1,monthlyUse:10},
+    {name:"Firewood",qty:18,unitCap:1,monthlyUse:8},
+    {name:"Light Armour",qty:0,unitCap:1,monthlyUse:0},
+    {name:"Spears",qty:0,unitCap:1,monthlyUse:0},
+    {name:"Chain Shirt",qty:0,unitCap:1,monthlyUse:0},
+    {name:"Simple Weapon",qty:0,unitCap:1,monthlyUse:0},
+    {name:"Chainmail",qty:0,unitCap:1,monthlyUse:0},
+    {name:"Breastplate",qty:0,unitCap:1,monthlyUse:0},
+    {name:"Martial Weapon",qty:0,unitCap:1,monthlyUse:0}
+  ],
+
+  factions:[
+    {name:"Village A",rep:20},
+    {name:"Village B",rep:20},
+    {name:"Orks",rep:0},
+    {name:"Uberwald",rep:0}
+  ],
+
+  villages:[
+    {name:"Village A",baseRent:100,rentRate:10},
+    {name:"Village B",baseRent:100,rentRate:10}
+  ],
+
+  history:[
+    {year:1,monthIndex:0,income:0,expenses:0,net:0,balance:1000}
+  ],
+
+  transactions:[],
+  log:[]
 };
 
+let data=JSON.parse(localStorage.getItem("mountainKeep"))||structuredClone(DEFAULT_DATA);
 
-/* =========================================================
-   SAVE
-   ========================================================= */
+function normalize(){
+  const d=DEFAULT_DATA;
+  for(const k of Object.keys(d)) if(data[k]===undefined) data[k]=structuredClone(d[k]);
+  if(!Array.isArray(data.staff))data.staff=[];
+  if(!Array.isArray(data.stores))data.stores=[];
+  if(!Array.isArray(data.buildings))data.buildings=[];
+  if(!Array.isArray(data.maintenance))data.maintenance=[];
+  if(!Array.isArray(data.possibleUpgrades))data.possibleUpgrades=[];
+  if(!Array.isArray(data.ongoingUpgrades))data.ongoingUpgrades=[];
+  if(!Array.isArray(data.completedUpgrades))data.completedUpgrades=[];
+  if(!Array.isArray(data.factions))data.factions=[];
+  if(!Array.isArray(data.villages))data.villages=[];
+  if(!Array.isArray(data.history))data.history=[];
+  if(!Array.isArray(data.transactions))data.transactions=[];
+  if(!Array.isArray(data.log))data.log=[];
+}
+normalize();
 
-function save() {
-
-    localStorage.setItem(
-        "mountainKeep",
-        JSON.stringify(data)
-    );
-
+function save(){localStorage.setItem("mountainKeep",JSON.stringify(data))}
+function money(n){return Math.round(n).toLocaleString()+" gp"}
+function monthName(){return MONTHS[data.monthIndex]}
+function season(){return ["Winter","Winter","Spring","Spring","Spring","Summer","Summer","Summer","Autumn","Autumn","Autumn","Winter"][data.monthIndex]}
+function addLog(message){data.log.unshift({year:data.year,month:monthName(),turn:data.turn,message,date:new Date().toLocaleDateString()});data.log=data.log.slice(0,300)}
+function nav(){
+  const items=[["overview","Overview"],["finance","Finance"],["keep","Keep"],["staff","Staff"],["stores","Stores"],["factions","Factions"],["history","History"],["log","Log"],["dm","DM"]];
+  document.getElementById("nav").innerHTML=items.map(([id,label])=>`<button onclick="showPage('${id}',this)">${label}</button>`).join("");
+  document.querySelectorAll("#nav button")[0].classList.add("active");
+}
+function showPage(id,btn){
+  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll("#nav button").forEach(x=>x.classList.remove("active"));
+  if(btn)btn.classList.add("active");
+  if(id==="history")drawHistory();
+}
+function openDM(){document.getElementById("dmModal").classList.add("show")}
+function closeModal(id){document.getElementById(id).classList.remove("show")}
+function checkDM(){
+  if(document.getElementById("dmPin").value!==DM_PIN){alert("Incorrect PIN.");return}
+  closeModal("dmModal");
+  showPage("dm",document.querySelectorAll("#nav button")[8]);
+  render();
 }
 
+function staffWages(){return data.staff.reduce((a,s)=>a+Number(s.wage||0),0)}
+function villageRent(v){
+  const orderFactor=0.5+(data.publicOrder/100)*0.5;
+  const taxFactor=1+(Number(v.rentRate||0)/100);
+  return Number(v.baseRent||0)*orderFactor*taxFactor;
+}
+function villageRentIncome(){return data.villages.reduce((a,v)=>a+villageRent(v),0)}
+function tollIncome(){
+  const base=data.income.find(x=>x.type==="toll");
+  const baseCharge=Number(base?.amount||0);
+  const safety=(data.publicOrder/100);
+  const seasonFactor={Spring:1,Summer:1.2,Autumn:.7,Winter:.2}[season()];
+  const merchantFactor=data.merchant?1.15:1;
+  return baseCharge*seasonFactor*(0.5+0.5*safety)*merchantFactor;
+}
+function maintenanceExpense(){return data.maintenance.reduce((a,x)=>a+Number(x.cost||0)/Math.max(1,Number(x.turns||1)),0)}
+function recurringExpenses(){
+  return data.otherExpenses.reduce((a,x)=>a+Number(x.amount||0),0)+staffWages()+maintenanceExpense();
+}
+function monthlyIncome(){
+  const general=data.income.filter(x=>x.type!=="toll").reduce((a,x)=>a+Number(x.amount||0),0);
+  return general+villageRentIncome()+tollIncome();
+}
+function monthlyTax(){return monthlyIncome()*Number(data.taxRate||0)/100}
+function monthlyExpenses(){return recurringExpenses()+monthlyTax()}
+function monthlyNet(){return monthlyIncome()-monthlyExpenses()}
+function totalStoreCapacity(){return Number(data.baseStoreCapacity||0)+data.wagons*100}
+function usedStoreCapacity(){return data.stores.reduce((a,s)=>a+Number(s.qty||0)*Number(s.unitCap||1),0)}
+function tradeCapacity(){return Math.max(0,totalStoreCapacity()-usedStoreCapacity())}
 
-/* =========================================================
-   MONTH / SEASON
-   ========================================================= */
-
-function getSeason() {
-
-    return data.seasons[data.seasonIndex];
-
+function render(){
+  normalize();
+  document.getElementById("keepName").textContent=data.keepName;
+  document.getElementById("dateLabel").textContent=`${monthName()}, Year ${data.year}`;
+  document.getElementById("turnLabel").textContent=`Turn ${data.turn} · ${season()}`;
+  document.getElementById("balanceMetric").textContent=money(data.balance);
+  document.getElementById("netMetric").textContent=money(monthlyNet());
+  document.getElementById("netMetric").className="metric "+(monthlyNet()>=0?"positive":"negative");
+  document.getElementById("orderMetric").textContent=Math.round(data.publicOrder)+" / 100";
+  document.getElementById("capacityMetric").textContent=`${usedStoreCapacity()} / ${totalStoreCapacity()}`;
+  renderAlerts();renderOverview();renderFinance();renderKeep();renderStaff();renderStores();renderFactions();renderHistory();renderLog();renderDM();
+  save();
 }
 
-
-function getSeasonName() {
-
-    return getSeason().name;
-
+function renderAlerts(){
+  let a=[];
+  if(data.balance<0)a.push(`<div class="alert danger">The keep is in debt.</div>`);
+  if(data.publicOrder<35)a.push(`<div class="alert danger">Public order is dangerously low.</div>`);
+  else if(data.publicOrder<55)a.push(`<div class="alert warning">Public order is deteriorating.</div>`);
+  data.buildings.forEach(b=>{if(b.condition<40)a.push(`<div class="alert danger">${b.name} is in poor condition.</div>`)});
+  if(usedStoreCapacity()>totalStoreCapacity())a.push(`<div class="alert danger">The stores exceed their overall capacity.</div>`);
+  data.stores.forEach(s=>{if(s.qty>0&&s.monthlyUse>0&&s.qty<=s.monthlyUse*2)a.push(`<div class="alert warning">${s.name} may run out soon.</div>`)});
+  document.getElementById("alerts").innerHTML=a.length?a.join(""):`<div class="alert good">The keep is currently operating normally.</div>`;
 }
 
-
-/* =========================================================
-   FINANCE CALCULATIONS
-   ========================================================= */
-
-function calculateStaffWages() {
-
-    return data.staff.reduce(
-        (total, staff) =>
-            total + Number(staff.wage),
-        0
-    );
-
+function renderOverview(){
+  document.getElementById("overviewIncome").innerHTML=`
+    ${data.income.filter(x=>x.type!=="toll").map(x=>`<div class="inline" style="justify-content:space-between;padding:5px 0"><span>${x.name}</span><b>${money(x.amount)}</b></div>`).join("")}
+    <div class="inline" style="justify-content:space-between;padding:5px 0"><span>Village rents</span><b>${money(villageRentIncome())}</b></div>
+    <div class="inline" style="justify-content:space-between;padding:5px 0"><span>Toll road</span><b>${money(tollIncome())}</b></div>`;
+  document.getElementById("overviewExpenses").innerHTML=`
+    <div class="inline" style="justify-content:space-between;padding:5px 0"><span>Staff wages</span><b>${money(staffWages())}</b></div>
+    ${data.otherExpenses.map(x=>`<div class="inline" style="justify-content:space-between;padding:5px 0"><span>${x.name}</span><b>${money(x.amount)}</b></div>`).join("")}
+    <div class="inline" style="justify-content:space-between;padding:5px 0"><span>Maintenance</span><b>${money(maintenanceExpense())}</b></div>
+    <div class="inline" style="justify-content:space-between;padding:5px 0"><span>Tax (${data.taxRate}%)</span><b>${money(monthlyTax())}</b></div>`;
+  document.getElementById("overviewVillages").innerHTML=data.villages.map(v=>`<div style="padding:6px 0;border-bottom:1px solid #eee">${v.name}: <b>${money(villageRent(v))}</b><br><span class="small">Base ${money(v.baseRent)} · Rent rate ${v.rentRate}%</span></div>`).join("");
+  document.getElementById("overviewUpgrades").innerHTML=data.ongoingUpgrades.length?data.ongoingUpgrades.map(u=>`<div style="padding:6px 0">${u.name} — <b>${u.remaining} turns</b> remaining</div>`).join(""):`<span class="muted">No ongoing upgrades.</span>`;
 }
 
-
-function calculateIncome() {
-
-    const season =
-        getSeason();
-
-    return data.income.reduce(
-        (total, item) =>
-            total +
-            Number(item.amount) *
-            season.incomeMultiplier,
-        0
-    );
-
+function addIncome(){
+  const name=document.getElementById("incomeName").value.trim(),amount=Number(document.getElementById("incomeAmount").value),type=document.getElementById("incomeType").value;
+  if(!name||!amount)return;
+  data.income.push({name,amount,type});addLog(`Added recurring income: ${name} (${money(amount)}).`);render();
+  document.getElementById("incomeName").value="";document.getElementById("incomeAmount").value="";
+}
+function removeIncome(i){data.income.splice(i,1);render()}
+function addTransaction(){
+  const name=document.getElementById("txName").value.trim(),amount=Number(document.getElementById("txAmount").value),type=document.getElementById("txType").value;
+  if(!name||!amount)return;
+  data.balance+=type==="income"?amount:-amount;
+  data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name,amount,type});
+  addLog(`${type==="income"?"Income":"Expense"} recorded: ${name} (${money(amount)}).`);
+  render();
+}
+function renderFinance(){
+  const inc=monthlyIncome(),exp=monthlyExpenses(),tax=monthlyTax(),net=monthlyNet();
+  document.getElementById("financeIncome").textContent=money(inc);
+  document.getElementById("financeExpenses").textContent=money(exp);
+  document.getElementById("financeTax").textContent=money(tax);
+  document.getElementById("financeNet").textContent=money(net);
+  document.getElementById("financeNet").className="metric "+(net>=0?"positive":"negative");
+  document.getElementById("incomeList").innerHTML=`<table><tr><th>Income</th><th>Base</th><th>Type</th><th></th></tr>${data.income.map((x,i)=>`<tr><td>${x.name}</td><td>${money(x.amount)}</td><td>${x.type}</td><td><button class="danger" onclick="removeIncome(${i})">Remove</button></td></tr>`).join("")}</table>`;
+  document.getElementById("expenseList").innerHTML=`<table><tr><th>Expense</th><th>Monthly</th></tr>
+    <tr><td>Staff wages</td><td>${money(staffWages())}</td></tr>
+    ${data.otherExpenses.map(x=>`<tr><td>${x.name}</td><td>${money(x.amount)}</td></tr>`).join("")}
+    <tr><td>Maintenance reserve</td><td>${money(maintenanceExpense())}</td></tr>
+    <tr><td>Tax (${data.taxRate}%)</td><td>${money(monthlyTax())}</td></tr></table>`;
+  document.getElementById("financeLog").innerHTML=data.transactions.slice(0,50).map(x=>`<div class="log-entry"><div class="log-date">Turn ${x.turn} · ${x.month}, Year ${x.year}</div>${x.type==="income"?"Income":"Expense"}: ${x.name} — <b>${money(x.amount)}</b></div>`).join("")||`<span class="muted">No financial transactions recorded.</span>`;
+  document.getElementById("tradeCapacity").textContent=`${tradeCapacity()} / ${totalStoreCapacity()} free`;
+  document.getElementById("wagonCount").textContent=data.wagons;
+  document.getElementById("merchantStatus").innerHTML=data.merchant?`<span class="status good">Hired</span>`:`<span class="status neutral">Not hired</span>`;
+  document.getElementById("tradeItem").innerHTML=data.stores.map((s,i)=>`<option value="${i}">${s.name}</option>`).join("");
+}
+function buyWagon(){if(data.balance<250){alert("Not enough gold.");return}data.balance-=250;data.wagons++;addLog("Purchased a wagon for 250 gp.");render()}
+function hireMerchant(){if(data.merchant){alert("A merchant is already hired.");return}if(data.balance<300){alert("Not enough gold.");return}data.balance-=300;data.merchant=true;addLog("Hired a merchant for 300 gp.");render()}
+function trade(){
+  const i=Number(document.getElementById("tradeItem").value),q=Number(document.getElementById("tradeQty").value),p=Number(document.getElementById("tradePrice").value),a=document.getElementById("tradeAction").value,s=data.stores[i];
+  if(!s||q<=0||p<0)return;
+  if(a==="buy"){
+    if(data.balance<q*p){alert("Not enough gold.");return}
+    if(tradeCapacity()<q*s.unitCap){alert("Not enough trade/storage capacity.");return}
+    data.balance-=q*p;s.qty+=q;
+  }else{
+    if(s.qty<q){alert("Not enough of that item in inventory.");return}
+    data.balance+=q*p;s.qty-=q;
+  }
+  data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:`Trade ${a}: ${q} ${s.name}`,amount:q*p,type:a==="buy"?"expense":"income"});
+  addLog(`Trade completed: ${a} ${q} ${s.name} for ${money(q*p)}.`);
+  render();
 }
 
-
-function calculateExpenses() {
-
-    const season =
-        getSeason();
-
-    const recurring =
-        data.expenses.reduce(
-            (total, item) =>
-                total +
-                Number(item.amount),
-            0
-        );
-
-
-    const wages =
-        calculateStaffWages();
-
-
-    return (
-        recurring +
-        wages
-    ) *
-    season.expenseMultiplier;
-
+function populateBuildingSelects(){
+  const opts=data.buildings.map(b=>`<option>${b.name}</option>`).join("");
+  document.getElementById("maintBuilding").innerHTML=opts;
+  document.getElementById("upgradeBuilding").innerHTML=opts;
+}
+function addMaintenance(){
+  const name=document.getElementById("maintName").value.trim(),building=document.getElementById("maintBuilding").value,cost=Number(document.getElementById("maintCost").value),restore=Number(document.getElementById("maintRestore").value);
+  if(!name||!building||cost<0)return;
+  data.maintenance.push({name,building,cost,restore});addLog(`Added maintenance task: ${name}.`);render();
+}
+function completeMaintenance(i){
+  const x=data.maintenance[i];
+  if(data.balance<x.cost){alert("The keep cannot afford this.");return}
+  data.balance-=x.cost;
+  const b=data.buildings.find(b=>b.name===x.building);
+  if(b)b.condition=Math.min(100,b.condition+x.restore);
+  data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:`Maintenance: ${x.name}`,amount:x.cost,type:"expense"});
+  data.maintenance.splice(i,1);addLog(`Completed maintenance: ${x.name}.`);render();
+}
+function editCondition(i){
+  const v=prompt("New condition (0–100):",data.buildings[i].condition);
+  if(v===null)return;const n=Math.max(0,Math.min(100,Number(v)));if(isNaN(n))return;
+  data.buildings[i].condition=n;addLog(`DM changed ${data.buildings[i].name} condition to ${n}.`);render();
+}
+function addUpgrade(){
+  const name=document.getElementById("upgradeName").value.trim(),building=document.getElementById("upgradeBuilding").value,cost=Number(document.getElementById("upgradeCost").value),turns=Number(document.getElementById("upgradeTurns").value);
+  if(!name||!building||cost<0||turns<1)return;
+  data.possibleUpgrades.push({name,building,cost,turns,description:""});addLog(`Added possible upgrade: ${name}.`);render();
+}
+function startUpgrade(i){
+  const u=data.possibleUpgrades[i];
+  if(data.balance<u.cost){alert("The keep cannot afford this upgrade.");return}
+  data.balance-=u.cost;
+  data.ongoingUpgrades.push({...u,remaining:u.turns});
+  data.possibleUpgrades.splice(i,1);
+  data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:`Upgrade started: ${u.name}`,amount:u.cost,type:"expense"});
+  addLog(`Started upgrade: ${u.name}.`);render();
+}
+function renderKeep(){
+  populateBuildingSelects();
+  document.getElementById("buildingList").innerHTML=`<table><tr><th>Building / Facility</th><th>Level</th><th>Condition</th><th></th></tr>${data.buildings.map((b,i)=>`<tr><td>${b.name}</td><td>${b.level}</td><td><span class="status ${b.condition>=75?"good":b.condition>=40?"warning":"bad"}">${Math.round(b.condition)}%</span></td><td><button class="secondary" onclick="editCondition(${i})">Edit Condition</button></td></tr>`).join("")}</table>`;
+  document.getElementById("maintenanceList").innerHTML=data.maintenance.length?`<table><tr><th>Task</th><th>Building</th><th>Cost</th><th>Restore</th><th></th></tr>${data.maintenance.map((x,i)=>`<tr><td>${x.name}</td><td>${x.building}</td><td>${money(x.cost)}</td><td>+${x.restore}</td><td><button class="secondary" onclick="completeMaintenance(${i})">Complete</button></td></tr>`).join("")}</table>`:`<span class="muted">No maintenance tasks.</span>`;
+  document.getElementById("upgradeList").innerHTML=data.possibleUpgrades.length?`<table><tr><th>Upgrade</th><th>Building</th><th>Cost</th><th>Turns</th><th></th></tr>${data.possibleUpgrades.map((x,i)=>`<tr><td>${x.name}</td><td>${x.building}</td><td>${money(x.cost)}</td><td>${x.turns}</td><td><button class="secondary" onclick="startUpgrade(${i})">Start</button></td></tr>`).join("")}</table>`:`<span class="muted">No upgrades currently available.</span>`;
+  document.getElementById("ongoingList").innerHTML=data.ongoingUpgrades.length?`<table><tr><th>Upgrade</th><th>Building</th><th>Turns Remaining</th></tr>${data.ongoingUpgrades.map(x=>`<tr><td>${x.name}</td><td>${x.building}</td><td>${x.remaining}</td></tr>`).join("")}</table>`:`<span class="muted">No ongoing upgrades.</span>`;
+  document.getElementById("completedList").innerHTML=data.completedUpgrades.length?`<table><tr><th>Upgrade</th><th>Building</th><th>Completed</th></tr>${data.completedUpgrades.map(x=>`<tr><td>${x.name}</td><td>${x.building}</td><td>${x.completed}</td></tr>`).join("")}</table>`:`<span class="muted">No completed upgrades.</span>`;
 }
 
-
-function calculateNet() {
-
-    return (
-        calculateIncome() -
-        calculateExpenses()
-    );
-
+function guardCounts(){
+  return {Private:data.staff.filter(s=>s.type==="Private").length,Sergeant:data.staff.filter(s=>s.type==="Sergeant").length,Captain:data.staff.filter(s=>s.type==="Captain").length};
+}
+function addStaff(){
+  const name=document.getElementById("staffName").value.trim(),type=document.getElementById("staffType").value,rank=Math.max(1,Math.min(5,Number(document.getElementById("staffRank").value||1))),wage=Number(document.getElementById("staffWage").value)||GUARD_WAGES[type]||rank*10;
+  if(!name)return;
+  const c=guardCounts();
+  if(type==="Private"&&c.Private>=45){alert("Maximum 45 Privates.");return}
+  if(type==="Sergeant"&&c.Sergeant>=5){alert("Maximum 5 Sergeants.");return}
+  if(type==="Captain"&&c.Captain>=1){alert("Maximum 1 Captain.");return}
+  data.staff.push({name,type,rank,wage,equipment:0,training:0,trainingRemaining:0});
+  addLog(`${name} joined as ${type}.`);render();
+}
+function removeStaff(i){addLog(`${data.staff[i].name} left the keep.`);data.staff.splice(i,1);render()}
+function editStaffRank(i){const v=Number(prompt("Rank 1–5:",data.staff[i].rank));if(v>=1&&v<=5){data.staff[i].rank=v;render()}}
+function trainGuard(i){
+  const s=data.staff[i];if(!["Private","Sergeant","Captain"].includes(s.type))return;
+  if(s.training>=3){alert("Already at maximum training.");return}
+  if(s.trainingRemaining>0){alert("This guard is already training.");return}
+  s.trainingRemaining=TRAIN_TURNS[s.training+1];addLog(`${s.name} began training to level ${s.training+1}.`);render();
+}
+function equipmentRequirement(level){
+  return {
+    1:["Light Armour","Spears"],
+    2:["Chain Shirt","Simple Weapon"],
+    3:["Chainmail","Breastplate","Martial Weapon"]
+  }[level]||[];
+}
+function trainEquipment(i){
+  const s=data.staff[i];if(s.equipment>=3){alert("Already at maximum equipment.");return}
+  const next=s.equipment+1,req=equipmentRequirement(next);
+  const missing=req.filter(name=>(data.stores.find(x=>x.name===name)?.qty||0)<1);
+  if(missing.length){alert("Missing equipment: "+missing.join(", "));return}
+  req.forEach(name=>{data.stores.find(x=>x.name===name).qty--});
+  s.equipment=next;addLog(`${s.name} was equipped to level ${next}.`);render();
+}
+function renderStaff(){
+  const non=data.staff.map((s,i)=>({s,i})).filter(x=>!["Private","Sergeant","Captain"].includes(x.s.type));
+  const guards=data.staff.map((s,i)=>({s,i})).filter(x=>["Private","Sergeant","Captain"].includes(x.s.type));
+  document.getElementById("staffList").innerHTML=non.length?`<table><tr><th>Name</th><th>Type</th><th>Rank</th><th>Wage</th><th></th></tr>${non.map(x=>`<tr><td>${x.s.name}</td><td>${x.s.type}</td><td>${x.s.rank}</td><td>${money(x.s.wage)}</td><td><button class="danger" onclick="removeStaff(${x.i})">Remove</button></td></tr>`).join("")}</table>`:`<span class="muted">No non-guard staff.</span>`;
+  document.getElementById("guardList").innerHTML=`<table><tr><th>Name</th><th>Guard Rank</th><th>Rank</th><th>Wage</th><th>Equipment</th><th>Training</th><th></th></tr>${guards.map(x=>`<tr><td>${x.s.name}</td><td>${x.s.type}</td><td>${x.s.rank}</td><td>${money(x.s.wage)}</td><td>${x.s.equipment}/3</td><td>${x.s.training}/3${x.s.trainingRemaining?` (${x.s.trainingRemaining} turns)`:``}</td><td><button class="secondary" onclick="trainGuard(${x.i})">Train</button> <button class="secondary" onclick="trainEquipment(${x.i})">Equip</button> <button class="danger" onclick="removeStaff(${x.i})">Remove</button></td></tr>`).join("")}</table><p class="small">Current guards: ${guardCounts().Private}/45 Privates · ${guardCounts().Sergeant}/5 Sergeants · ${guardCounts().Captain}/1 Captain</p>`;
+  document.getElementById("trainingList").innerHTML=`<table><tr><th>Guard</th><th>Training</th><th>Next Training</th><th>Equipment</th><th>Next Equipment Requires</th></tr>${guards.map(x=>{const req=equipmentRequirement(x.s.equipment+1);return `<tr><td>${x.s.name}</td><td>${x.s.training}/3</td><td>${x.s.training<3?TRAIN_TURNS[x.s.training+1]+" turns":"Max"}</td><td>${x.s.equipment}/3</td><td>${req.length?req.join(", "):"Max"}</td></tr>`}).join("")}</table>`;
 }
 
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-
-function showPage(page, button) {
-
-    document
-        .querySelectorAll(".page")
-        .forEach(p =>
-            p.classList.remove("active")
-        );
-
-
-    document
-        .getElementById(page)
-        .classList.add("active");
-
-
-    document
-        .querySelectorAll(".nav-button")
-        .forEach(b =>
-            b.classList.remove("active")
-        );
-
-
-    button.classList.add("active");
-
+function addStore(){
+  const name=document.getElementById("storeName").value.trim(),qty=Number(document.getElementById("storeQty").value),unitCap=Number(document.getElementById("storeUnitCap").value)||1;
+  if(!name||qty<0)return;
+  if(usedStoreCapacity()+qty*unitCap>totalStoreCapacity()){alert("Not enough store capacity.");return}
+  const existing=data.stores.find(s=>s.name.toLowerCase()===name.toLowerCase());
+  if(existing)existing.qty+=qty;else data.stores.push({name,qty,unitCap,monthlyUse:0});
+  addLog(`Added ${qty} ${name} to inventory.`);render();
+}
+function editStoreQty(i){const v=Number(prompt("Quantity:",data.stores[i].qty));if(v>=0&&usedStoreCapacity()-data.stores[i].qty*data.stores[i].unitCap+v*data.stores[i].unitCap<=totalStoreCapacity()){data.stores[i].qty=v;render()}else alert("That would exceed capacity.")}
+function renderStores(){
+  document.getElementById("usedCapacity").textContent=`${usedStoreCapacity()}`;
+  document.getElementById("overallCapacity").textContent=`${totalStoreCapacity()}`;
+  document.getElementById("remainingCapacity").textContent=`${tradeCapacity()}`;
+  document.getElementById("storeList").innerHTML=`<table><tr><th>Item</th><th>Qty</th><th>Capacity Used</th><th>Monthly Use</th><th>Status</th><th></th></tr>${data.stores.map((s,i)=>`<tr><td>${s.name}</td><td>${s.qty}</td><td>${s.qty*s.unitCap}</td><td>${s.monthlyUse||0}</td><td>${s.qty<=0&&s.monthlyUse>0?'<span class="status bad">Empty</span>':s.monthlyUse>0&&s.qty<=s.monthlyUse*2?'<span class="status warning">Low</span>':'<span class="status good">OK</span>'}</td><td><button class="secondary" onclick="editStoreQty(${i})">Edit</button></td></tr>`).join("")}</table>`;
 }
 
-
-/* =========================================================
-   BALANCE
-   ========================================================= */
-
-function setBalance() {
-
-    const value =
-        Number(
-            document.getElementById(
-                "startingBalance"
-            ).value
-        );
-
-
-    if (!isNaN(value)) {
-
-        data.balance = value;
-
-        addLog(
-            "DM manually changed the balance."
-        );
-
-        save();
-        render();
-
-    }
-
+function addFaction(){
+  const name=document.getElementById("factionName").value.trim();if(!name)return;
+  data.factions.push({name,rep:0});addLog(`Added faction: ${name}.`);render();document.getElementById("factionName").value="";
+}
+function editRep(i){
+  const v=Number(prompt("Reputation (-100 to 100):",data.factions[i].rep));if(!isNaN(v)){data.factions[i].rep=Math.max(-100,Math.min(100,v));addLog(`DM changed reputation with ${data.factions[i].name} to ${data.factions[i].rep}.`);render()}
+}
+function renderFactions(){
+  document.getElementById("factionList").innerHTML=`<table><tr><th>Faction</th><th>Reputation</th><th>Standing</th><th></th></tr>${data.factions.map((f,i)=>`<tr><td>${f.name}</td><td>${f.rep}</td><td><span class="status ${f.rep>=25?"good":f.rep<=-25?"bad":"neutral"}">${f.rep>=50?"Friendly":f.rep>=25?"Positive":f.rep<=-50?"Hostile":f.rep<=-25?"Negative":"Neutral"}</span></td><td><button class="secondary" onclick="editRep(${i})">DM Edit</button></td></tr>`).join("")}</table>`;
 }
 
-
-/* =========================================================
-   TRANSACTIONS
-   ========================================================= */
-
-function addTransaction() {
-
-    const name =
-        document.getElementById(
-            "transactionName"
-        ).value.trim();
-
-
-    const amount =
-        Number(
-            document.getElementById(
-                "transactionAmount"
-            ).value
-        );
-
-
-    const type =
-        document.getElementById(
-            "transactionType"
-        ).value;
-
-
-    if (!name || !amount) return;
-
-
-    if (type === "income") {
-
-        data.balance += amount;
-
-    } else {
-
-        data.balance -= amount;
-
-    }
-
-
-    data.transactions.unshift({
-
-        name: name,
-
-        amount: amount,
-
-        type: type,
-
-        month: data.month,
-
-        season: getSeasonName(),
-
-        date:
-            new Date()
-            .toLocaleDateString()
-
-    });
-
-
-    addLog(
-
-        `${type === "income"
-            ? "Income"
-            : "Expense"} recorded: ${name} (${amount} gp).`
-
-    );
-
-
-    document.getElementById(
-        "transactionName"
-    ).value = "";
-
-
-    document.getElementById(
-        "transactionAmount"
-    ).value = "";
-
-
-    save();
-    render();
-
+function renderHistory(){
+  document.getElementById("historyTable").innerHTML=`<table><tr><th>Turn</th><th>Date</th><th>Income</th><th>Expenses</th><th>Net</th><th>Balance</th></tr>${data.history.slice().reverse().map((h,i)=>`<tr><td>${data.history.length-i}</td><td>${MONTHS[h.monthIndex]}, Year ${h.year}</td><td>${money(h.income)}</td><td>${money(h.expenses)}</td><td class="${h.net>=0?"positive":"negative"}">${money(h.net)}</td><td>${money(h.balance)}</td></tr>`).join("")}</table>`;
+}
+function drawHistory(){
+  const c=document.getElementById("historyChart"),ctx=c.getContext("2d"),w=c.width,h=c.height;
+  ctx.clearRect(0,0,w,h);ctx.strokeStyle="#ddd";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(45,15);ctx.lineTo(45,h-35);ctx.lineTo(w-15,h-35);ctx.stroke();
+  const arr=data.history.slice(-24);if(arr.length<2)return;
+  const vals=arr.map(x=>x.net),min=Math.min(...vals,0),max=Math.max(...vals,0),range=max-min||1;
+  ctx.strokeStyle="#333";ctx.lineWidth=2;ctx.beginPath();
+  arr.forEach((x,i)=>{const px=50+i*(w-70)/(arr.length-1),py=20+(max-x.net)/range*(h-60);if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)});ctx.stroke();
+  ctx.fillStyle="#666";ctx.font="11px Arial";arr.forEach((x,i)=>{if(i%2===0){const px=50+i*(w-70)/(arr.length-1);ctx.fillText(MONTHS[x.monthIndex].slice(0,3)+" "+x.year,px-12,h-15)}});
 }
 
-
-/* =========================================================
-   RECURRING INCOME
-   ========================================================= */
-
-function addIncome() {
-
-    const name =
-        document.getElementById(
-            "incomeName"
-        ).value.trim();
-
-
-    const amount =
-        Number(
-            document.getElementById(
-                "incomeAmount"
-            ).value
-        );
-
-
-    if (!name || !amount) return;
-
-
-    data.income.push({
-
-        name: name,
-
-        amount: amount
-
-    });
-
-
-    document.getElementById(
-        "incomeName"
-    ).value = "";
-
-
-    document.getElementById(
-        "incomeAmount"
-    ).value = "";
-
-
-    save();
-    render();
-
+function addPlayerLog(){
+  const text=document.getElementById("logText").value.trim();if(!text)return;
+  addLog(text);document.getElementById("logText").value="";render();
+}
+function renderLog(){
+  document.getElementById("eventLog").innerHTML=data.log.map(x=>`<div class="log-entry"><div class="log-date">Turn ${x.turn} · ${x.month}, Year ${x.year} · ${x.date}</div>${x.message}</div>`).join("")||`<span class="muted">No events recorded.</span>`;
 }
 
+function renderDM(){
+  document.getElementById("dmKeepName").value=data.keepName;
+  document.getElementById("dmYear").value=data.year;
+  document.getElementById("dmTax").value=data.taxRate;
+  document.getElementById("dmOrder").value=data.publicOrder;
+  document.getElementById("dmBaseCapacity").value=data.baseStoreCapacity;
+  document.getElementById("dmMonth").innerHTML=MONTHS.map((m,i)=>`<option value="${i}" ${i===data.monthIndex?"selected":""}>${m}</option>`).join("");
+  document.getElementById("villageDM").innerHTML=`<table><tr><th>Village</th><th>Base Income</th><th>Rent Rate</th><th>Current Income</th></tr>${data.villages.map((v,i)=>`<tr><td>${v.name}</td><td><input type="number" value="${v.baseRent}" onchange="updateVillage(${i},'baseRent',this.value)"></td><td><input type="number" value="${v.rentRate}" onchange="updateVillage(${i},'rentRate',this.value)"></td><td>${money(villageRent(v))}</td></tr>`).join("")}</table>`;
+}
+function saveDMSettings(){
+  data.keepName=document.getElementById("dmKeepName").value.trim()||data.keepName;
+  data.year=Number(document.getElementById("dmYear").value)||1;
+  data.monthIndex=Number(document.getElementById("dmMonth").value);
+  data.taxRate=Math.max(0,Number(document.getElementById("dmTax").value)||0);
+  addLog("DM updated campaign settings.");render();
+}
+function setOrder(){data.publicOrder=Math.max(0,Math.min(100,Number(document.getElementById("dmOrder").value)||0));addLog(`Public order set to ${data.publicOrder}.`);render()}
+function setCapacity(){data.baseStoreCapacity=Math.max(0,Number(document.getElementById("dmBaseCapacity").value)||0);render()}
+function updateVillage(i,key,value){data.villages[i][key]=Math.max(0,Number(value)||0);addLog(`DM updated ${data.villages[i].name} ${key}.`);render()}
 
-function deleteIncome(index) {
+function openAdvance(){
+  const net=monthlyNet();
+  document.getElementById("advancePreview").innerHTML=`<div class="alert ${net>=0?"good":"warning"}">Expected monthly result: <b>${net>=0?"+":""}${money(net)}</b></div><p>Staff training and ongoing upgrades will progress by one turn. Inventory consumption and building deterioration will be applied.</p>`;
+  document.getElementById("advanceModal").classList.add("show");
+}
+function advanceTurn(){
+  const inc=monthlyIncome(),exp=monthlyExpenses(),net=inc-exp;
+  data.balance+=net;
 
-    data.income.splice(
-        index,
-        1
-    );
+  data.stores.forEach(s=>{if(s.monthlyUse>0)s.qty=Math.max(0,s.qty-s.monthlyUse)});
 
-    save();
-    render();
+  data.buildings.forEach(b=>{
+    let decay=1.5;
+    if(season()==="Winter")decay*=1.5;
+    b.condition=Math.max(0,b.condition-decay);
+  });
 
+  data.staff.forEach(s=>{
+    if(s.trainingRemaining>0){s.trainingRemaining--;if(s.trainingRemaining===0){s.training++;addLog(`${s.name} completed training level ${s.training}.`)}}
+  });
+
+  data.ongoingUpgrades.forEach(u=>u.remaining--);
+  const complete=data.ongoingUpgrades.filter(u=>u.remaining<=0);
+  complete.forEach(u=>{
+    const b=data.buildings.find(b=>b.name===u.building);if(b)b.level++;
+    data.completedUpgrades.push({name:u.name,building:u.building,completed:`${monthName()}, Year ${data.year}`});
+    addLog(`Upgrade completed: ${u.name}.`);
+  });
+  data.ongoingUpgrades=data.ongoingUpgrades.filter(u=>u.remaining>0);
+
+  data.history.push({year:data.year,monthIndex:data.monthIndex,income:inc,expenses:exp,net,balance:data.balance});
+  data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:"Monthly settlement",amount:Math.abs(net),type:net>=0?"income":"expense"});
+  addLog(`Turn ${data.turn} completed: income ${money(inc)}, expenses ${money(exp)}, net ${net>=0?"+":""}${money(net)}.`);
+
+  data.turn++;
+  data.monthIndex++;
+  if(data.monthIndex>=12){data.monthIndex=0;data.year++}
+
+  closeModal("advanceModal");render();
 }
 
-
-/* =========================================================
-   RECURRING EXPENSE
-   ========================================================= */
-
-function addExpense() {
-
-    const name =
-        document.getElementById(
-            "expenseName"
-        ).value.trim();
-
-
-    const amount =
-        Number(
-            document.getElementById(
-                "expenseAmount"
-            ).value
-        );
-
-
-    if (!name || !amount) return;
-
-
-    data.expenses.push({
-
-        name: name,
-
-        amount: amount
-
-    });
-
-
-    document.getElementById(
-        "expenseName"
-    ).value = "";
-
-
-    document.getElementById(
-        "expenseAmount"
-    ).value = "";
-
-
-    save();
-    render();
-
+function exportSave(){
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="mountain-keep-save.json";a.click();URL.revokeObjectURL(url);
+}
+function importSave(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=()=>{try{data=JSON.parse(r.result);normalize();save();render();alert("Campaign imported.")}catch{alert("Invalid save file.")}};r.readAsText(f);
+}
+function resetCampaign(){
+  if(confirm("Erase this campaign from this browser?")){localStorage.removeItem("mountainKeep");location.reload()}
 }
 
-
-function deleteExpense(index) {
-
-    data.expenses.splice(
-        index,
-        1
-    );
-
-    save();
-    render();
-
-}
-
-
-/* =========================================================
-   STAFF
-   ========================================================= */
-
-function addStaff() {
-
-    const name =
-        document.getElementById(
-            "staffName"
-        ).value.trim();
-
-
-    const role =
-        document.getElementById(
-            "staffRole"
-        ).value.trim();
-
-
-    const wage =
-        Number(
-            document.getElementById(
-                "staffWage"
-            ).value
-        );
-
-
-    if (!name || !role || !wage)
-        return;
-
-
-    data.staff.push({
-
-        name: name,
-
-        role: role,
-
-        wage: wage
-
-    });
-
-
-    addLog(
-        `${name} joined the keep as ${role}.`
-    );
-
-
-    document.getElementById(
-        "staffName"
-    ).value = "";
-
-
-    document.getElementById(
-        "staffRole"
-    ).value = "";
-
-
-    document.getElementById(
-        "staffWage"
-    ).value = "";
-
-
-    save();
-    render();
-
-}
-
-
-function removeStaff(index) {
-
-    const name =
-        data.staff[index].name;
-
-
-    data.staff.splice(
-        index,
-        1
-    );
-
-
-    addLog(
-        `${name} left the keep staff.`
-    );
-
-
-    save();
-    render();
-
-}
-
-
-/* =========================================================
-   STORES
-   ========================================================= */
-
-function addStore() {
-
-    const name =
-        document.getElementById(
-            "storeName"
-        ).value.trim();
-
-
-    const quantity =
-        Number(
-            document.getElementById(
-                "storeQuantity"
-            ).value
-        );
-
-
-    const capacity =
-        Number(
-            document.getElementById(
-                "storeCapacity"
-            ).value
-        );
-
-
-    if (
-        !name ||
-        isNaN(quantity) ||
-        isNaN(capacity)
-    ) return;
-
-
-    data.stores.push({
-
-        name: name,
-
-        quantity: quantity,
-
-        capacity: capacity,
-
-        monthlyUse: 0
-
-    });
-
-
-    document.getElementById(
-        "storeName"
-    ).value = "";
-
-
-    document.getElementById(
-        "storeQuantity"
-    ).value = "";
-
-
-    document.getElementById(
-        "storeCapacity"
-    ).value = "";
-
-
-    save();
-    render();
-
-}
-
-
-/* =========================================================
-   BUILDING CONDITION
-   ========================================================= */
-
-function conditionStatus(condition) {
-
-    if (condition >= 75)
-        return {
-            text: "Good",
-            class: "good"
-        };
-
-    if (condition >= 40)
-        return {
-            text: "Needs Attention",
-            class: "warning"
-        };
-
-    return {
-        text: "Poor",
-        class: "bad"
-    };
-
-}
-
-
-/* =========================================================
-   MAINTENANCE
-   ========================================================= */
-
-function completeMaintenance(index) {
-
-    const job =
-        data.maintenance[index];
-
-
-    if (data.balance < job.cost) {
-
-        alert(
-            "The keep cannot afford this maintenance."
-        );
-
-        return;
-
-    }
-
-
-    data.balance -= job.cost;
-
-
-    const building =
-        data.buildings.find(
-            b => b.name === job.target
-        );
-
-
-    if (building) {
-
-        building.condition =
-            Math.min(
-                100,
-                building.condition +
-                job.condition
-            );
-
-    }
-
-
-    addLog(
-        `Completed maintenance: ${job.name} (-${job.cost} gp).`
-    );
-
-
-    data.maintenance.splice(
-        index,
-        1
-    );
-
-
-    save();
-    render();
-
-}
-
-
-/* =========================================================
-   UPGRADES
-   ========================================================= */
-
-function purchaseUpgrade(index) {
-
-    const upgrade =
-        data.upgrades[index];
-
-
-    if (upgrade.purchased)
-        return;
-
-
-    if (data.balance < upgrade.cost) {
-
-        alert(
-            "The keep cannot afford this upgrade."
-        );
-
-        return;
-
-    }
-
-
-    data.balance -=
-        upgrade.cost;
-
-
-    upgrade.purchased = true;
-
-
-    if (
-        upgrade.name ===
-        "Expanded Granary"
-    ) {
-
-        const granary =
-            data.stores.find(
-                s => s.name === "Food"
-            );
-
-
-        if (granary) {
-
-            granary.capacity += 50;
-
-        }
-
-    }
-
-
-    addLog(
-        `Purchased upgrade: ${upgrade.name} (-${upgrade.cost} gp).`
-    );
-
-
-    save();
-    render();
-
-}
-
-
-/* =========================================================
-   ADVANCE MONTH
-   ========================================================= */
-
-function openAdvanceModal() {
-
-    const net =
-        calculateNet();
-
-
-    const text =
-        `Expected monthly result: ${
-            net >= 0 ? "+" : ""
-        }${Math.round(net)} gp.`;
-
-
-    document.getElementById(
-        "advancePreview"
-    ).textContent = text;
-
-
-    document
-        .getElementById(
-            "advanceModal"
-        )
-        .classList.add("show");
-
-}
-
-
-function closeModal(id) {
-
-    document
-        .getElementById(id)
-        .classList.remove("show");
-
-}
-
-
-function advanceMonth() {
-
-    const income =
-        Math.round(
-            calculateIncome()
-        );
-
-
-    const expenses =
-        Math.round(
-            calculateExpenses()
-        );
-
-
-    const net =
-        income - expenses;
-
-
-    /* Apply finance */
-
-    data.balance += net;
-
-
-    /* Inventory */
-
-    data.stores.forEach(store => {
-
-        if (
-            store.monthlyUse &&
-            store.monthlyUse > 0
-        ) {
-
-            store.quantity =
-                Math.max(
-                    0,
-                    store.quantity -
-                    store.monthlyUse
-                );
-
-        }
-
-    });
-
-
-    /* Building deterioration */
-
-    const winter =
-        getSeasonName() === "Winter";
-
-
-    data.buildings.forEach(building => {
-
-        let deterioration =
-            building.deterioration;
-
-
-        if (winter)
-            deterioration *= 1.5;
-
-
-        const stoneRoofs =
-            data.upgrades.find(
-                u =>
-                    u.name ===
-                    "Stone Roofs" &&
-                    u.purchased
-            );
-
-
-        if (
-            winter &&
-            stoneRoofs
-        ) {
-
-            deterioration *= 0.5;
-
-        }
-
-
-        building.condition =
-            Math.max(
-                0,
-                building.condition -
-                deterioration
-            );
-
-    });
-
-
-    /* Record transactions */
-
-    if (income > 0) {
-
-        data.transactions.unshift({
-
-            name:
-                `Monthly income - ${getSeasonName()}`,
-
-            amount: income,
-
-            type: "income",
-
-            month: data.month,
-
-            season: getSeasonName(),
-
-            date:
-                new Date()
-                .toLocaleDateString()
-
-        });
-
-    }
-
-
-    if (expenses > 0) {
-
-        data.transactions.unshift({
-
-            name:
-                `Monthly expenses - ${getSeasonName()}`,
-
-            amount: expenses,
-
-            type: "expense",
-
-            month: data.month,
-
-            season: getSeasonName(),
-
-            date:
-                new Date()
-                .toLocaleDateString()
-
-        });
-
-    }
-
-
-    addLog(
-
-        `Month ${data.month} completed. ` +
-        `Income: ${income} gp. ` +
-        `Expenses: ${expenses} gp. ` +
-        `Net: ${net >= 0 ? "+" : ""}${net} gp.`
-
-    );
-
-
-    /* Advance month */
-
-    data.month++;
-
-
-    /*
-       Four seasons, each lasting
-       three months.
-    */
-
-    data.seasonIndex =
-        Math.floor(
-            ((data.month - 1) % 12) / 3
-        );
-
-
-    closeModal(
-        "advanceModal"
-    );
-
-
-    save();
-    render();
-
-}
-
-
-/* =========================================================
-   EVENT LOG
-   ========================================================= */
-
-function addLog(message) {
-
-    data.log.unshift({
-
-        month: data.month,
-
-        season: getSeasonName(),
-
-        message: message,
-
-        date:
-            new Date()
-            .toLocaleDateString()
-
-    });
-
-
-    /*
-       Keep the log manageable.
-    */
-
-    if (data.log.length > 200) {
-
-        data.log =
-            data.log.slice(0, 200);
-
-    }
-
-}
-
-
-/* =========================================================
-   ALERTS
-   ========================================================= */
-
-function generateAlerts() {
-
-    let alerts = [];
-
-
-    /* Low money */
-
-    if (data.balance < 0) {
-
-        alerts.push({
-
-            class: "danger",
-
-            text:
-                "The keep is in debt."
-
-        });
-
-    }
-
-
-    if (
-        data.balance >= 0 &&
-        data.balance < 100
-    ) {
-
-        alerts.push({
-
-            class: "warning",
-
-            text:
-                "Treasury reserves are dangerously low."
-
-        });
-
-    }
-
-
-    /* Buildings */
-
-    data.buildings.forEach(
-        building => {
-
-            if (
-                building.condition < 40
-            ) {
-
-                alerts.push({
-
-                    class: "danger",
-
-                    text:
-                        `${building.name} is in poor condition.`
-
-                });
-
-            }
-
-        }
-    );
-
-
-    /* Stores */
-
-    data.stores.forEach(
-        store => {
-
-            const percentage =
-                store.quantity /
-                store.capacity;
-
-
-            if (
-                percentage <= 0.20
-            ) {
-
-                alerts.push({
-
-                    class: "warning",
-
-                    text:
-                        `${store.name} stores are running low.`
-
-                });
-
-            }
-
-        }
-    );
-
-
-    return alerts;
-
-}
-
-
-/* =========================================================
-   RENDER
-   ========================================================= */
-
-function render() {
-
-    const income =
-        calculateIncome();
-
-
-    const expenses =
-        calculateExpenses();
-
-
-    const net =
-        income - expenses;
-
-
-    const season =
-        getSeason();
-
-
-    /* Header */
-
-    document.getElementById(
-        "keepName"
-    ).textContent =
-        data.keepName;
-
-
-    document.getElementById(
-        "monthName"
-    ).textContent =
-        `Month ${data.month}`;
-
-
-    document.getElementById(
-        "seasonName"
-    ).textContent =
-        season.name;
-
-
-    /* Financial */
-
-    document.getElementById(
-        "balance"
-    ).textContent =
-        `${Math.round(data.balance)} gp`;
-
-
-    document.getElementById(
-        "monthlyIncome"
-    ).textContent =
-        `${Math.round(income)} gp`;
-
-
-    document.getElementById(
-        "monthlyExpenses"
-    ).textContent =
-        `${Math.round(expenses)} gp`;
-
-
-    const netElement =
-        document.getElementById(
-            "monthlyNet"
-        );
-
-
-    netElement.textContent =
-        `${net >= 0 ? "+" : ""}${Math.round(net)} gp`;
-
-
-    netElement.className =
-        `metric ${
-            net >= 0
-                ? "positive"
-                : "negative"
-        }`;
-
-
-    /* Forecast */
-
-    document.getElementById(
-        "forecast"
-    ).innerHTML = `
-
-        <strong>
-            Expected balance after next month:
-        </strong>
-
-        <span class="${
-            data.balance + net >= 0
-                ? "positive"
-                : "negative"
-        }">
-
-            ${Math.round(
-                data.balance + net
-            )} gp
-
-        </span>
-
-        <br><br>
-
-        <span style="color:#777;font-size:13px;">
-
-            Income is affected by the
-            ${season.name.toLowerCase()}
-            seasonal multiplier.
-
-            <br>
-
-            Income multiplier:
-            ${season.incomeMultiplier * 100}%
-
-            <br>
-
-            Expense multiplier:
-            ${season.expenseMultiplier * 100}%
-
-        </span>
-
-    `;
-
-
-    /* Overview income */
-
-    document.getElementById(
-        "overviewIncome"
-    ).innerHTML =
-
-        data.income.map(
-            item => `
-
-            <div style="
-                display:flex;
-                justify-content:space-between;
-                padding:7px 0;
-                border-bottom:1px solid #eee;
-            ">
-
-                <span>
-                    ${item.name}
-                </span>
-
-                <strong>
-                    ${item.amount} gp
-                </strong>
-
-            </div>
-
-        `
-        ).join("");
-
-
-    /* Overview expenses */
-
-    document.getElementById(
-        "overviewExpenses"
-    ).innerHTML =
-
-        data.expenses.map(
-            item => `
-
-            <div style="
-                display:flex;
-                justify-content:space-between;
-                padding:7px 0;
-                border-bottom:1px solid #eee;
-            ">
-
-                <span>
-                    ${item.name}
-                </span>
-
-                <strong>
-                    ${item.amount} gp
-                </strong>
-
-            </div>
-
-        `
-        ).join("") +
-
-        `
-
-        <div style="
-            display:flex;
-            justify-content:space-between;
-            padding:8px 0;
-            color:#666;
-        ">
-
-            <span>
-                Staff wages
-            </span>
-
-            <strong>
-                ${calculateStaffWages()} gp
-            </strong>
-
-        </div>
-
-        `;
-
-
-    /* Alerts */
-
-    const alerts =
-        generateAlerts();
-
-
-    document.getElementById(
-        "alerts"
-    ).innerHTML =
-
-        alerts.length
-
-        ?
-
-        alerts.map(
-            alert => `
-
-                <div
-                    class="alert ${alert.class}">
-                    ${alert.text}
-                </div>
-
-            `
-        ).join("")
-
-        :
-
-        `<div class="alert good">
-            The keep is currently operating normally.
-        </div>`;
-
-
-    renderFinance();
-    renderBuildings();
-    renderStaff();
-    renderStores();
-    renderLog();
-
-}
-
-
-/* =========================================================
-   FINANCE RENDER
-   ========================================================= */
-
-function renderFinance() {
-
-    document.getElementById(
-        "startingBalance"
-    ).value =
-        data.balance;
-
-
-    document.getElementById(
-        "incomeList"
-    ).innerHTML = `
-
-        <table>
-
-            <tbody>
-
-                ${
-                    data.income.map(
-                        (item, index) => `
-
-                        <tr>
-
-                            <td>
-                                ${item.name}
-                            </td>
-
-                            <td>
-                                ${item.amount} gp
-                            </td>
-
-                            <td>
-
-                                <button
-                                    class="danger"
-                                    onclick="deleteIncome(${index})">
-
-                                    Remove
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                    `
-                    ).join("")
-                }
-
-            </tbody>
-
-        </table>
-
-    `;
-
-
-    document.getElementById(
-        "expenseList"
-    ).innerHTML = `
-
-        <table>
-
-            <tbody>
-
-                ${
-                    data.expenses.map(
-                        (item, index) => `
-
-                        <tr>
-
-                            <td>
-                                ${item.name}
-                            </td>
-
-                            <td>
-                                ${item.amount} gp
-                            </td>
-
-                            <td>
-
-                                <button
-                                    class="danger"
-                                    onclick="deleteExpense(${index})">
-
-                                    Remove
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                    `
-                    ).join("")
-                }
-
-            </tbody>
-
-        </table>
-
-    `;
-
-}
-
-
-/* =========================================================
-   BUILDINGS
-   ========================================================= */
-
-function renderBuildings() {
-
-    document.getElementById(
-        "buildingList"
-    ).innerHTML =
-
-        data.buildings.map(
-            building => {
-
-                const status =
-                    conditionStatus(
-                        building.condition
-                    );
-
-
-                return `
-
-                <tr>
-
-                    <td>
-                        ${building.name}
-                    </td>
-
-                    <td>
-
-                        <span
-                            class="status ${status.class}">
-
-                            ${status.text}
-
-                        </span>
-
-                        ${Math.round(
-                            building.condition
-                        )}%
-
-                    </td>
-
-                    <td>
-                        ${building.maintenance} gp
-                    </td>
-
-                    <td>
-                        ${building.deterioration}
-                        condition/month
-                    </td>
-
-                </tr>
-
-                `;
-
-            }
-        ).join("");
-
-
-    document.getElementById(
-        "maintenanceList"
-    ).innerHTML =
-
-        data.maintenance.length
-
-        ?
-
-        `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Job
-                    </th>
-
-                    <th>
-                        Building
-                    </th>
-
-                    <th>
-                        Cost
-                    </th>
-
-                    <th>
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                ${
-                    data.maintenance.map(
-                        (job, index) => `
-
-                        <tr>
-
-                            <td>
-                                ${job.name}
-                            </td>
-
-                            <td>
-                                ${job.target}
-                            </td>
-
-                            <td>
-                                ${job.cost} gp
-                            </td>
-
-                            <td>
-
-                                <button
-                                    class="secondary"
-                                    onclick="completeMaintenance(${index})">
-
-                                    Complete
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                    `
-                    ).join("")
-                }
-
-            </tbody>
-
-        </table>
-
-        `
-
-        :
-
-        `<div class="alert good">
-            No outstanding maintenance jobs.
-        </div>`;
-
-
-    document.getElementById(
-        "upgradeList"
-    ).innerHTML = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Upgrade
-                    </th>
-
-                    <th>
-                        Cost
-                    </th>
-
-                    <th>
-                        Effect
-                    </th>
-
-                    <th>
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                ${
-                    data.upgrades.map(
-                        (upgrade, index) => `
-
-                        <tr>
-
-                            <td>
-                                ${upgrade.name}
-                            </td>
-
-                            <td>
-                                ${upgrade.cost} gp
-                            </td>
-
-                            <td>
-                                ${upgrade.effect}
-                            </td>
-
-                            <td>
-
-                                ${
-                                    upgrade.purchased
-
-                                    ?
-
-                                    `<span class="status good">
-                                        Purchased
-                                    </span>`
-
-                                    :
-
-                                    `<button
-                                        class="secondary"
-                                        onclick="purchaseUpgrade(${index})">
-
-                                        Purchase
-
-                                    </button>`
-                                }
-
-                            </td>
-
-                        </tr>
-
-                    `
-                    ).join("")
-                }
-
-            </tbody>
-
-        </table>
-
-    `;
-
-}
-
-
-/* =========================================================
-   STAFF
-   ========================================================= */
-
-function renderStaff() {
-
-    const wages =
-        calculateStaffWages();
-
-
-    document.getElementById(
-        "staffList"
-    ).innerHTML = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Name
-                    </th>
-
-                    <th>
-                        Role
-                    </th>
-
-                    <th>
-                        Monthly Wage
-                    </th>
-
-                    <th>
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                ${
-                    data.staff.map(
-                        (staff, index) => `
-
-                        <tr>
-
-                            <td>
-                                ${staff.name}
-                            </td>
-
-                            <td>
-                                ${staff.role}
-                            </td>
-
-                            <td>
-                                ${staff.wage} gp
-                            </td>
-
-                            <td>
-
-                                <button
-                                    class="danger"
-                                    onclick="removeStaff(${index})">
-
-                                    Remove
-
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                    `
-                    ).join("")
-                }
-
-            </tbody>
-
-            <tfoot>
-
-                <tr>
-
-                    <td colspan="2">
-                        <strong>
-                            Total wages
-                        </strong>
-                    </td>
-
-                    <td>
-                        <strong>
-                            ${wages} gp
-                        </strong>
-                    </td>
-
-                    <td></td>
-
-                </tr>
-
-            </tfoot>
-
-        </table>
-
-    `;
-
-}
-
-
-/* =========================================================
-   STORES
-   ========================================================= */
-
-function renderStores() {
-
-    document.getElementById(
-        "storeList"
-    ).innerHTML = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Item
-                    </th>
-
-                    <th>
-                        Quantity
-                    </th>
-
-                    <th>
-                        Capacity
-                    </th>
-
-                    <th>
-                        Monthly Use
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                ${
-                    data.stores.map(
-                        store => {
-
-                            const percentage =
-                                store.quantity /
-                                store.capacity;
-
-
-                            let status =
-                                "good";
-
-                            let text =
-                                "Adequate";
-
-
-                            if (
-                                percentage <= 0.2
-                            ) {
-
-                                status =
-                                    "bad";
-
-                                text =
-                                    "Low";
-
-                            }
-
-                            else if (
-                                percentage <= 0.4
-                            ) {
-
-                                status =
-                                    "warning";
-
-                                text =
-                                    "Watch";
-
-                            }
-
-
-                            return `
-
-                            <tr>
-
-                                <td>
-                                    ${store.name}
-                                </td>
-
-                                <td>
-                                    ${store.quantity}
-                                </td>
-
-                                <td>
-                                    ${store.capacity}
-                                </td>
-
-                                <td>
-                                    ${store.monthlyUse}
-                                </td>
-
-                                <td>
-
-                                    <span
-                                        class="status ${status}">
-
-                                        ${text}
-
-                                    </span>
-
-                                </td>
-
-                            </tr>
-
-                            `;
-
-                        }
-                    ).join("")
-                }
-
-            </tbody>
-
-        </table>
-
-    `;
-
-}
-
-
-/* =========================================================
-   LOG
-   ========================================================= */
-
-function renderLog() {
-
-    document.getElementById(
-        "eventLog"
-    ).innerHTML =
-
-        data.log.length
-
-        ?
-
-        data.log.map(
-            entry => `
-
-            <div class="log-entry">
-
-                <div class="log-date">
-
-                    Month ${entry.month}
-                    · ${entry.season}
-                    · ${entry.date}
-
-                </div>
-
-                ${entry.message}
-
-            </div>
-
-        `
-        ).join("")
-
-        :
-
-        `<div class="empty">
-            No events recorded.
-        </div>`;
-
-}
-
-
-/* =========================================================
-   DM MODE
-   ========================================================= */
-
-const DM_PIN = "1234";
-
-
-function openDM() {
-
-    document
-        .getElementById(
-            "dmModal"
-        )
-        .classList.add("show");
-
-}
-
-
-function checkDM() {
-
-    const pin =
-        document.getElementById(
-            "dmPin"
-        ).value;
-
-
-    if (pin !== DM_PIN) {
-
-        alert(
-            "Incorrect PIN."
-        );
-
-        return;
-
-    }
-
-
-    closeModal(
-        "dmModal"
-    );
-
-
-    /*
-       Find the DM navigation button.
-    */
-
-    const buttons =
-        document.querySelectorAll(
-            ".nav-button"
-        );
-
-
-    buttons.forEach(
-        button => {
-
-            button.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-
-    document
-        .querySelectorAll(
-            ".page"
-        )
-        .forEach(
-            page =>
-                page.classList.remove(
-                    "active"
-                )
-        );
-
-
-    document
-        .getElementById(
-            "dm"
-        )
-        .classList.add("active");
-
-
-    document.getElementById(
-        "dmKeepName"
-    ).value =
-        data.keepName;
-
-
-    document.getElementById(
-        "dmMonth"
-    ).textContent =
-        data.month;
-
-
-    document.getElementById(
-        "dmSeason"
-    ).textContent =
-        getSeasonName();
-
-}
-
-
-/* =========================================================
-   CAMPAIGN SETTINGS
-   ========================================================= */
-
-function saveCampaignSettings() {
-
-    const name =
-        document.getElementById(
-            "dmKeepName"
-        ).value.trim();
-
-
-    if (name) {
-
-        data.keepName =
-            name;
-
-    }
-
-
-    save();
-    render();
-
-}
-
-
-/* =========================================================
-   EXPORT SAVE
-   ========================================================= */
-
-function exportSave() {
-
-    const json =
-        JSON.stringify(
-            data,
-            null,
-            2
-        );
-
-
-    const blob =
-        new Blob(
-            [json],
-            {
-                type:
-                    "application/json"
-            }
-        );
-
-
-    const url =
-        URL.createObjectURL(
-            blob
-        );
-
-
-    const a =
-        document.createElement(
-            "a"
-        );
-
-
-    a.href = url;
-
-    a.download =
-        "mountain-keep-save.json";
-
-
-    a.click();
-
-
-    URL.revokeObjectURL(
-        url
-    );
-
-}
-
-
-/* =========================================================
-   IMPORT SAVE
-   ========================================================= */
-
-function importSave(event) {
-
-    const file =
-        event.target.files[0];
-
-
-    if (!file)
-        return;
-
-
-    const reader =
-        new FileReader();
-
-
-    reader.onload =
-        function(e) {
-
-            try {
-
-                const imported =
-                    JSON.parse(
-                        e.target.result
-                    );
-
-
-                data =
-                    imported;
-
-
-                save();
-
-                render();
-
-
-                alert(
-                    "Campaign imported successfully."
-                );
-
-
-            }
-
-            catch {
-
-                alert(
-                    "Invalid campaign file."
-                );
-
-            }
-
-        };
-
-
-    reader.readAsText(
-        file
-    );
-
-}
-
-
-/* =========================================================
-   RESET
-   ========================================================= */
-
-function resetCampaign() {
-
-    const confirmed =
-        confirm(
-            "This will permanently erase the current campaign from this browser. Continue?"
-        );
-
-
-    if (!confirmed)
-        return;
-
-
-    localStorage.removeItem(
-        "mountainKeep"
-    );
-
-
-    location.reload();
-
-}
-
-
-/* =========================================================
-   INITIALISE
-   ========================================================= */
-
-render();
-
+nav();render();
 </script>
-
 </body>
 </html>
