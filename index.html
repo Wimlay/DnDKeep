@@ -13,51 +13,41 @@ header p{margin:4px 0 0;color:#aaa;font-size:13px}
 nav{display:flex;background:#fff;border-bottom:1px solid #ddd;padding:0 12px;overflow-x:auto}
 nav button{border:0;background:none;padding:13px 14px;color:#666;cursor:pointer;white-space:nowrap}
 nav button.active{color:#222;border-bottom:2px solid #222}
-main{max-width:1250px;margin:24px auto;padding:0 18px}
+main{max-width:1280px;margin:24px auto;padding:0 18px}
 .page{display:none}.page.active{display:block}
 .grid{display:grid;gap:14px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
 .card{background:#fff;border:1px solid #ddd;border-radius:5px;padding:16px}
 .card h2{font-size:16px;font-weight:500;margin:0 0 14px}
 .section-title{font-size:18px;font-weight:500;margin:25px 0 10px}
 .label{font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.05em}
-.metric{font-size:25px;font-weight:500;margin-top:5px}.positive{color:#31734b}.negative{color:#9a3939}.muted{color:#777}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{text-align:left;color:#777;font-size:11px;font-weight:normal;border-bottom:1px solid #ddd;padding:7px}
-td{padding:8px 7px;border-bottom:1px solid #eee;vertical-align:middle}
-input,select,textarea{width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;background:#fff;font:inherit}
-textarea{resize:vertical}
+.metric{font-size:25px;font-weight:500;margin-top:5px}.positive{color:#31734b}.negative{color:#9a3939}.muted,.small{color:#777}.small{font-size:11px}
+table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;color:#777;font-size:11px;font-weight:normal;border-bottom:1px solid #ddd;padding:7px}td{padding:8px 7px;border-bottom:1px solid #eee;vertical-align:middle}
+input,select,textarea{width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;background:#fff;font:inherit}textarea{resize:vertical}
 .form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;align-items:end}.form-grid5{grid-template-columns:repeat(5,1fr)}
 .form-group label{display:block;font-size:11px;color:#666;margin-bottom:4px}
 button{font:inherit}.primary{background:#222;color:#fff;border:0;padding:8px 13px;border-radius:4px;cursor:pointer}.secondary{background:#fff;color:#333;border:1px solid #ccc;padding:7px 11px;border-radius:4px;cursor:pointer}.danger{background:none;border:0;color:#963b3b;cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
 .status{display:inline-block;padding:3px 6px;border-radius:3px;font-size:10px}.good{background:#e4eee7;color:#31734b}.warning{background:#f3ead8;color:#876522}.bad{background:#f2e0e0;color:#9a3939}.neutral{background:#eee;color:#666}
 .alert{padding:10px 12px;margin:5px 0;border-radius:4px;font-size:13px}.alert.good{background:#e4eee7;color:#356b49}.alert.warning{background:#f5ecd9;color:#76591c}.alert.danger{background:#f3e0e0;color:#8b3333}
 .turnbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.turnbar strong{font-size:18px}.turnbar span{color:#777;font-size:12px}
-.progress{height:7px;background:#eee;border-radius:5px;overflow:hidden}.progress div{height:100%;background:#555}
-.small{font-size:11px;color:#777}
 .inline{display:flex;gap:7px;align-items:center}.right{text-align:right}
 .log-entry{padding:8px 0;border-bottom:1px solid #eee;font-size:13px}.log-date{font-size:10px;color:#888;margin-bottom:2px}
-.modal{display:none;position:fixed;z-index:20;inset:0;background:rgba(0,0,0,.45);align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-content{background:#fff;width:100%;max-width:550px;max-height:90vh;overflow:auto;padding:20px;border-radius:5px}
-canvas{width:100%;height:260px;border:1px solid #eee;background:#fff}
-.tabs{display:flex;gap:6px;margin-bottom:10px}.tabs button{border:1px solid #ccc;background:#fff;padding:7px 10px;border-radius:4px;cursor:pointer}.tabs button.active{background:#222;color:#fff}
-@media(max-width:900px){.g4,.g3{grid-template-columns:repeat(2,1fr)}.form-grid,.form-grid5{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
-@media(max-width:550px){.g4,.g3,.g2,.form-grid,.form-grid5{grid-template-columns:1fr}main{padding:0 10px}.turnbar{align-items:flex-start;flex-direction:column}}
+.progress{height:7px;background:#eee;border-radius:5px;overflow:hidden}.progress>div{height:100%;background:#555}
+.modal{display:none;position:fixed;z-index:20;inset:0;background:rgba(0,0,0,.45);align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-content{background:#fff;width:100%;max-width:580px;max-height:90vh;overflow:auto;padding:20px;border-radius:5px}
+canvas{width:100%;height:320px;border:1px solid #eee;background:#fff}
+.hr{border:0;border-top:1px solid #eee;margin:14px 0}
+@media(max-width:950px){.g4,.g3{grid-template-columns:repeat(2,1fr)}.form-grid,.form-grid5{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
+@media(max-width:560px){.g4,.g3,.g2,.form-grid,.form-grid5{grid-template-columns:1fr}main{padding:0 10px}.turnbar{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
 <body>
-
-<header>
-  <h1 id="keepName">The Mountain Keep</h1>
-  <p>Keep Management Ledger</p>
-</header>
-
+<header><h1 id="keepName">The Mountain Keep</h1><p>Keep Management Ledger</p></header>
 <nav id="nav"></nav>
-
 <main>
 
-<!-- OVERVIEW -->
 <section id="overview" class="page active">
   <div class="turnbar">
-    <div><strong id="dateLabel">January, Year 1</strong><br><span id="turnLabel">Turn 1</span></div>
+    <div><strong id="dateLabel">January, Year 1</strong><br><span id="turnLabel">Turn 1 · Winter</span></div>
     <button class="primary" onclick="openAdvance()">Advance Turn</button>
   </div>
 
@@ -65,7 +55,7 @@ canvas{width:100%;height:260px;border:1px solid #eee;background:#fff}
     <div class="card"><div class="label">Treasury</div><div class="metric" id="balanceMetric">0 gp</div></div>
     <div class="card"><div class="label">Expected Monthly Net</div><div class="metric" id="netMetric">0 gp</div></div>
     <div class="card"><div class="label">Public Order</div><div class="metric" id="orderMetric">0 / 100</div></div>
-    <div class="card"><div class="label">Store Capacity</div><div class="metric" id="capacityMetric">0 / 1000</div></div>
+    <div class="card"><div class="label">Keep Space</div><div class="metric" id="spaceMetric">0 / 0</div></div>
   </div>
 
   <h2 class="section-title">Keep Status</h2>
@@ -73,40 +63,49 @@ canvas{width:100%;height:260px;border:1px solid #eee;background:#fff}
 
   <div class="grid g3">
     <div class="card"><h2>Income</h2><div id="overviewIncome"></div></div>
-    <div class="card"><h2>Expenses</h2><div id="overviewExpenses"></div></div>
-    <div class="card"><h2>Villages & Rents</h2><div id="overviewVillages"></div></div>
+    <div class="card"><h2>Recurring Expenses</h2><div id="overviewExpenses"></div></div>
+    <div class="card"><h2>Food & Population</h2><div id="overviewFood"></div></div>
   </div>
 
   <h2 class="section-title">Ongoing Upgrades</h2>
   <div class="card"><div id="overviewUpgrades"></div></div>
 </section>
 
-<!-- FINANCE -->
 <section id="finance" class="page">
   <h2 class="section-title">Finance</h2>
-
   <div class="grid g4">
     <div class="card"><div class="label">Monthly Income</div><div class="metric positive" id="financeIncome">0 gp</div></div>
-    <div class="card"><div class="label">Monthly Expenses</div><div class="metric negative" id="financeExpenses">0 gp</div></div>
+    <div class="card"><div class="label">Recurring Expenses</div><div class="metric negative" id="financeExpenses">0 gp</div></div>
     <div class="card"><div class="label">Tax</div><div class="metric" id="financeTax">0 gp</div></div>
-    <div class="card"><div class="label">Net</div><div class="metric" id="financeNet">0 gp</div></div>
+    <div class="card"><div class="label">Expected Net</div><div class="metric" id="financeNet">0 gp</div></div>
   </div>
 
   <div class="card" style="margin-top:14px">
     <h2>Recurring Income</h2>
+    <div id="incomeList"></div>
+    <hr class="hr">
     <div class="form-grid">
-      <div class="form-group"><label>Name</label><input id="incomeName" placeholder="Mine lease"></div>
-      <div class="form-group"><label>Monthly Base</label><input id="incomeAmount" type="number"></div>
-      <div class="form-group"><label>Type</label><select id="incomeType"><option value="general">General</option><option value="other">Other</option></select></div>
-      <button class="primary" onclick="addIncome()">Add</button>
+      <div class="form-group"><label>New Income Stream</label><input id="incomeName" placeholder="Mine lease"></div>
+      <div class="form-group"><label>Monthly Amount</label><input id="incomeAmount" type="number"></div>
+      <div></div><button class="primary" onclick="addIncome()">Add</button>
     </div>
-    <div id="incomeList" style="margin-top:12px"></div>
   </div>
 
   <div class="card" style="margin-top:14px">
-    <h2>Automatic Expenses</h2>
-    <p class="small">Staff wages, maintenance reserve, tax and other recurring costs are calculated automatically.</p>
+    <h2>Recurring Expenses</h2>
     <div id="expenseList"></div>
+    <hr class="hr">
+    <div class="form-grid">
+      <div class="form-group"><label>New Recurring Expense</label><input id="expenseName" placeholder="Lighting oil"></div>
+      <div class="form-group"><label>Monthly Amount</label><input id="expenseAmount" type="number"></div>
+      <div></div><button class="primary" onclick="addExpense()">Add</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Village Rents</h2>
+    <p class="small">Higher rent rates increase revenue but reduce the village faction's reputation and the keep's public order.</p>
+    <div id="villageFinance"></div>
   </div>
 
   <div class="card" style="margin-top:14px">
@@ -121,121 +120,145 @@ canvas{width:100%;height:260px;border:1px solid #eee;background:#fff}
 
   <div class="card" style="margin-top:14px">
     <h2>Trade</h2>
-    <p class="small">Trade uses the keep's spare carrying capacity. Buy or sell goods directly into inventory.</p>
     <div class="grid g3">
-      <div><div class="label">Trade Capacity</div><div class="metric" id="tradeCapacity"></div></div>
-      <div><div class="label">Merchant</div><div id="merchantStatus"></div></div>
-      <div><div class="label">Wagons</div><div class="metric" id="wagonCount"></div></div>
+      <div><div class="label">Trade Capacity This Turn</div><div class="metric" id="tradeCapacity"></div></div>
+      <div><div class="label">Trade Used</div><div class="metric" id="tradeUsed"></div></div>
+      <div><div class="label">Trade Profit This Turn</div><div class="metric" id="tradeProfit"></div></div>
     </div>
-    <div class="form-grid" style="margin-top:12px">
+    <p class="small" style="margin-top:10px">Wagons increase trade capacity only. They do not increase the keep's store capacity. Merchant staff increase sale profit by 5% each, up to five merchants.</p>
+    <div class="form-grid5" style="margin-top:12px">
+      <div class="form-group"><label>Category</label><select id="tradeCategory" onchange="populateTradeItems()"></select></div>
       <div class="form-group"><label>Item</label><select id="tradeItem"></select></div>
       <div class="form-group"><label>Quantity</label><input id="tradeQty" type="number" min="1"></div>
-      <div class="form-group"><label>Price per unit</label><input id="tradePrice" type="number" min="0"></div>
       <div class="form-group"><label>Action</label><select id="tradeAction"><option value="buy">Buy</option><option value="sell">Sell</option></select></div>
       <button class="primary" onclick="trade()">Trade</button>
     </div>
-    <div style="margin-top:12px">
-      <button class="secondary" onclick="buyWagon()">Buy Wagon (+100 capacity)</button>
-      <button class="secondary" onclick="hireMerchant()">Hire Merchant</button>
-    </div>
+    <div style="margin-top:12px"><button class="secondary" onclick="buyWagon()">Buy Wagon — 250 gp (+100 trade capacity)</button></div>
+  </div>
+
+  <div class="card" style="margin-top:14px"><h2>Finance Log</h2><div id="financeLog"></div></div>
+</section>
+
+<section id="keep" class="page">
+  <h2 class="section-title">Keep & Facilities</h2>
+  <div class="grid g4">
+    <div class="card"><div class="label">Keep Space Used</div><div class="metric" id="keepSpaceUsed"></div></div>
+    <div class="card"><div class="label">Keep Space Available</div><div class="metric" id="keepSpaceAvailable"></div></div>
+    <div class="card"><div class="label">Maintenance Budget</div><div class="metric" id="maintenanceBudgetMetric"></div></div>
+    <div class="card"><div class="label">Maintenance Required</div><div class="metric" id="maintenanceRequiredMetric"></div></div>
   </div>
 
   <div class="card" style="margin-top:14px">
-    <h2>Finance Log</h2>
-    <div id="financeLog"></div>
+    <h2>Maintenance</h2>
+    <div class="form-grid">
+      <div class="form-group"><label>Monthly Maintenance Budget</label><input id="maintenanceBudgetInput" type="number" min="0"></div>
+      <div></div><div></div><button class="primary" onclick="setMaintenanceBudget()">Set Budget</button>
+    </div>
+    <p class="small">Funding at least the required amount prevents condition attrition. Spending less allows buildings and facilities to deteriorate.</p>
   </div>
-</section>
 
-<!-- KEEP -->
-<section id="keep" class="page">
-  <h2 class="section-title">Buildings & Facilities</h2>
-  <div class="card">
+  <div class="card" style="margin-top:14px">
+    <h2>Food</h2>
+    <div class="grid g3">
+      <div><div class="label">People in Castle</div><div class="metric" id="populationMetric"></div></div>
+      <div><div class="label">Food Stored</div><div class="metric" id="foodQtyMetric"></div></div>
+      <div><div class="label">Monthly Food Use</div><div class="metric" id="foodUseMetric"></div></div>
+    </div>
+    <p class="small">Food use is 1 unit per person each turn: 6 party members plus all current staff.</p>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Buildings & Facilities</h2>
     <div id="buildingList"></div>
   </div>
 
-  <h2 class="section-title">Maintenance Tasks</h2>
-  <div class="card">
-    <div class="form-grid5">
-      <div class="form-group"><label>Task</label><input id="maintName" placeholder="Repair wall"></div>
-      <div class="form-group"><label>Building</label><select id="maintBuilding"></select></div>
-      <div class="form-group"><label>Cost</label><input id="maintCost" type="number"></div>
-      <div class="form-group"><label>Condition Restored</label><input id="maintRestore" type="number" min="0" max="100"></div>
-      <button class="primary" onclick="addMaintenance()">Add</button>
-    </div>
-    <div id="maintenanceList" style="margin-top:12px"></div>
-  </div>
-
-  <h2 class="section-title">Possible Upgrades</h2>
-  <div class="card">
-    <div class="form-grid5">
-      <div class="form-group"><label>Upgrade</label><input id="upgradeName" placeholder="Reinforced Gate"></div>
-      <div class="form-group"><label>Building</label><select id="upgradeBuilding"></select></div>
-      <div class="form-group"><label>Cost</label><input id="upgradeCost" type="number"></div>
-      <div class="form-group"><label>Turns</label><input id="upgradeTurns" type="number" min="1"></div>
-      <button class="primary" onclick="addUpgrade()">Add</button>
-    </div>
-    <div id="upgradeList" style="margin-top:12px"></div>
-  </div>
-
-  <h2 class="section-title">Ongoing Upgrades</h2>
-  <div class="card"><div id="ongoingList"></div></div>
-
-  <h2 class="section-title">Completed Upgrades</h2>
-  <div class="card"><div id="completedList"></div></div>
-</section>
-
-<!-- STAFF -->
-<section id="staff" class="page">
-  <h2 class="section-title">Staff</h2>
-  <div class="card">
-    <div class="form-grid5">
-      <div class="form-group"><label>Name</label><input id="staffName"></div>
-      <div class="form-group"><label>Type / Role</label>
-        <select id="staffType">
-          <option value="Private">Guard — Private</option>
-          <option value="Sergeant">Guard — Sergeant</option>
-          <option value="Captain">Guard — Captain</option>
-          <option value="Steward">Steward</option>
-          <option value="Tradesman">Tradesman</option>
-          <option value="Artisan">Artisan</option>
-        </select>
-      </div>
-      <div class="form-group"><label>Rank (1–5)</label><input id="staffRank" type="number" min="1" max="5" value="1"></div>
-      <div class="form-group"><label>Monthly Wage</label><input id="staffWage" type="number"></div>
-      <button class="primary" onclick="addStaff()">Add</button>
-    </div>
-    <p class="small">Guard limits: 45 Privates, 5 Sergeants, 1 Captain. Guard wage is automatically suggested from rank but can be edited.</p>
-  </div>
-
-  <div class="card" style="margin-top:14px"><h2>Non-Guard Staff</h2><div id="staffList"></div></div>
-
-  <div class="card" style="margin-top:14px"><h2>Guards</h2><div id="guardList"></div></div>
-
-  <div class="card" style="margin-top:14px"><h2>Guard Training & Equipment</h2><p class="small">Equipment levels require the next equipment package in inventory. Training requires turns: 0→1 = 1, 1→2 = 2, 2→3 = 3.</p><div id="trainingList"></div></div>
-</section>
-
-<!-- STORES -->
-<section id="stores" class="page">
-  <h2 class="section-title">Stores</h2>
-  <div class="grid g3">
-    <div class="card"><div class="label">Used Capacity</div><div class="metric" id="usedCapacity"></div></div>
-    <div class="card"><div class="label">Overall Capacity</div><div class="metric" id="overallCapacity"></div></div>
-    <div class="card"><div class="label">Remaining</div><div class="metric" id="remainingCapacity"></div></div>
+  <div class="card" style="margin-top:14px">
+    <h2>Repair Walls</h2>
+    <p class="small" id="repairWallsText"></p>
+    <button class="primary" onclick="repairWalls()">Repair Walls +5%</button>
   </div>
 
   <div class="card" style="margin-top:14px">
-    <h2>Inventory</h2>
-    <div class="form-grid">
-      <div class="form-group"><label>Item</label><input id="storeName"></div>
-      <div class="form-group"><label>Quantity</label><input id="storeQty" type="number"></div>
-      <div class="form-group"><label>Capacity / Unit</label><input id="storeUnitCap" type="number" value="1"></div>
-      <button class="primary" onclick="addStore()">Add</button>
+    <h2>Maintenance Tasks</h2>
+    <div id="maintenanceList"></div>
+    <hr class="hr">
+    <div class="form-grid5">
+      <div class="form-group"><label>Task</label><input id="maintName" placeholder="Repair stable roof"></div>
+      <div class="form-group"><label>Building</label><select id="maintBuilding"></select></div>
+      <div class="form-group"><label>Cost</label><input id="maintCost" type="number"></div>
+      <div class="form-group"><label>Condition Restored</label><input id="maintRestore" type="number" min="0" max="100"></div>
+      <button class="primary" onclick="addMaintenance()">Add Task</button>
     </div>
-    <div id="storeList" style="margin-top:12px"></div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Possible Upgrades</h2>
+    <div id="upgradeList"></div>
+    <hr class="hr">
+    <div class="form-grid5">
+      <div class="form-group"><label>Upgrade</label><input id="upgradeName" placeholder="Expand Courtyard"></div>
+      <div class="form-group"><label>Building</label><select id="upgradeBuilding"></select></div>
+      <div class="form-group"><label>Cost</label><input id="upgradeCost" type="number"></div>
+      <div class="form-group"><label>Turns</label><input id="upgradeTurns" type="number" min="1"></div>
+      <button class="primary" onclick="addUpgrade()">Add Upgrade</button>
+    </div>
+    <div class="form-grid5" style="margin-top:8px">
+      <div class="form-group"><label>Maintenance Increase</label><input id="upgradeMaint" type="number" value="0"></div>
+      <div class="form-group"><label>Space Increase</label><input id="upgradeSpace" type="number" value="0"></div>
+      <div class="form-group"><label>Condition Increase</label><input id="upgradeCondition" type="number" value="0"></div>
+      <div></div><div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px"><h2>Ongoing Upgrades</h2><div id="ongoingList"></div></div>
+  <div class="card" style="margin-top:14px"><h2>Completed Upgrades</h2><div id="completedList"></div></div>
+</section>
+
+<section id="staff" class="page">
+  <h2 class="section-title">Staff</h2>
+  <div class="card">
+    <div class="form-grid">
+      <div class="form-group"><label>Name</label><input id="staffName"></div>
+      <div class="form-group"><label>Type / Role</label><select id="staffType"><option value="Private">Guard — Private</option><option value="Sergeant">Guard — Sergeant</option><option value="Captain">Guard — Captain</option><option value="Steward">Steward</option><option value="Tradesman">Tradesman</option><option value="Artisan">Artisan</option><option value="Merchant">Merchant</option></select></div>
+      <div></div><button class="primary" onclick="addStaff()">Add Staff</button>
+    </div>
+    <p class="small">Ranks are set automatically by role. Wages are based on rank and can be adjusted at the bottom of this page. Merchant limit: 5.</p>
+  </div>
+
+  <div class="card" style="margin-top:14px"><h2>Non-Guard Staff</h2><div id="staffList"></div></div>
+  <div class="card" style="margin-top:14px"><h2>Guards</h2><div id="guardList"></div></div>
+  <div class="card" style="margin-top:14px"><h2>Guard Training & Equipment</h2><div id="trainingList"></div></div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Rank Wages</h2>
+    <p class="small">Changing a rank wage updates all staff currently holding that rank.</p>
+    <div id="rankWagesList"></div>
   </div>
 </section>
 
-<!-- FACTIONS -->
+<section id="stores" class="page">
+  <h2 class="section-title">Stores</h2>
+  <div class="grid g4">
+    <div class="card"><div class="label">Used Capacity</div><div class="metric" id="usedCapacity"></div></div>
+    <div class="card"><div class="label">Overall Capacity</div><div class="metric" id="overallCapacity"></div></div>
+    <div class="card"><div class="label">Remaining Capacity</div><div class="metric" id="remainingCapacity"></div></div>
+    <div class="card"><div class="label">Food This Turn</div><div class="metric" id="storeFoodSummary"></div></div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Add Inventory</h2>
+    <div class="form-grid5">
+      <div class="form-group"><label>Category</label><select id="storeCategory" onchange="populateStoreItems()"></select></div>
+      <div class="form-group"><label>Item</label><select id="storeItem"></select></div>
+      <div class="form-group"><label>Quantity</label><input id="storeQty" type="number" min="1"></div>
+      <div class="form-group"><label>Capacity / Unit</label><input id="storeUnitCap" type="number" min="1" value="1"></div>
+      <button class="primary" onclick="addStore()">Add</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px"><h2>Inventory</h2><div id="storeList"></div></div>
+</section>
+
 <section id="factions" class="page">
   <h2 class="section-title">Factions</h2>
   <div class="card">
@@ -247,16 +270,12 @@ canvas{width:100%;height:260px;border:1px solid #eee;background:#fff}
   </div>
 </section>
 
-<!-- HISTORY -->
 <section id="history" class="page">
   <h2 class="section-title">Financial History</h2>
-  <div class="card">
-    <canvas id="historyChart" width="1100" height="280"></canvas>
-  </div>
+  <div class="card"><canvas id="historyChart" width="1150" height="360"></canvas></div>
   <div class="card" style="margin-top:14px"><div id="historyTable"></div></div>
 </section>
 
-<!-- LOG -->
 <section id="log" class="page">
   <h2 class="section-title">Campaign Log</h2>
   <div class="card">
@@ -268,540 +287,448 @@ canvas{width:100%;height:260px;border:1px solid #eee;background:#fff}
   <div class="card" style="margin-top:14px"><div id="eventLog"></div></div>
 </section>
 
-<!-- DM -->
 <section id="dm" class="page">
   <h2 class="section-title">DM Control</h2>
-
   <div class="card">
-    <h2>Campaign</h2>
-    <div class="form-grid">
+    <h2>Campaign & Economy</h2>
+    <div class="form-grid5">
       <div class="form-group"><label>Keep Name</label><input id="dmKeepName"></div>
       <div class="form-group"><label>Calendar Year</label><input id="dmYear" type="number"></div>
-      <div class="form-group"><label>Starting Month</label><select id="dmMonth"></select></div>
-      <div class="form-group"><label>Tax Rate (%)</label><input id="dmTax" type="number" min="0" max="100" step=".1"></div>
+      <div class="form-group"><label>Calendar Month</label><select id="dmMonth"></select></div>
+      <div class="form-group"><label>Tax Rate (% of Income)</label><input id="dmTax" type="number" min="0" max="100" step=".1"></div>
       <button class="primary" onclick="saveDMSettings()">Save</button>
     </div>
   </div>
 
   <div class="card" style="margin-top:14px">
-    <h2>Public Order</h2>
-    <div class="form-grid">
+    <h2>Public Order & Space</h2>
+    <div class="form-grid5">
       <div class="form-group"><label>Public Order (0–100)</label><input id="dmOrder" type="number" min="0" max="100"></div>
-      <button class="primary" onclick="setOrder()">Update</button>
+      <div class="form-group"><label>Base Store Capacity</label><input id="dmStoreCapacity" type="number"></div>
+      <div class="form-group"><label>Base Keep Space</label><input id="dmKeepSpace" type="number"></div>
+      <div class="form-group"><label>Trade Capacity / Wagon</label><input id="dmTradeCapacity" type="number"></div>
+      <button class="primary" onclick="saveDMCore()">Save</button>
     </div>
   </div>
 
   <div class="card" style="margin-top:14px">
-    <h2>Store Capacity</h2>
-    <div class="form-grid">
-      <div class="form-group"><label>Base Capacity</label><input id="dmBaseCapacity" type="number"></div>
-      <button class="primary" onclick="setCapacity()">Update</button>
+    <h2>Toll Road Rules</h2>
+    <div class="form-grid5">
+      <div class="form-group"><label>Base Traffic Value (gp)</label><input id="dmTollBase" type="number"></div>
+      <div class="form-group"><label>Toll Charge (%)</label><input id="dmTollRate" type="number"></div>
+      <div class="form-group"><label>Winter Traffic Factor</label><input id="dmWinterTraffic" type="number" step=".05"></div>
+      <div></div><button class="primary" onclick="saveTollRules()">Save</button>
+    </div>
+    <p class="small">Actual toll income also responds to season, public order, wall condition and nearby-village reputation.</p>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Trade Rules</h2>
+    <div class="form-grid5">
+      <div class="form-group"><label>Sell Margin (%)</label><input id="dmTradeMargin" type="number"></div>
+      <div class="form-group"><label>Merchant Bonus / Merchant (%)</label><input id="dmMerchantBonus" type="number"></div>
+      <div class="form-group"><label>Max Merchants</label><input id="dmMaxMerchants" type="number" min="1"></div>
+      <div></div><button class="primary" onclick="saveTradeRules()">Save</button>
     </div>
   </div>
 
   <div class="card" style="margin-top:14px">
-    <h2>Village Rent</h2>
+    <h2>Food & Firewood Rules</h2>
+    <div class="form-grid5">
+      <div class="form-group"><label>Food / Person / Turn</label><input id="dmFoodUse" type="number" min="0"></div>
+      <div class="form-group"><label>Firewood / Turn</label><input id="dmFirewoodUse" type="number" min="0"></div>
+      <div></div><div></div><button class="primary" onclick="saveStoreRules()">Save</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Repair Walls</h2>
+    <div class="form-grid5">
+      <div class="form-group"><label>Gold Cost</label><input id="dmRepairGold" type="number"></div>
+      <div class="form-group"><label>Stone Cost</label><input id="dmRepairStone" type="number"></div>
+      <div class="form-group"><label>Wood Cost</label><input id="dmRepairWood" type="number"></div>
+      <div class="form-group"><label>Condition Restored</label><input id="dmRepairRestore" type="number"></div>
+      <button class="primary" onclick="saveRepairRules()">Save</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Village Base Income</h2>
     <div id="villageDM"></div>
   </div>
 
   <div class="card" style="margin-top:14px">
-    <h2>Save / Reset</h2>
-    <button class="secondary" onclick="exportSave()">Export Campaign</button>
-    <button class="secondary" onclick="document.getElementById('importFile').click()">Import Campaign</button>
-    <input id="importFile" type="file" accept=".json" style="display:none" onchange="importSave(event)">
-    <button class="danger" onclick="resetCampaign()">Reset Campaign</button>
+    <h2>Item Values</h2>
+    <p class="small">These are the base market values used for trade. Buying uses the base value. Selling uses the base value plus the configured trade margin and merchant bonus.</p>
+    <div id="itemValueList"></div>
   </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>Building & Facility Editor</h2>
+    <div id="dmBuildingList"></div>
+    <hr class="hr">
+    <div class="form-grid5">
+      <div class="form-group"><label>Name</label><input id="dmBuildingName"></div>
+      <div class="form-group"><label>Condition</label><input id="dmBuildingCondition" type="number" min="0" max="100" value="100"></div>
+      <div class="form-group"><label>Space</label><input id="dmBuildingSpace" type="number" min="0" value="5"></div>
+      <div class="form-group"><label>Monthly Maintenance</label><input id="dmBuildingMaint" type="number" min="0" value="10"></div>
+      <button class="primary" onclick="addBuilding()">Add Building</button>
+    </div>
+    <div class="form-grid" style="margin-top:8px">
+      <div class="form-group"><label>Is Wall / Gate Structure?</label><select id="dmBuildingWalls"><option value="no">No</option><option value="yes">Yes</option></select></div>
+      <div></div><div></div><div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px"><h2>Campaign Save</h2><button class="secondary" onclick="exportSave()">Export Campaign</button> <button class="secondary" onclick="document.getElementById('importFile').click()">Import Campaign</button> <input id="importFile" type="file" accept=".json" style="display:none" onchange="importSave(event)"> <button class="danger" onclick="resetCampaign()">Reset Campaign</button></div>
 </section>
 
 </main>
 
-<div id="dmModal" class="modal">
-  <div class="modal-content">
-    <h2>DM Access</h2>
-    <p>Enter the DM PIN.</p>
-    <input id="dmPin" type="password">
-    <br><br>
-    <button class="primary" onclick="checkDM()">Enter</button>
-    <button class="secondary" onclick="closeModal('dmModal')">Cancel</button>
-  </div>
-</div>
-
-<div id="advanceModal" class="modal">
-  <div class="modal-content">
-    <h2>Advance Turn</h2>
-    <div id="advancePreview"></div>
-    <br>
-    <button class="primary" onclick="advanceTurn()">Advance Turn</button>
-    <button class="secondary" onclick="closeModal('advanceModal')">Cancel</button>
-  </div>
-</div>
+<div id="dmModal" class="modal"><div class="modal-content"><h2>DM Access</h2><p>Enter the DM PIN.</p><input id="dmPin" type="password"><br><br><button class="primary" onclick="checkDM()">Enter</button> <button class="secondary" onclick="closeModal('dmModal')">Cancel</button></div></div>
+<div id="advanceModal" class="modal"><div class="modal-content"><h2>Advance Turn</h2><div id="advancePreview"></div><br><button class="primary" onclick="advanceTurn()">Advance Turn</button> <button class="secondary" onclick="closeModal('advanceModal')">Cancel</button></div></div>
 
 <script>
 const DM_PIN="1234";
-
+const SCHEMA_VERSION=3;
 const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
-
-const GUARD_WAGES={Private:20,Sergeant:40,Captain:75};
+const SEASONS=["Winter","Winter","Spring","Spring","Spring","Summer","Summer","Summer","Autumn","Autumn","Autumn","Winter"];
+const ROLE_DEFAULTS={Private:1,Sergeant:3,Captain:5,Steward:1,Tradesman:3,Artisan:5,Merchant:3};
+const DEFAULT_RANK_WAGES={1:20,2:30,3:45,4:60,5:80};
 const TRAIN_TURNS={1:1,2:2,3:3};
-
+const MAX_GUARDS={Private:45,Sergeant:5,Captain:1};
+const ITEM_CATALOG=[
+  {id:"weapon_simple",category:"Weapon",name:"Simple",label:"Weapon - Simple",value:25},
+  {id:"weapon_martial",category:"Weapon",name:"Martial",label:"Weapon - Martial",value:75},
+  {id:"armour_light",category:"Armour",name:"Light",label:"Armour - Light",value:60},
+  {id:"armour_chain_shirt",category:"Armour",name:"Chain Shirt",label:"Armour - Chain Shirt",value:150},
+  {id:"armour_chainmail",category:"Armour",name:"Chainmail",label:"Armour - Chainmail",value:250},
+  {id:"armour_breastplate",category:"Armour",name:"Breastplate",label:"Armour - Breastplate",value:350},
+  {id:"resource_food",category:"Resource",name:"Food",label:"Resource - Food",value:2},
+  {id:"resource_firewood",category:"Resource",name:"Firewood",label:"Resource - Firewood",value:1},
+  {id:"resource_stone",category:"Resource",name:"Stone",label:"Resource - Stone",value:5},
+  {id:"resource_wood",category:"Resource",name:"Wood",label:"Resource - Wood",value:4},
+  {id:"potion_healing",category:"Potion",name:"Healing Potion",label:"Potion - Healing",value:50},
+  {id:"potion_antidote",category:"Potion",name:"Antidote",label:"Potion - Antidote",value:35},
+  {id:"commodity_grain",category:"Commodity",name:"Grain",label:"Commodity - Grain",value:3},
+  {id:"commodity_wool",category:"Commodity",name:"Wool",label:"Commodity - Wool",value:8},
+  {id:"commodity_cloth",category:"Commodity",name:"Cloth",label:"Commodity - Cloth",value:15},
+  {id:"commodity_salt",category:"Commodity",name:"Salt",label:"Commodity - Salt",value:10}
+];
+const CATALOG_BY_ID=Object.fromEntries(ITEM_CATALOG.map(i=>[i.id,i]));
+const CLONE=x=>JSON.parse(JSON.stringify(x));
 const DEFAULT_DATA={
-  keepName:"The Mountain Keep",
-  year:1,
-  monthIndex:0,
-  turn:1,
-  balance:1000,
-  taxRate:10,
-  publicOrder:75,
-  baseStoreCapacity:1000,
-  wagons:0,
-  merchant:false,
-
-  income:[
-    {name:"Mine Lease",amount:80,type:"general"},
-    {name:"Mountain Toll Road",amount:0,type:"toll"}
-  ],
-
-  otherExpenses:[
-    {name:"Food",amount:60},
-    {name:"General Maintenance Reserve",amount:40}
-  ],
-
+  schemaVersion:SCHEMA_VERSION,
+  keepName:"The Mountain Keep",year:1,monthIndex:0,turn:1,balance:1000,
+  taxRate:10,publicOrder:75,baseStoreCapacity:1000,keepSpaceBase:60,keepSpaceBonus:0,
+  tradeCapacityBase:100,wagons:0,tradeUsed:0,tradePurchaseCost:0,tradeSalesRevenue:0,tradeMerchantBonus:0,
+  tradeSaleMargin:25,merchantBonusPer:5,maxMerchants:5,
+  foodUsePerPerson:1,firewoodUse:8,maintenanceBudget:100,
+  tollRoad:{trafficBase:1000,tollRate:10,winterFactor:0.2},
+  repairWalls:{gold:25,stone:5,wood:5,restore:5},
+  rankWages:CLONE(DEFAULT_RANK_WAGES),
+  income:[{name:"Mine Lease",amount:80}],
+  otherExpenses:[],
   buildings:[
-    {name:"Great Hall",condition:90,level:1},
-    {name:"Outer Walls",condition:65,level:1},
-    {name:"Stables",condition:85,level:1},
-    {name:"Granary",condition:95,level:1}
+    {id:"great_hall",name:"Great Hall",condition:90,space:12,baseMaintenance:15,upgradeMaintenance:0,isWalls:false},
+    {id:"outer_walls",name:"Outer Walls",condition:65,space:16,baseMaintenance:25,upgradeMaintenance:0,isWalls:true},
+    {id:"stables",name:"Stables",condition:85,space:10,baseMaintenance:10,upgradeMaintenance:0,isWalls:false},
+    {id:"granary",name:"Granary",condition:95,space:8,baseMaintenance:10,upgradeMaintenance:0,isWalls:false}
   ],
-
-  maintenance:[
-    {name:"Repair eastern wall",building:"Outer Walls",cost:150,restore:15}
-  ],
-
+  maintenance:[{id:"maint_wall_patch",name:"Repair eastern wall",buildingId:"outer_walls",cost:150,restore:15}],
   possibleUpgrades:[
-    {name:"Reinforced Gate",building:"Outer Walls",cost:500,turns:3,description:"Improves defence"},
-    {name:"Expanded Granary",building:"Granary",cost:250,turns:2,description:"+200 overall store capacity"}
+    {id:"reinforced_gate",name:"Reinforced Gate",buildingId:"outer_walls",cost:500,turns:3,maintenanceIncrease:10,spaceIncrease:0,conditionIncrease:0,description:"Improves the defensive works."},
+    {id:"expanded_courtyard",name:"Expand Keep Grounds",buildingId:null,cost:600,turns:4,maintenanceIncrease:0,spaceIncrease:20,conditionIncrease:0,description:"Adds 20 usable keep-space."},
+    {id:"stone_roofs",name:"Stone Roofs",buildingId:"great_hall",cost:400,turns:3,maintenanceIncrease:10,spaceIncrease:0,conditionIncrease:10,description:"More durable roofs."}
   ],
-
-  ongoingUpgrades:[],
-  completedUpgrades:[],
-
+  ongoingUpgrades:[],completedUpgrades:[],
   staff:[
-    {name:"Edric",type:"Steward",rank:3,wage:30,equipment:0,training:0,trainingRemaining:0},
+    {name:"Edric",type:"Steward",rank:1,wage:20,equipment:0,training:0,trainingRemaining:0},
     {name:"Gregor",type:"Private",rank:1,wage:20,equipment:0,training:0,trainingRemaining:0}
   ],
-
   stores:[
-    {name:"Food",qty:74,unitCap:1,monthlyUse:10},
-    {name:"Firewood",qty:18,unitCap:1,monthlyUse:8},
-    {name:"Light Armour",qty:0,unitCap:1,monthlyUse:0},
-    {name:"Spears",qty:0,unitCap:1,monthlyUse:0},
-    {name:"Chain Shirt",qty:0,unitCap:1,monthlyUse:0},
-    {name:"Simple Weapon",qty:0,unitCap:1,monthlyUse:0},
-    {name:"Chainmail",qty:0,unitCap:1,monthlyUse:0},
-    {name:"Breastplate",qty:0,unitCap:1,monthlyUse:0},
-    {name:"Martial Weapon",qty:0,unitCap:1,monthlyUse:0}
+    {itemId:"resource_food",qty:100,unitCap:1},
+    {itemId:"resource_firewood",qty:50,unitCap:1},
+    {itemId:"resource_stone",qty:20,unitCap:1},
+    {itemId:"resource_wood",qty:20,unitCap:1}
   ],
-
-  factions:[
-    {name:"Village A",rep:20},
-    {name:"Village B",rep:20},
-    {name:"Orks",rep:0},
-    {name:"Uberwald",rep:0}
-  ],
-
-  villages:[
-    {name:"Village A",baseRent:100,rentRate:10},
-    {name:"Village B",baseRent:100,rentRate:10}
-  ],
-
-  history:[
-    {year:1,monthIndex:0,income:0,expenses:0,net:0,balance:1000}
-  ],
-
-  transactions:[],
-  log:[]
+  itemValues:Object.fromEntries(ITEM_CATALOG.map(i=>[i.id,i.value])),
+  factions:[{name:"Village A",rep:20},{name:"Village B",rep:20},{name:"Orks",rep:0},{name:"Uberwald",rep:0}],
+  villages:[{name:"Village A",baseIncome:100,rentRate:10},{name:"Village B",baseIncome:100,rentRate:10}],
+  history:[{year:1,monthIndex:0,income:0,expenses:0,tradeProfit:0,net:0,balance:1000}],
+  transactions:[],log:[]
 };
-
-let data=JSON.parse(localStorage.getItem("mountainKeep"))||structuredClone(DEFAULT_DATA);
-
-function normalize(){
-  const d=DEFAULT_DATA;
-  for(const k of Object.keys(d)) if(data[k]===undefined) data[k]=structuredClone(d[k]);
-  if(!Array.isArray(data.staff))data.staff=[];
-  if(!Array.isArray(data.stores))data.stores=[];
-  if(!Array.isArray(data.buildings))data.buildings=[];
-  if(!Array.isArray(data.maintenance))data.maintenance=[];
-  if(!Array.isArray(data.possibleUpgrades))data.possibleUpgrades=[];
-  if(!Array.isArray(data.ongoingUpgrades))data.ongoingUpgrades=[];
-  if(!Array.isArray(data.completedUpgrades))data.completedUpgrades=[];
-  if(!Array.isArray(data.factions))data.factions=[];
-  if(!Array.isArray(data.villages))data.villages=[];
-  if(!Array.isArray(data.history))data.history=[];
-  if(!Array.isArray(data.transactions))data.transactions=[];
-  if(!Array.isArray(data.log))data.log=[];
-}
-normalize();
+let dmUnlocked=false;
+let data=JSON.parse(localStorage.getItem("mountainKeep"))||CLONE(DEFAULT_DATA);
 
 function save(){localStorage.setItem("mountainKeep",JSON.stringify(data))}
 function money(n){return Math.round(n).toLocaleString()+" gp"}
 function monthName(){return MONTHS[data.monthIndex]}
-function season(){return ["Winter","Winter","Spring","Spring","Spring","Summer","Summer","Summer","Autumn","Autumn","Autumn","Winter"][data.monthIndex]}
-function addLog(message){data.log.unshift({year:data.year,month:monthName(),turn:data.turn,message,date:new Date().toLocaleDateString()});data.log=data.log.slice(0,300)}
-function nav(){
-  const items=[["overview","Overview"],["finance","Finance"],["keep","Keep"],["staff","Staff"],["stores","Stores"],["factions","Factions"],["history","History"],["log","Log"],["dm","DM"]];
-  document.getElementById("nav").innerHTML=items.map(([id,label])=>`<button onclick="showPage('${id}',this)">${label}</button>`).join("");
-  document.querySelectorAll("#nav button")[0].classList.add("active");
-}
-function showPage(id,btn){
-  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  document.querySelectorAll("#nav button").forEach(x=>x.classList.remove("active"));
-  if(btn)btn.classList.add("active");
-  if(id==="history")drawHistory();
-}
-function openDM(){document.getElementById("dmModal").classList.add("show")}
-function closeModal(id){document.getElementById(id).classList.remove("show")}
-function checkDM(){
-  if(document.getElementById("dmPin").value!==DM_PIN){alert("Incorrect PIN.");return}
-  closeModal("dmModal");
-  showPage("dm",document.querySelectorAll("#nav button")[8]);
-  render();
-}
-
-function staffWages(){return data.staff.reduce((a,s)=>a+Number(s.wage||0),0)}
-function villageRent(v){
-  const orderFactor=0.5+(data.publicOrder/100)*0.5;
-  const taxFactor=1+(Number(v.rentRate||0)/100);
-  return Number(v.baseRent||0)*orderFactor*taxFactor;
-}
+function season(){return SEASONS[data.monthIndex]}
+function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
+function addLog(message){data.log.unshift({year:data.year,month:monthName(),turn:data.turn,message,date:new Date().toLocaleDateString()});data.log=data.log.slice(0,400)}
+function getItem(id){return CATALOG_BY_ID[id]}
+function getStore(id){return data.stores.find(s=>s.itemId===id)}
+function ensureStore(id,qty=0){let s=getStore(id);if(!s){s={itemId:id,qty,unitCap:1};data.stores.push(s)}return s}
+function itemValue(id){return Number(data.itemValues?.[id]??getItem(id)?.value??0)}
+function foodNeed(){return 6+data.staff.length}
+function monthlyUseForStore(s){if(s.itemId==="resource_food")return foodNeed()*Number(data.foodUsePerPerson||1);if(s.itemId==="resource_firewood")return Number(data.firewoodUse||0);return 0}
+function usedStoreCapacity(){return data.stores.reduce((a,s)=>a+(Number(s.qty)||0)*(Number(s.unitCap)||1),0)}
+function overallStoreCapacity(){return Number(data.baseStoreCapacity||0)}
+function freeStoreCapacity(){return overallStoreCapacity()-usedStoreCapacity()}
+function keepSpaceUsed(){return data.buildings.reduce((a,b)=>a+Number(b.space||0),0)}
+function keepSpaceAvailable(){return Number(data.keepSpaceBase||0)+Number(data.keepSpaceBonus||0)}
+function tradeCapacity(){return Number(data.tradeCapacityBase||100)+(Number(data.wagons||0)*100)}
+function merchantCount(){return data.staff.filter(s=>s.type==="Merchant").length}
+function guardCount(type){return data.staff.filter(s=>s.type===type).length}
+function population(){return 6+data.staff.length}
+function conditionStatus(v){if(v<=0)return ["Destroyed","bad"];if(v<=20)return ["Severely Damaged","bad"];if(v<=70)return ["Damaged","warning"];if(v<=90)return ["Slightly Damaged","warning"];return ["Good","good"]}
+function wallCondition(){const walls=data.buildings.filter(b=>b.isWalls);if(!walls.length)return 50;return walls.reduce((a,b)=>a+b.condition,0)/walls.length}
+function avgVillageRep(){if(!data.factions.length)return 0;const names=data.villages.map(v=>v.name);const reps=data.factions.filter(f=>names.includes(f.name)).map(f=>f.rep);return reps.length?reps.reduce((a,b)=>a+b,0)/reps.length:0}
+function rentOrderFactor(){return 0.5+(data.publicOrder/100)*0.5}
+function villageRent(v){return Number(v.baseIncome||0)*rentOrderFactor()*(1+Number(v.rentRate||0)/100)}
 function villageRentIncome(){return data.villages.reduce((a,v)=>a+villageRent(v),0)}
 function tollIncome(){
-  const base=data.income.find(x=>x.type==="toll");
-  const baseCharge=Number(base?.amount||0);
-  const safety=(data.publicOrder/100);
-  const seasonFactor={Spring:1,Summer:1.2,Autumn:.7,Winter:.2}[season()];
-  const merchantFactor=data.merchant?1.15:1;
-  return baseCharge*seasonFactor*(0.5+0.5*safety)*merchantFactor;
+  const seasonFactor=season()==="Winter"?Number(data.tollRoad.winterFactor):({Spring:1,Summer:1.2,Autumn:.7}[season()]??1);
+  const safety=(0.5+0.5*((Number(data.publicOrder)/100+Number(wallCondition())/100)/2));
+  const repFactor=clamp(1+(avgVillageRep()/500),.8,1.2);
+  return Number(data.tollRoad.trafficBase||0)*(Number(data.tollRoad.tollRate||0)/100)*seasonFactor*safety*repFactor;
 }
-function maintenanceExpense(){return data.maintenance.reduce((a,x)=>a+Number(x.cost||0)/Math.max(1,Number(x.turns||1)),0)}
-function recurringExpenses(){
-  return data.otherExpenses.reduce((a,x)=>a+Number(x.amount||0),0)+staffWages()+maintenanceExpense();
+function tradeProfitThisTurn(){
+  return Number(data.tradeSalesRevenue||0)+Number(data.tradeMerchantBonus||0)-Number(data.tradePurchaseCost||0);
 }
-function monthlyIncome(){
-  const general=data.income.filter(x=>x.type!=="toll").reduce((a,x)=>a+Number(x.amount||0),0);
-  return general+villageRentIncome()+tollIncome();
-}
+function recurringIncomeBeforeTrade(){return data.income.reduce((a,x)=>a+Number(x.amount||0),0)+villageRentIncome()+tollIncome()}
+function monthlyIncome(){return recurringIncomeBeforeTrade()+tradeProfitThisTurn()}
 function monthlyTax(){return monthlyIncome()*Number(data.taxRate||0)/100}
-function monthlyExpenses(){return recurringExpenses()+monthlyTax()}
+function maintenanceRequired(){return data.buildings.reduce((a,b)=>a+Number(b.baseMaintenance||0)+Number(b.upgradeMaintenance||0),0)}
+function recurringExpenses(){return data.otherExpenses.reduce((a,x)=>a+Number(x.amount||0),0)+staffWages()+Number(data.maintenanceBudget||0)+monthlyTax()}
+function monthlyExpenses(){return recurringExpenses()}
 function monthlyNet(){return monthlyIncome()-monthlyExpenses()}
-function totalStoreCapacity(){return Number(data.baseStoreCapacity||0)+data.wagons*100}
-function usedStoreCapacity(){return data.stores.reduce((a,s)=>a+Number(s.qty||0)*Number(s.unitCap||1),0)}
-function tradeCapacity(){return Math.max(0,totalStoreCapacity()-usedStoreCapacity())}
+function settlementNetExcludingTrade(){return recurringIncomeBeforeTrade()-monthlyExpenses()}
+function monthlyTradeUsed(){return Number(data.tradeUsed||0)}
+
+function nav(){
+  const items=[["overview","Overview"],["finance","Finance"],["keep","Keep"],["staff","Staff"],["stores","Stores"],["factions","Factions"],["history","History"],["log","Log"],["dm","DM"]];
+  document.getElementById("nav").innerHTML=items.map(([id,label],i)=>`<button onclick="showPage('${id}',this)">${label}</button>`).join("");
+  document.querySelectorAll("#nav button")[0].classList.add("active");
+}
+function showPage(id,btn){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll("#nav button").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");if(id==="history")drawHistory()}
+function openDM(){document.getElementById("dmModal").classList.add("show")}
+function closeModal(id){document.getElementById(id).classList.remove("show")}
+function checkDM(){if(document.getElementById("dmPin").value!==DM_PIN){alert("Incorrect PIN.");return}dmUnlocked=true;closeModal("dmModal");showPage("dm",document.querySelectorAll("#nav button")[8]);render()}
+function requireDM(){if(!dmUnlocked){alert("DM access required.");return false}return true}
+
+function staffWages(){return data.staff.reduce((a,s)=>a+Number(s.wage||0),0)}
+function addIncome(){const name=document.getElementById("incomeName").value.trim(),amount=Number(document.getElementById("incomeAmount").value);if(!name||amount<0)return;data.income.push({name,amount});addLog(`Added recurring income: ${name}.`);document.getElementById("incomeName").value="";document.getElementById("incomeAmount").value="";render()}
+function removeIncome(i){data.income.splice(i,1);render()}
+function addExpense(){const name=document.getElementById("expenseName").value.trim(),amount=Number(document.getElementById("expenseAmount").value);if(!name||amount<0)return;data.otherExpenses.push({name,amount});addLog(`Added recurring expense: ${name}.`);document.getElementById("expenseName").value="";document.getElementById("expenseAmount").value="";render()}
+function removeExpense(i){data.otherExpenses.splice(i,1);render()}
+function addTransaction(){const name=document.getElementById("txName").value.trim(),amount=Number(document.getElementById("txAmount").value),type=document.getElementById("txType").value;if(!name||amount<=0)return;data.balance+=type==="income"?amount:-amount;data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name,amount,type});addLog(`${type==="income"?"Income":"Expense"} recorded: ${name} (${money(amount)}).`);document.getElementById("txName").value="";document.getElementById("txAmount").value="";render()}
+
+function updateVillageRent(i,value){const v=data.villages[i],next=clamp(Number(value)||0,0,100),old=Number(v.rentRate||0),delta=next-old;if(next===old)return;v.rentRate=next;if(delta>0){data.publicOrder=clamp(data.publicOrder-delta*0.25,0,100);const f=data.factions.find(x=>x.name===v.name);if(f)f.rep=clamp(f.rep-delta*0.75,-100,100);addLog(`${v.name} rent increased by ${delta} percentage points; reputation and public order fell.`)}else addLog(`${v.name} rent rate changed to ${next}%.`);render()}
+function updateVillageBase(i,value){if(!requireDM())return;data.villages[i].baseIncome=Math.max(0,Number(value)||0);addLog(`DM changed ${data.villages[i].name} base income.`);render()}
+
+function populateCategorySelect(id){const el=document.getElementById(id);const cats=[...new Set(ITEM_CATALOG.map(x=>x.category))];el.innerHTML=cats.map(c=>`<option value="${c}">${c}</option>`).join("")}
+function populateStoreItems(){const category=document.getElementById("storeCategory").value;document.getElementById("storeItem").innerHTML=ITEM_CATALOG.filter(x=>x.category===category).map(x=>`<option value="${x.id}">${x.label}</option>`).join("")}
+function populateTradeItems(){const category=document.getElementById("tradeCategory").value;document.getElementById("tradeItem").innerHTML=ITEM_CATALOG.filter(x=>x.category===category).map(x=>`<option value="${x.id}">${x.label}</option>`).join("")}
+function addStore(){const id=document.getElementById("storeItem").value,qty=Number(document.getElementById("storeQty").value),unitCap=Math.max(1,Number(document.getElementById("storeUnitCap").value)||1);if(!id||qty<=0)return;if(freeStoreCapacity()<qty*unitCap){alert("Not enough overall store capacity.");return}const s=ensureStore(id,0);if(s.qty===0)s.unitCap=unitCap;else if(s.unitCap!==unitCap&&!confirm("This item already has a different capacity-per-unit. Use the existing value?"))return;s.qty+=qty;addLog(`Added ${qty} ${getItem(id).label} to inventory.`);document.getElementById("storeQty").value="";render()}
+function updateStore(i,key,value){const s=data.stores[i],n=Math.max(0,Number(value)||0);if(key==="qty"){const usedWithout=s.qty*s.unitCap;const newUsed=n*s.unitCap;if(usedStoreCapacity()-usedWithout+newUsed>overallStoreCapacity()){alert("That would exceed overall store capacity.");renderStores();return}s.qty=n}else if(key==="unitCap"){const newUsed=s.qty*n;const usedWithout=s.qty*s.unitCap;if(usedStoreCapacity()-usedWithout+newUsed>overallStoreCapacity()){alert("That would exceed overall store capacity.");renderStores();return}s.unitCap=Math.max(1,n)}save();renderStores();renderFinance()}
+function removeStore(i){const s=data.stores[i];if(!confirm(`Remove all ${getItem(s.itemId).label} from inventory?`))return;data.stores.splice(i,1);addLog(`Removed ${getItem(s.itemId).label} from inventory.`);render()}
+
+function trade(){
+  const id=document.getElementById("tradeItem").value,q=Math.floor(Number(document.getElementById("tradeQty").value)),action=document.getElementById("tradeAction").value,s=ensureStore(id,0),cat=getItem(id);
+  if(!cat||q<=0)return;
+  if(data.tradeUsed+q>tradeCapacity()){alert("Not enough trade capacity remaining this turn.");return}
+  if(action==="buy"){
+    const cost=q*itemValue(id);
+    if(data.balance<cost){alert("Not enough gold.");return}
+    if(freeStoreCapacity()<q*s.unitCap){alert("Not enough storage capacity.");return}
+    data.balance-=cost;s.qty+=q;data.tradePurchaseCost+=cost;
+    data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:`Trade purchase: ${cat.label} x${q}`,amount:cost,type:"expense"});
+    addLog(`Bought ${q} ${cat.label} for ${money(cost)}.`);
+  }else{
+    if(s.qty<q){alert("Not enough of that item in inventory.");return}
+    const saleMultiplier=1+Number(data.tradeSaleMargin||0)/100;
+    const baseRevenue=q*itemValue(id)*saleMultiplier;
+    const merchantBonus=baseRevenue*(Number(data.merchantBonusPer||0)/100)*merchantCount();
+    const revenue=baseRevenue+merchantBonus;
+    s.qty-=q;data.balance+=revenue;data.tradeSalesRevenue+=baseRevenue;data.tradeMerchantBonus+=merchantBonus;
+    data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:`Trade sale: ${cat.label} x${q}`,amount:revenue,type:"income"});
+    addLog(`Sold ${q} ${cat.label} for ${money(revenue)}.`);
+  }
+  data.tradeUsed+=q;render();
+}
+function buyWagon(){const cost=250;if(data.balance<cost){alert("Not enough gold.");return}data.balance-=cost;data.wagons++;data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:"Wagon",amount:cost,type:"expense"});addLog("Bought a wagon; trade capacity increases by 100 this turn.");render()}
+
+function setMaintenanceBudget(){data.maintenanceBudget=Math.max(0,Number(document.getElementById("maintenanceBudgetInput").value)||0);addLog(`Maintenance budget set to ${money(data.maintenanceBudget)} per turn.`);render()}
+function addMaintenance(){const name=document.getElementById("maintName").value.trim(),buildingId=document.getElementById("maintBuilding").value,cost=Number(document.getElementById("maintCost").value),restore=Number(document.getElementById("maintRestore").value);if(!name||!buildingId||cost<0||restore<0)return;data.maintenance.push({id:"m_"+Date.now(),name,buildingId,cost,restore});addLog(`Added maintenance task: ${name}.`);render()}
+function completeMaintenance(i){const x=data.maintenance[i];if(data.balance<x.cost){alert("The keep cannot afford this maintenance task.");return}data.balance-=x.cost;const b=data.buildings.find(b=>b.id===x.buildingId);if(b)b.condition=clamp(b.condition+x.restore,0,100);data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:`Maintenance: ${x.name}`,amount:x.cost,type:"expense"});addLog(`Completed maintenance: ${x.name}.`);data.maintenance.splice(i,1);render()}
+function repairWalls(){const walls=data.buildings.find(b=>b.isWalls);if(!walls){alert("There is no wall or gate structure configured.");return}const r=data.repairWalls,stone=ensureStore("resource_stone",0),wood=ensureStore("resource_wood",0);if(data.balance<r.gold){alert("Not enough gold.");return}if(stone.qty<r.stone||wood.qty<r.wood){alert("Not enough Stone or Wood.");return}if(walls.condition>=100){alert("The walls are already in Good condition.");return}data.balance-=r.gold;stone.qty-=r.stone;wood.qty-=r.wood;walls.condition=clamp(walls.condition+r.restore,0,100);data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:"Repair Walls",amount:r.gold,type:"expense"});addLog(`Walls repaired by ${r.restore}%.`);render()}
+
+function buildingOptions(){return `<option value="">Overall Keep</option>`+data.buildings.map(b=>`<option value="${b.id}">${b.name}</option>`).join("")}
+function addUpgrade(){if(!requireDM())return;const name=document.getElementById("upgradeName").value.trim(),buildingId=document.getElementById("upgradeBuilding").value||null,cost=Number(document.getElementById("upgradeCost").value),turns=Number(document.getElementById("upgradeTurns").value),maintenanceIncrease=Number(document.getElementById("upgradeMaint").value)||0,spaceIncrease=Number(document.getElementById("upgradeSpace").value)||0,conditionIncrease=Number(document.getElementById("upgradeCondition").value)||0;if(!name||cost<0||turns<1)return;data.possibleUpgrades.push({id:"u_"+Date.now(),name,buildingId:buildingId||null,cost,turns,maintenanceIncrease,spaceIncrease,conditionIncrease,description:""});addLog(`DM added possible upgrade: ${name}.`);render()}
+function startUpgrade(i){const u=data.possibleUpgrades[i];if(data.balance<u.cost){alert("The keep cannot afford this upgrade.");return}data.balance-=u.cost;data.ongoingUpgrades.push({...u,remaining:u.turns});data.possibleUpgrades.splice(i,1);data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:`Upgrade started: ${u.name}`,amount:u.cost,type:"expense"});addLog(`Started upgrade: ${u.name}.`);render()}
+
+function addStaff(){const name=document.getElementById("staffName").value.trim(),type=document.getElementById("staffType").value;if(!name)return;if(["Private","Sergeant","Captain"].includes(type)&&guardCount(type)>=MAX_GUARDS[type]){alert(`Maximum ${MAX_GUARDS[type]} ${type}s.`);return}if(type==="Merchant"&&merchantCount()>=Number(data.maxMerchants||5)){alert(`Maximum ${data.maxMerchants} merchants.`);return}const rank=ROLE_DEFAULTS[type],wage=Number(data.rankWages[rank]);data.staff.push({name,type,rank,wage,equipment:0,training:0,trainingRemaining:0});addLog(`${name} joined as ${type}.`);document.getElementById("staffName").value="";render()}
+function removeStaff(i){addLog(`${data.staff[i].name} left the keep.`);data.staff.splice(i,1);render()}
+function promoteGuard(i){const s=data.staff[i];if(s.type==="Private"){if(guardCount("Sergeant")>=MAX_GUARDS.Sergeant){alert("No Sergeant positions are available.");return}s.type="Sergeant";s.rank=3}else if(s.type==="Sergeant"){if(guardCount("Captain")>=MAX_GUARDS.Captain){alert("No Captain position is available.");return}s.type="Captain";s.rank=5}else return;s.wage=Number(data.rankWages[s.rank]);addLog(`${s.name} was promoted to ${s.type}.`);render()}
+function trainGuard(i){const s=data.staff[i];if(!["Private","Sergeant","Captain"].includes(s.type))return;if(s.training>=3){alert("Already at maximum training.");return}if(s.trainingRemaining>0){alert("This guard is already training.");return}s.trainingRemaining=TRAIN_TURNS[s.training+1];addLog(`${s.name} began training to level ${s.training+1}.`);render()}
+function equipmentRequirement(level){return {1:["armour_light","weapon_simple"],2:["armour_chain_shirt","weapon_simple"],3:["armour_chainmail","armour_breastplate","weapon_martial"]}[level]||[]}
+function trainEquipment(i){const s=data.staff[i];if(s.equipment>=3){alert("Already at maximum equipment.");return}const req=equipmentRequirement(s.equipment+1),missing=req.filter(id=>(getStore(id)?.qty||0)<1);if(missing.length){alert("Missing: "+missing.map(id=>getItem(id).label).join(", "));return}req.forEach(id=>getStore(id).qty--);s.equipment++;addLog(`${s.name} reached equipment level ${s.equipment}.`);render()}
+function updateRankWage(rank,value){const n=Math.max(0,Number(value)||0);data.rankWages[rank]=n;data.staff.forEach(s=>{if(s.rank===Number(rank))s.wage=n});addLog(`Rank ${rank} wage set to ${money(n)}.`);render()}
+
+function addFaction(){const name=document.getElementById("factionName").value.trim();if(!name)return;data.factions.push({name,rep:0});addLog(`Added faction: ${name}.`);document.getElementById("factionName").value="";render()}
+function editRep(i){if(!requireDM())return;const v=Number(prompt("Reputation (-100 to 100):",data.factions[i].rep));if(isNaN(v))return;data.factions[i].rep=clamp(v,-100,100);addLog(`DM changed reputation with ${data.factions[i].name} to ${data.factions[i].rep}.`);render()}
+
+function addBuilding(){if(!requireDM())return;const name=document.getElementById("dmBuildingName").value.trim(),condition=clamp(Number(document.getElementById("dmBuildingCondition").value)||0,0,100),space=Math.max(0,Number(document.getElementById("dmBuildingSpace").value)||0),baseMaintenance=Math.max(0,Number(document.getElementById("dmBuildingMaint").value)||0),isWalls=document.getElementById("dmBuildingWalls").value==="yes";if(!name)return;if(keepSpaceUsed()+space>keepSpaceAvailable()){alert("There is not enough keep space for this building.");return}data.buildings.push({id:"b_"+Date.now(),name,condition,space,baseMaintenance,upgradeMaintenance:0,isWalls});addLog(`DM added building/facility: ${name}.`);render()}
+function editBuilding(i,field){if(!requireDM())return;const b=data.buildings[i];const labels={name:"Name",condition:"Condition",space:"Space",baseMaintenance:"Base Monthly Maintenance"};const current=b[field];const v=prompt(labels[field]||field,current);if(v===null)return;if(field==="name"){if(!v.trim())return;b.name=v.trim()}else if(field==="condition")b.condition=clamp(Number(v)||0,0,100);else if(field==="space"){const n=Math.max(0,Number(v)||0);if(keepSpaceUsed()-b.space+n>keepSpaceAvailable()){alert("That would exceed keep space.");return}b.space=n}else b[field]=Math.max(0,Number(v)||0);addLog(`DM edited ${b.name}.`);render()}
 
 function render(){
-  normalize();
+  normalizeData();
   document.getElementById("keepName").textContent=data.keepName;
   document.getElementById("dateLabel").textContent=`${monthName()}, Year ${data.year}`;
   document.getElementById("turnLabel").textContent=`Turn ${data.turn} · ${season()}`;
   document.getElementById("balanceMetric").textContent=money(data.balance);
   document.getElementById("netMetric").textContent=money(monthlyNet());
   document.getElementById("netMetric").className="metric "+(monthlyNet()>=0?"positive":"negative");
-  document.getElementById("orderMetric").textContent=Math.round(data.publicOrder)+" / 100";
-  document.getElementById("capacityMetric").textContent=`${usedStoreCapacity()} / ${totalStoreCapacity()}`;
-  renderAlerts();renderOverview();renderFinance();renderKeep();renderStaff();renderStores();renderFactions();renderHistory();renderLog();renderDM();
-  save();
+  document.getElementById("orderMetric").textContent=`${Math.round(data.publicOrder)} / 100`;
+  document.getElementById("spaceMetric").textContent=`${keepSpaceUsed()} / ${keepSpaceAvailable()}`;
+  renderAlerts();renderOverview();renderFinance();renderKeep();renderStaff();renderStores();renderFactions();renderHistory();renderLog();renderDM();save();
 }
-
 function renderAlerts(){
   let a=[];
   if(data.balance<0)a.push(`<div class="alert danger">The keep is in debt.</div>`);
-  if(data.publicOrder<35)a.push(`<div class="alert danger">Public order is dangerously low.</div>`);
-  else if(data.publicOrder<55)a.push(`<div class="alert warning">Public order is deteriorating.</div>`);
-  data.buildings.forEach(b=>{if(b.condition<40)a.push(`<div class="alert danger">${b.name} is in poor condition.</div>`)});
-  if(usedStoreCapacity()>totalStoreCapacity())a.push(`<div class="alert danger">The stores exceed their overall capacity.</div>`);
-  data.stores.forEach(s=>{if(s.qty>0&&s.monthlyUse>0&&s.qty<=s.monthlyUse*2)a.push(`<div class="alert warning">${s.name} may run out soon.</div>`)});
+  if(data.publicOrder<50)a.push(`<div class="alert ${data.publicOrder<25?"danger":"warning"}">Public order is below 50.</div>`);
+  data.buildings.forEach(b=>{if(b.condition<=70){const [txt,cls]=conditionStatus(b.condition);a.push(`<div class="alert ${b.condition<=20?"danger":"warning"}">${b.name} is ${txt.toLowerCase()}.</div>`)}});
+  if(freeStoreCapacity()<0)a.push(`<div class="alert danger">The stores exceed their overall capacity.</div>`);
+  if(keepSpaceUsed()>keepSpaceAvailable())a.push(`<div class="alert danger">The keep is using more space than it has available.</div>`);
+  const food=getStore("resource_food")?.qty||0;if(food<foodNeed())a.push(`<div class="alert warning">Food is below the next turn's requirement.</div>`);
   document.getElementById("alerts").innerHTML=a.length?a.join(""):`<div class="alert good">The keep is currently operating normally.</div>`;
 }
-
 function renderOverview(){
-  document.getElementById("overviewIncome").innerHTML=`
-    ${data.income.filter(x=>x.type!=="toll").map(x=>`<div class="inline" style="justify-content:space-between;padding:5px 0"><span>${x.name}</span><b>${money(x.amount)}</b></div>`).join("")}
-    <div class="inline" style="justify-content:space-between;padding:5px 0"><span>Village rents</span><b>${money(villageRentIncome())}</b></div>
-    <div class="inline" style="justify-content:space-between;padding:5px 0"><span>Toll road</span><b>${money(tollIncome())}</b></div>`;
-  document.getElementById("overviewExpenses").innerHTML=`
-    <div class="inline" style="justify-content:space-between;padding:5px 0"><span>Staff wages</span><b>${money(staffWages())}</b></div>
-    ${data.otherExpenses.map(x=>`<div class="inline" style="justify-content:space-between;padding:5px 0"><span>${x.name}</span><b>${money(x.amount)}</b></div>`).join("")}
-    <div class="inline" style="justify-content:space-between;padding:5px 0"><span>Maintenance</span><b>${money(maintenanceExpense())}</b></div>
-    <div class="inline" style="justify-content:space-between;padding:5px 0"><span>Tax (${data.taxRate}%)</span><b>${money(monthlyTax())}</b></div>`;
-  document.getElementById("overviewVillages").innerHTML=data.villages.map(v=>`<div style="padding:6px 0;border-bottom:1px solid #eee">${v.name}: <b>${money(villageRent(v))}</b><br><span class="small">Base ${money(v.baseRent)} · Rent rate ${v.rentRate}%</span></div>`).join("");
+  const incomeRows=data.income.map(x=>`<div class="inline" style="justify-content:space-between;padding:5px 0"><span>${x.name}</span><b>${money(x.amount)}</b></div>`).join("");
+  document.getElementById("overviewIncome").innerHTML=incomeRows+`<div class="inline" style="justify-content:space-between;padding:5px 0"><span>Village rents</span><b>${money(villageRentIncome())}</b></div><div class="inline" style="justify-content:space-between;padding:5px 0"><span>Toll road</span><b>${money(tollIncome())}</b></div><div class="inline" style="justify-content:space-between;padding:5px 0"><span>Trade income</span><b>${money(tradeProfitThisTurn())}</b></div>`;
+  document.getElementById("overviewExpenses").innerHTML=`<div class="inline" style="justify-content:space-between;padding:5px 0"><span>Staff wages</span><b>${money(staffWages())}</b></div>${data.otherExpenses.map((x,i)=>`<div class="inline" style="justify-content:space-between;padding:5px 0"><span>${x.name}</span><b>${money(x.amount)}</b></div>`).join("")}<div class="inline" style="justify-content:space-between;padding:5px 0"><span>Maintenance</span><b>${money(data.maintenanceBudget)}</b></div><div class="inline" style="justify-content:space-between;padding:5px 0"><span>Tax (${data.taxRate}%)</span><b>${money(monthlyTax())}</b></div>`;
+  const food=getStore("resource_food")?.qty||0;document.getElementById("overviewFood").innerHTML=`<div class="metric">${food}</div><div class="small">stored food</div><hr class="hr"><div class="small">${population()} people · ${foodNeed()} food used each turn</div><div class="progress" style="margin-top:8px"><div style="width:${clamp(food/(Math.max(foodNeed(),1)*10)*100,0,100)}%"></div></div>`;
   document.getElementById("overviewUpgrades").innerHTML=data.ongoingUpgrades.length?data.ongoingUpgrades.map(u=>`<div style="padding:6px 0">${u.name} — <b>${u.remaining} turns</b> remaining</div>`).join(""):`<span class="muted">No ongoing upgrades.</span>`;
-}
-
-function addIncome(){
-  const name=document.getElementById("incomeName").value.trim(),amount=Number(document.getElementById("incomeAmount").value),type=document.getElementById("incomeType").value;
-  if(!name||!amount)return;
-  data.income.push({name,amount,type});addLog(`Added recurring income: ${name} (${money(amount)}).`);render();
-  document.getElementById("incomeName").value="";document.getElementById("incomeAmount").value="";
-}
-function removeIncome(i){data.income.splice(i,1);render()}
-function addTransaction(){
-  const name=document.getElementById("txName").value.trim(),amount=Number(document.getElementById("txAmount").value),type=document.getElementById("txType").value;
-  if(!name||!amount)return;
-  data.balance+=type==="income"?amount:-amount;
-  data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name,amount,type});
-  addLog(`${type==="income"?"Income":"Expense"} recorded: ${name} (${money(amount)}).`);
-  render();
 }
 function renderFinance(){
   const inc=monthlyIncome(),exp=monthlyExpenses(),tax=monthlyTax(),net=monthlyNet();
-  document.getElementById("financeIncome").textContent=money(inc);
-  document.getElementById("financeExpenses").textContent=money(exp);
-  document.getElementById("financeTax").textContent=money(tax);
-  document.getElementById("financeNet").textContent=money(net);
-  document.getElementById("financeNet").className="metric "+(net>=0?"positive":"negative");
-  document.getElementById("incomeList").innerHTML=`<table><tr><th>Income</th><th>Base</th><th>Type</th><th></th></tr>${data.income.map((x,i)=>`<tr><td>${x.name}</td><td>${money(x.amount)}</td><td>${x.type}</td><td><button class="danger" onclick="removeIncome(${i})">Remove</button></td></tr>`).join("")}</table>`;
-  document.getElementById("expenseList").innerHTML=`<table><tr><th>Expense</th><th>Monthly</th></tr>
-    <tr><td>Staff wages</td><td>${money(staffWages())}</td></tr>
-    ${data.otherExpenses.map(x=>`<tr><td>${x.name}</td><td>${money(x.amount)}</td></tr>`).join("")}
-    <tr><td>Maintenance reserve</td><td>${money(maintenanceExpense())}</td></tr>
-    <tr><td>Tax (${data.taxRate}%)</td><td>${money(monthlyTax())}</td></tr></table>`;
-  document.getElementById("financeLog").innerHTML=data.transactions.slice(0,50).map(x=>`<div class="log-entry"><div class="log-date">Turn ${x.turn} · ${x.month}, Year ${x.year}</div>${x.type==="income"?"Income":"Expense"}: ${x.name} — <b>${money(x.amount)}</b></div>`).join("")||`<span class="muted">No financial transactions recorded.</span>`;
-  document.getElementById("tradeCapacity").textContent=`${tradeCapacity()} / ${totalStoreCapacity()} free`;
-  document.getElementById("wagonCount").textContent=data.wagons;
-  document.getElementById("merchantStatus").innerHTML=data.merchant?`<span class="status good">Hired</span>`:`<span class="status neutral">Not hired</span>`;
-  document.getElementById("tradeItem").innerHTML=data.stores.map((s,i)=>`<option value="${i}">${s.name}</option>`).join("");
-}
-function buyWagon(){if(data.balance<250){alert("Not enough gold.");return}data.balance-=250;data.wagons++;addLog("Purchased a wagon for 250 gp.");render()}
-function hireMerchant(){if(data.merchant){alert("A merchant is already hired.");return}if(data.balance<300){alert("Not enough gold.");return}data.balance-=300;data.merchant=true;addLog("Hired a merchant for 300 gp.");render()}
-function trade(){
-  const i=Number(document.getElementById("tradeItem").value),q=Number(document.getElementById("tradeQty").value),p=Number(document.getElementById("tradePrice").value),a=document.getElementById("tradeAction").value,s=data.stores[i];
-  if(!s||q<=0||p<0)return;
-  if(a==="buy"){
-    if(data.balance<q*p){alert("Not enough gold.");return}
-    if(tradeCapacity()<q*s.unitCap){alert("Not enough trade/storage capacity.");return}
-    data.balance-=q*p;s.qty+=q;
-  }else{
-    if(s.qty<q){alert("Not enough of that item in inventory.");return}
-    data.balance+=q*p;s.qty-=q;
-  }
-  data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:`Trade ${a}: ${q} ${s.name}`,amount:q*p,type:a==="buy"?"expense":"income"});
-  addLog(`Trade completed: ${a} ${q} ${s.name} for ${money(q*p)}.`);
-  render();
-}
-
-function populateBuildingSelects(){
-  const opts=data.buildings.map(b=>`<option>${b.name}</option>`).join("");
-  document.getElementById("maintBuilding").innerHTML=opts;
-  document.getElementById("upgradeBuilding").innerHTML=opts;
-}
-function addMaintenance(){
-  const name=document.getElementById("maintName").value.trim(),building=document.getElementById("maintBuilding").value,cost=Number(document.getElementById("maintCost").value),restore=Number(document.getElementById("maintRestore").value);
-  if(!name||!building||cost<0)return;
-  data.maintenance.push({name,building,cost,restore});addLog(`Added maintenance task: ${name}.`);render();
-}
-function completeMaintenance(i){
-  const x=data.maintenance[i];
-  if(data.balance<x.cost){alert("The keep cannot afford this.");return}
-  data.balance-=x.cost;
-  const b=data.buildings.find(b=>b.name===x.building);
-  if(b)b.condition=Math.min(100,b.condition+x.restore);
-  data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:`Maintenance: ${x.name}`,amount:x.cost,type:"expense"});
-  data.maintenance.splice(i,1);addLog(`Completed maintenance: ${x.name}.`);render();
-}
-function editCondition(i){
-  const v=prompt("New condition (0–100):",data.buildings[i].condition);
-  if(v===null)return;const n=Math.max(0,Math.min(100,Number(v)));if(isNaN(n))return;
-  data.buildings[i].condition=n;addLog(`DM changed ${data.buildings[i].name} condition to ${n}.`);render();
-}
-function addUpgrade(){
-  const name=document.getElementById("upgradeName").value.trim(),building=document.getElementById("upgradeBuilding").value,cost=Number(document.getElementById("upgradeCost").value),turns=Number(document.getElementById("upgradeTurns").value);
-  if(!name||!building||cost<0||turns<1)return;
-  data.possibleUpgrades.push({name,building,cost,turns,description:""});addLog(`Added possible upgrade: ${name}.`);render();
-}
-function startUpgrade(i){
-  const u=data.possibleUpgrades[i];
-  if(data.balance<u.cost){alert("The keep cannot afford this upgrade.");return}
-  data.balance-=u.cost;
-  data.ongoingUpgrades.push({...u,remaining:u.turns});
-  data.possibleUpgrades.splice(i,1);
-  data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:`Upgrade started: ${u.name}`,amount:u.cost,type:"expense"});
-  addLog(`Started upgrade: ${u.name}.`);render();
+  document.getElementById("financeIncome").textContent=money(inc);document.getElementById("financeExpenses").textContent=money(exp);document.getElementById("financeTax").textContent=money(tax);document.getElementById("financeNet").textContent=money(net);document.getElementById("financeNet").className="metric "+(net>=0?"positive":"negative");
+  document.getElementById("incomeList").innerHTML=`<table><tr><th>Income Stream</th><th>Monthly</th><th></th></tr>${data.income.map((x,i)=>`<tr><td>${x.name}</td><td>${money(x.amount)}</td><td><button class="danger" onclick="removeIncome(${i})">Remove</button></td></tr>`).join("")}<tr><td>Village rents</td><td>${money(villageRentIncome())}</td><td></td></tr><tr><td>Mountain Toll Road</td><td>${money(tollIncome())}</td><td></td></tr><tr><td>Trade Income <span class="small">(realised this turn)</span></td><td>${money(tradeProfitThisTurn())}</td><td></td></tr></table>`;
+  document.getElementById("expenseList").innerHTML=`<table><tr><th>Recurring Expense</th><th>Monthly</th><th></th></tr><tr><td>Staff wages</td><td>${money(staffWages())}</td><td></td></tr>${data.otherExpenses.map((x,i)=>`<tr><td>${x.name}</td><td>${money(x.amount)}</td><td><button class="danger" onclick="removeExpense(${i})">Remove</button></td></tr>`).join("")}<tr><td>Maintenance</td><td>${money(data.maintenanceBudget)}</td><td></td></tr><tr><td>Tax (${data.taxRate}%)</td><td>${money(monthlyTax())}</td><td></td></tr></table>`;
+  document.getElementById("villageFinance").innerHTML=`<table><tr><th>Village</th><th>Base Income</th><th>Rent Rate</th><th>Current Monthly Rent</th></tr>${data.villages.map((v,i)=>`<tr><td>${v.name}</td><td>${money(v.baseIncome)}</td><td><input type="number" min="0" max="100" value="${v.rentRate}" onchange="updateVillageRent(${i},this.value)"></td><td>${money(villageRent(v))}</td></tr>`).join("")}</table>`;
+  document.getElementById("tradeCapacity").textContent=`${tradeCapacity()}`;document.getElementById("tradeUsed").textContent=`${monthlyTradeUsed()} / ${tradeCapacity()}`;document.getElementById("tradeProfit").textContent=money(tradeProfitThisTurn());document.getElementById("tradeProfit").className="metric "+(tradeProfitThisTurn()>=0?"positive":"negative");
+  populateCategorySelect("tradeCategory");populateTradeItems();
+  document.getElementById("financeLog").innerHTML=data.transactions.slice(0,80).map(x=>`<div class="log-entry"><div class="log-date">Turn ${x.turn} · ${x.month}, Year ${x.year}</div>${x.type==="income"?"Income":"Expense"}: ${x.name} — <b>${money(x.amount)}</b></div>`).join("")||`<span class="muted">No financial transactions recorded.</span>`;
 }
 function renderKeep(){
-  populateBuildingSelects();
-  document.getElementById("buildingList").innerHTML=`<table><tr><th>Building / Facility</th><th>Level</th><th>Condition</th><th></th></tr>${data.buildings.map((b,i)=>`<tr><td>${b.name}</td><td>${b.level}</td><td><span class="status ${b.condition>=75?"good":b.condition>=40?"warning":"bad"}">${Math.round(b.condition)}%</span></td><td><button class="secondary" onclick="editCondition(${i})">Edit Condition</button></td></tr>`).join("")}</table>`;
-  document.getElementById("maintenanceList").innerHTML=data.maintenance.length?`<table><tr><th>Task</th><th>Building</th><th>Cost</th><th>Restore</th><th></th></tr>${data.maintenance.map((x,i)=>`<tr><td>${x.name}</td><td>${x.building}</td><td>${money(x.cost)}</td><td>+${x.restore}</td><td><button class="secondary" onclick="completeMaintenance(${i})">Complete</button></td></tr>`).join("")}</table>`:`<span class="muted">No maintenance tasks.</span>`;
-  document.getElementById("upgradeList").innerHTML=data.possibleUpgrades.length?`<table><tr><th>Upgrade</th><th>Building</th><th>Cost</th><th>Turns</th><th></th></tr>${data.possibleUpgrades.map((x,i)=>`<tr><td>${x.name}</td><td>${x.building}</td><td>${money(x.cost)}</td><td>${x.turns}</td><td><button class="secondary" onclick="startUpgrade(${i})">Start</button></td></tr>`).join("")}</table>`:`<span class="muted">No upgrades currently available.</span>`;
-  document.getElementById("ongoingList").innerHTML=data.ongoingUpgrades.length?`<table><tr><th>Upgrade</th><th>Building</th><th>Turns Remaining</th></tr>${data.ongoingUpgrades.map(x=>`<tr><td>${x.name}</td><td>${x.building}</td><td>${x.remaining}</td></tr>`).join("")}</table>`:`<span class="muted">No ongoing upgrades.</span>`;
-  document.getElementById("completedList").innerHTML=data.completedUpgrades.length?`<table><tr><th>Upgrade</th><th>Building</th><th>Completed</th></tr>${data.completedUpgrades.map(x=>`<tr><td>${x.name}</td><td>${x.building}</td><td>${x.completed}</td></tr>`).join("")}</table>`:`<span class="muted">No completed upgrades.</span>`;
-}
-
-function guardCounts(){
-  return {Private:data.staff.filter(s=>s.type==="Private").length,Sergeant:data.staff.filter(s=>s.type==="Sergeant").length,Captain:data.staff.filter(s=>s.type==="Captain").length};
-}
-function addStaff(){
-  const name=document.getElementById("staffName").value.trim(),type=document.getElementById("staffType").value,rank=Math.max(1,Math.min(5,Number(document.getElementById("staffRank").value||1))),wage=Number(document.getElementById("staffWage").value)||GUARD_WAGES[type]||rank*10;
-  if(!name)return;
-  const c=guardCounts();
-  if(type==="Private"&&c.Private>=45){alert("Maximum 45 Privates.");return}
-  if(type==="Sergeant"&&c.Sergeant>=5){alert("Maximum 5 Sergeants.");return}
-  if(type==="Captain"&&c.Captain>=1){alert("Maximum 1 Captain.");return}
-  data.staff.push({name,type,rank,wage,equipment:0,training:0,trainingRemaining:0});
-  addLog(`${name} joined as ${type}.`);render();
-}
-function removeStaff(i){addLog(`${data.staff[i].name} left the keep.`);data.staff.splice(i,1);render()}
-function editStaffRank(i){const v=Number(prompt("Rank 1–5:",data.staff[i].rank));if(v>=1&&v<=5){data.staff[i].rank=v;render()}}
-function trainGuard(i){
-  const s=data.staff[i];if(!["Private","Sergeant","Captain"].includes(s.type))return;
-  if(s.training>=3){alert("Already at maximum training.");return}
-  if(s.trainingRemaining>0){alert("This guard is already training.");return}
-  s.trainingRemaining=TRAIN_TURNS[s.training+1];addLog(`${s.name} began training to level ${s.training+1}.`);render();
-}
-function equipmentRequirement(level){
-  return {
-    1:["Light Armour","Spears"],
-    2:["Chain Shirt","Simple Weapon"],
-    3:["Chainmail","Breastplate","Martial Weapon"]
-  }[level]||[];
-}
-function trainEquipment(i){
-  const s=data.staff[i];if(s.equipment>=3){alert("Already at maximum equipment.");return}
-  const next=s.equipment+1,req=equipmentRequirement(next);
-  const missing=req.filter(name=>(data.stores.find(x=>x.name===name)?.qty||0)<1);
-  if(missing.length){alert("Missing equipment: "+missing.join(", "));return}
-  req.forEach(name=>{data.stores.find(x=>x.name===name).qty--});
-  s.equipment=next;addLog(`${s.name} was equipped to level ${next}.`);render();
+  document.getElementById("keepSpaceUsed").textContent=keepSpaceUsed();document.getElementById("keepSpaceAvailable").textContent=keepSpaceAvailable();document.getElementById("maintenanceBudgetMetric").textContent=money(data.maintenanceBudget);document.getElementById("maintenanceRequiredMetric").textContent=money(maintenanceRequired());document.getElementById("maintenanceBudgetInput").value=data.maintenanceBudget;
+  const food=getStore("resource_food")?.qty||0;document.getElementById("populationMetric").textContent=population();document.getElementById("foodQtyMetric").textContent=food;document.getElementById("foodUseMetric").textContent=foodNeed();document.getElementById("repairWallsText").textContent=`Cost: ${money(data.repairWalls.gold)} + ${data.repairWalls.stone} Stone + ${data.repairWalls.wood} Wood. Restores ${data.repairWalls.restore}% condition.`;
+  const bOpts=data.buildings.map(b=>`<option value="${b.id}">${b.name}</option>`).join("");document.getElementById("maintBuilding").innerHTML=bOpts;document.getElementById("upgradeBuilding").innerHTML=buildingOptions();
+  document.getElementById("buildingList").innerHTML=`<table><tr><th>Building / Facility</th><th>Status</th><th>Space</th><th>Required Maintenance</th><th>Condition</th><th></th></tr>${data.buildings.map((b,i)=>{const [txt,cls]=conditionStatus(b.condition);return `<tr><td>${b.name}</td><td><span class="status ${cls}">${txt}</span></td><td>${b.space}</td><td>${money(b.baseMaintenance+b.upgradeMaintenance)}</td><td>${Math.round(b.condition)}%</td><td>${dmUnlocked?`<button class="secondary" onclick="editBuilding(${i},'condition')">Condition</button> <button class="secondary" onclick="editBuilding(${i},'name')">Name</button> <button class="secondary" onclick="editBuilding(${i},'space')">Space</button>`:""}</td></tr>`}).join("")}</table>`;
+  document.getElementById("maintenanceList").innerHTML=data.maintenance.length?`<table><tr><th>Task</th><th>Building</th><th>Cost</th><th>Restore</th><th></th></tr>${data.maintenance.map((x,i)=>{const b=data.buildings.find(b=>b.id===x.buildingId);return `<tr><td>${x.name}</td><td>${b?.name||"Unknown"}</td><td>${money(x.cost)}</td><td>+${x.restore}%</td><td><button class="secondary" onclick="completeMaintenance(${i})">Complete</button></td></tr>`}).join("")}</table>`:`<span class="muted">No outstanding one-off maintenance tasks.</span>`;
+  document.getElementById("upgradeList").innerHTML=data.possibleUpgrades.length?`<table><tr><th>Upgrade</th><th>Target</th><th>Cost</th><th>Turns</th><th>Maint. +</th><th>Space +</th><th></th></tr>${data.possibleUpgrades.map((u,i)=>`<tr><td>${u.name}</td><td>${u.buildingId?data.buildings.find(b=>b.id===u.buildingId)?.name||"Unknown":"Overall Keep"}</td><td>${money(u.cost)}</td><td>${u.turns}</td><td>${u.maintenanceIncrease}</td><td>${u.spaceIncrease}</td><td><button class="secondary" onclick="startUpgrade(${i})">Start</button></td></tr>`).join("")}</table>`:`<span class="muted">No possible upgrades currently listed.</span>`;
+  document.getElementById("ongoingList").innerHTML=data.ongoingUpgrades.length?`<table><tr><th>Upgrade</th><th>Turns Remaining</th><th>Target</th></tr>${data.ongoingUpgrades.map(u=>`<tr><td>${u.name}</td><td>${u.remaining}</td><td>${u.buildingId?data.buildings.find(b=>b.id===u.buildingId)?.name||"Unknown":"Overall Keep"}</td></tr>`).join("")}</table>`:`<span class="muted">No ongoing upgrades.</span>`;
+  document.getElementById("completedList").innerHTML=data.completedUpgrades.length?`<table><tr><th>Upgrade</th><th>Completed</th><th>Maintenance +</th><th>Space +</th></tr>${data.completedUpgrades.map(u=>`<tr><td>${u.name}</td><td>${u.completed}</td><td>${u.maintenanceIncrease||0}</td><td>${u.spaceIncrease||0}</td></tr>`).join("")}</table>`:`<span class="muted">No completed upgrades.</span>`;
 }
 function renderStaff(){
-  const non=data.staff.map((s,i)=>({s,i})).filter(x=>!["Private","Sergeant","Captain"].includes(x.s.type));
-  const guards=data.staff.map((s,i)=>({s,i})).filter(x=>["Private","Sergeant","Captain"].includes(x.s.type));
+  const non=data.staff.map((s,i)=>({s,i})).filter(x=>!['Private','Sergeant','Captain'].includes(x.s.type));const guards=data.staff.map((s,i)=>({s,i})).filter(x=>['Private','Sergeant','Captain'].includes(x.s.type));
   document.getElementById("staffList").innerHTML=non.length?`<table><tr><th>Name</th><th>Type</th><th>Rank</th><th>Wage</th><th></th></tr>${non.map(x=>`<tr><td>${x.s.name}</td><td>${x.s.type}</td><td>${x.s.rank}</td><td>${money(x.s.wage)}</td><td><button class="danger" onclick="removeStaff(${x.i})">Remove</button></td></tr>`).join("")}</table>`:`<span class="muted">No non-guard staff.</span>`;
-  document.getElementById("guardList").innerHTML=`<table><tr><th>Name</th><th>Guard Rank</th><th>Rank</th><th>Wage</th><th>Equipment</th><th>Training</th><th></th></tr>${guards.map(x=>`<tr><td>${x.s.name}</td><td>${x.s.type}</td><td>${x.s.rank}</td><td>${money(x.s.wage)}</td><td>${x.s.equipment}/3</td><td>${x.s.training}/3${x.s.trainingRemaining?` (${x.s.trainingRemaining} turns)`:``}</td><td><button class="secondary" onclick="trainGuard(${x.i})">Train</button> <button class="secondary" onclick="trainEquipment(${x.i})">Equip</button> <button class="danger" onclick="removeStaff(${x.i})">Remove</button></td></tr>`).join("")}</table><p class="small">Current guards: ${guardCounts().Private}/45 Privates · ${guardCounts().Sergeant}/5 Sergeants · ${guardCounts().Captain}/1 Captain</p>`;
-  document.getElementById("trainingList").innerHTML=`<table><tr><th>Guard</th><th>Training</th><th>Next Training</th><th>Equipment</th><th>Next Equipment Requires</th></tr>${guards.map(x=>{const req=equipmentRequirement(x.s.equipment+1);return `<tr><td>${x.s.name}</td><td>${x.s.training}/3</td><td>${x.s.training<3?TRAIN_TURNS[x.s.training+1]+" turns":"Max"}</td><td>${x.s.equipment}/3</td><td>${req.length?req.join(", "):"Max"}</td></tr>`}).join("")}</table>`;
+  document.getElementById("guardList").innerHTML=`<table><tr><th>Name</th><th>Guard Role</th><th>Rank</th><th>Wage</th><th>Equipment</th><th>Training</th><th>Modifier</th><th></th></tr>${guards.map(x=>`<tr><td>${x.s.name}</td><td>${x.s.type}</td><td>${x.s.rank}</td><td>${money(x.s.wage)}</td><td>${x.s.equipment}/3</td><td>${x.s.training}/3${x.s.trainingRemaining?` (${x.s.trainingRemaining} turns)`:``}</td><td><b>+${x.s.equipment+x.s.training}</b></td><td>${x.s.type!=="Captain"?`<button class="secondary" onclick="promoteGuard(${x.i})">Promote</button> `:""}<button class="secondary" onclick="trainGuard(${x.i})">Train</button> <button class="secondary" onclick="trainEquipment(${x.i})">Equip</button> <button class="danger" onclick="removeStaff(${x.i})">Remove</button></td></tr>`).join("")}</table><p class="small">Privates ${guardCount("Private")}/${MAX_GUARDS.Private} · Sergeants ${guardCount("Sergeant")}/${MAX_GUARDS.Sergeant} · Captains ${guardCount("Captain")}/${MAX_GUARDS.Captain} · Merchants ${merchantCount()}/${data.maxMerchants}</p>`;
+  document.getElementById("trainingList").innerHTML=`<table><tr><th>Guard</th><th>Training</th><th>Next Training</th><th>Equipment</th><th>Next Equipment</th></tr>${guards.map(x=>{const req=equipmentRequirement(x.s.equipment+1);return `<tr><td>${x.s.name}</td><td>${x.s.training}/3</td><td>${x.s.training<3?TRAIN_TURNS[x.s.training+1]+" turns":"Max"}</td><td>${x.s.equipment}/3</td><td>${req.length?req.map(id=>getItem(id).label).join(", "):"Max"}</td></tr>`}).join("")}</table>`;
+  document.getElementById("rankWagesList").innerHTML=`<table><tr><th>Rank</th><th>Monthly Wage</th><th>Staff on Rank</th></tr>${[1,2,3,4,5].map(r=>`<tr><td>${r}</td><td><input type="number" value="${data.rankWages[r]}" onchange="updateRankWage(${r},this.value)"></td><td>${data.staff.filter(s=>s.rank===r).length}</td></tr>`).join("")}</table>`;
 }
-
-function addStore(){
-  const name=document.getElementById("storeName").value.trim(),qty=Number(document.getElementById("storeQty").value),unitCap=Number(document.getElementById("storeUnitCap").value)||1;
-  if(!name||qty<0)return;
-  if(usedStoreCapacity()+qty*unitCap>totalStoreCapacity()){alert("Not enough store capacity.");return}
-  const existing=data.stores.find(s=>s.name.toLowerCase()===name.toLowerCase());
-  if(existing)existing.qty+=qty;else data.stores.push({name,qty,unitCap,monthlyUse:0});
-  addLog(`Added ${qty} ${name} to inventory.`);render();
-}
-function editStoreQty(i){const v=Number(prompt("Quantity:",data.stores[i].qty));if(v>=0&&usedStoreCapacity()-data.stores[i].qty*data.stores[i].unitCap+v*data.stores[i].unitCap<=totalStoreCapacity()){data.stores[i].qty=v;render()}else alert("That would exceed capacity.")}
 function renderStores(){
-  document.getElementById("usedCapacity").textContent=`${usedStoreCapacity()}`;
-  document.getElementById("overallCapacity").textContent=`${totalStoreCapacity()}`;
-  document.getElementById("remainingCapacity").textContent=`${tradeCapacity()}`;
-  document.getElementById("storeList").innerHTML=`<table><tr><th>Item</th><th>Qty</th><th>Capacity Used</th><th>Monthly Use</th><th>Status</th><th></th></tr>${data.stores.map((s,i)=>`<tr><td>${s.name}</td><td>${s.qty}</td><td>${s.qty*s.unitCap}</td><td>${s.monthlyUse||0}</td><td>${s.qty<=0&&s.monthlyUse>0?'<span class="status bad">Empty</span>':s.monthlyUse>0&&s.qty<=s.monthlyUse*2?'<span class="status warning">Low</span>':'<span class="status good">OK</span>'}</td><td><button class="secondary" onclick="editStoreQty(${i})">Edit</button></td></tr>`).join("")}</table>`;
+  const food=getStore("resource_food")?.qty||0;document.getElementById("usedCapacity").textContent=usedStoreCapacity();document.getElementById("overallCapacity").textContent=overallStoreCapacity();document.getElementById("remainingCapacity").textContent=freeStoreCapacity();document.getElementById("storeFoodSummary").textContent=`${food} / ${foodNeed()}`;
+  populateCategorySelect("storeCategory");populateStoreItems();
+  document.getElementById("storeList").innerHTML=`<table><tr><th>Category</th><th>Item</th><th>Quantity</th><th>Capacity / Unit</th><th>Used</th><th>Value</th><th>Monthly Used</th><th></th></tr>${data.stores.map((s,i)=>{const item=getItem(s.itemId);const used=s.qty*s.unitCap;return `<tr><td>${item?.category||"Unknown"}</td><td>${item?.label||s.itemId}</td><td><input type="number" min="0" value="${s.qty}" onchange="updateStore(${i},'qty',this.value)"></td><td><input type="number" min="1" value="${s.unitCap}" onchange="updateStore(${i},'unitCap',this.value)"></td><td>${used}</td><td>${money(itemValue(s.itemId))}</td><td>${monthlyUseForStore(s)}</td><td><button class="danger" onclick="removeStore(${i})">Remove</button></td></tr>`}).join("")}</table>`;
 }
-
-function addFaction(){
-  const name=document.getElementById("factionName").value.trim();if(!name)return;
-  data.factions.push({name,rep:0});addLog(`Added faction: ${name}.`);render();document.getElementById("factionName").value="";
-}
-function editRep(i){
-  const v=Number(prompt("Reputation (-100 to 100):",data.factions[i].rep));if(!isNaN(v)){data.factions[i].rep=Math.max(-100,Math.min(100,v));addLog(`DM changed reputation with ${data.factions[i].name} to ${data.factions[i].rep}.`);render()}
-}
-function renderFactions(){
-  document.getElementById("factionList").innerHTML=`<table><tr><th>Faction</th><th>Reputation</th><th>Standing</th><th></th></tr>${data.factions.map((f,i)=>`<tr><td>${f.name}</td><td>${f.rep}</td><td><span class="status ${f.rep>=25?"good":f.rep<=-25?"bad":"neutral"}">${f.rep>=50?"Friendly":f.rep>=25?"Positive":f.rep<=-50?"Hostile":f.rep<=-25?"Negative":"Neutral"}</span></td><td><button class="secondary" onclick="editRep(${i})">DM Edit</button></td></tr>`).join("")}</table>`;
-}
-
-function renderHistory(){
-  document.getElementById("historyTable").innerHTML=`<table><tr><th>Turn</th><th>Date</th><th>Income</th><th>Expenses</th><th>Net</th><th>Balance</th></tr>${data.history.slice().reverse().map((h,i)=>`<tr><td>${data.history.length-i}</td><td>${MONTHS[h.monthIndex]}, Year ${h.year}</td><td>${money(h.income)}</td><td>${money(h.expenses)}</td><td class="${h.net>=0?"positive":"negative"}">${money(h.net)}</td><td>${money(h.balance)}</td></tr>`).join("")}</table>`;
-}
+function renderFactions(){document.getElementById("factionList").innerHTML=`<table><tr><th>Faction</th><th>Reputation</th><th>Standing</th><th></th></tr>${data.factions.map((f,i)=>`<tr><td>${f.name}</td><td>${Math.round(f.rep)}</td><td><span class="status ${f.rep>=25?"good":f.rep<=-25?"bad":"neutral"}">${f.rep>=50?"Friendly":f.rep>=25?"Positive":f.rep<=-50?"Hostile":f.rep<=-25?"Negative":"Neutral"}</span></td><td><button class="secondary" onclick="editRep(${i})">DM Edit</button></td></tr>`).join("")}</table>`}
+function renderHistory(){document.getElementById("historyTable").innerHTML=`<table><tr><th>Turn</th><th>Date</th><th>Income</th><th>Expenses</th><th>Trade Profit</th><th>Net</th><th>Treasury</th></tr>${data.history.slice().reverse().map((h,i)=>`<tr><td>${h.turn??(data.history.length-i)}</td><td>${MONTHS[h.monthIndex]}, Year ${h.year}</td><td>${money(h.income)}</td><td>${money(h.expenses)}</td><td>${money(h.tradeProfit||0)}</td><td class="${h.net>=0?"positive":"negative"}">${money(h.net)}</td><td>${money(h.balance)}</td></tr>`).join("")}</table>`}
 function drawHistory(){
-  const c=document.getElementById("historyChart"),ctx=c.getContext("2d"),w=c.width,h=c.height;
-  ctx.clearRect(0,0,w,h);ctx.strokeStyle="#ddd";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(45,15);ctx.lineTo(45,h-35);ctx.lineTo(w-15,h-35);ctx.stroke();
-  const arr=data.history.slice(-24);if(arr.length<2)return;
-  const vals=arr.map(x=>x.net),min=Math.min(...vals,0),max=Math.max(...vals,0),range=max-min||1;
-  ctx.strokeStyle="#333";ctx.lineWidth=2;ctx.beginPath();
-  arr.forEach((x,i)=>{const px=50+i*(w-70)/(arr.length-1),py=20+(max-x.net)/range*(h-60);if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)});ctx.stroke();
-  ctx.fillStyle="#666";ctx.font="11px Arial";arr.forEach((x,i)=>{if(i%2===0){const px=50+i*(w-70)/(arr.length-1);ctx.fillText(MONTHS[x.monthIndex].slice(0,3)+" "+x.year,px-12,h-15)}});
+  const c=document.getElementById("historyChart"),ctx=c.getContext("2d"),w=c.width,h=c.height,arr=data.history.slice(-24);ctx.clearRect(0,0,w,h);if(!arr.length)return;
+  const left=65,right=65,top=25,bottom=50,plotW=w-left-right,plotH=h-top-bottom;
+  const nets=arr.map(x=>Number(x.net||0)),balances=arr.map(x=>Number(x.balance||0));const nMin=Math.min(0,...nets),nMax=Math.max(0,...nets),nRange=nMax-nMin||1;const bMin=0,bMax=Math.max(1,...balances),bRange=bMax||1;
+  ctx.font="11px Arial";ctx.lineWidth=1;ctx.strokeStyle="#ddd";ctx.beginPath();ctx.moveTo(left,top);ctx.lineTo(left,h-bottom);ctx.lineTo(w-right,h-bottom);ctx.stroke();
+  for(let k=0;k<=5;k++){const y=top+plotH*k/5,ny=nMax-nRange*k/5;ctx.strokeStyle="#eee";ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(w-right,y);ctx.stroke();ctx.fillStyle="#666";ctx.fillText(Math.round(ny)+" gp",5,y+4)}
+  ctx.save();ctx.translate(16,h/2);ctx.rotate(-Math.PI/2);ctx.fillStyle="#444";ctx.fillText("Monthly net (gp)",0,0);ctx.restore();
+  ctx.save();ctx.translate(w-14,h/2);ctx.rotate(Math.PI/2);ctx.fillStyle="#444";ctx.fillText("Treasury (gp)",0,0);ctx.restore();
+  const barW=Math.max(8,plotW/Math.max(arr.length,1)*.55);
+  arr.forEach((x,i)=>{const px=left+(i+(.5))/arr.length*plotW;const bh=(Number(x.balance||0)/bRange)*plotH;ctx.fillStyle="#d8d8d8";ctx.fillRect(px-barW/2,h-bottom-bh,barW,bh);if(i%2===0){ctx.fillStyle="#666";ctx.fillText(MONTHS[x.monthIndex].slice(0,3)+" "+x.year,px-22,h-bottom+18)}});
+  ctx.strokeStyle="#333";ctx.lineWidth=2;ctx.beginPath();arr.forEach((x,i)=>{const px=left+(i+.5)/arr.length*plotW,py=top+(nMax-Number(x.net||0))/nRange*plotH;if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)});ctx.stroke();
+  ctx.fillStyle="#444";ctx.fillText("Bars: treasury",w-115,18);ctx.fillText("Line: monthly net",w-115,32);
 }
-
-function addPlayerLog(){
-  const text=document.getElementById("logText").value.trim();if(!text)return;
-  addLog(text);document.getElementById("logText").value="";render();
-}
-function renderLog(){
-  document.getElementById("eventLog").innerHTML=data.log.map(x=>`<div class="log-entry"><div class="log-date">Turn ${x.turn} · ${x.month}, Year ${x.year} · ${x.date}</div>${x.message}</div>`).join("")||`<span class="muted">No events recorded.</span>`;
-}
+function addPlayerLog(){const text=document.getElementById("logText").value.trim();if(!text)return;addLog(text);document.getElementById("logText").value="";render()}
+function renderLog(){document.getElementById("eventLog").innerHTML=data.log.map(x=>`<div class="log-entry"><div class="log-date">Turn ${x.turn} · ${x.month}, Year ${x.year} · ${x.date}</div>${x.message}</div>`).join("")||`<span class="muted">No events recorded.</span>`}
 
 function renderDM(){
-  document.getElementById("dmKeepName").value=data.keepName;
-  document.getElementById("dmYear").value=data.year;
-  document.getElementById("dmTax").value=data.taxRate;
-  document.getElementById("dmOrder").value=data.publicOrder;
-  document.getElementById("dmBaseCapacity").value=data.baseStoreCapacity;
-  document.getElementById("dmMonth").innerHTML=MONTHS.map((m,i)=>`<option value="${i}" ${i===data.monthIndex?"selected":""}>${m}</option>`).join("");
-  document.getElementById("villageDM").innerHTML=`<table><tr><th>Village</th><th>Base Income</th><th>Rent Rate</th><th>Current Income</th></tr>${data.villages.map((v,i)=>`<tr><td>${v.name}</td><td><input type="number" value="${v.baseRent}" onchange="updateVillage(${i},'baseRent',this.value)"></td><td><input type="number" value="${v.rentRate}" onchange="updateVillage(${i},'rentRate',this.value)"></td><td>${money(villageRent(v))}</td></tr>`).join("")}</table>`;
+  document.getElementById("dmKeepName").value=data.keepName;document.getElementById("dmYear").value=data.year;document.getElementById("dmTax").value=data.taxRate;document.getElementById("dmOrder").value=data.publicOrder;document.getElementById("dmStoreCapacity").value=data.baseStoreCapacity;document.getElementById("dmKeepSpace").value=data.keepSpaceBase;document.getElementById("dmTradeCapacity").value=data.tradeCapacityBase;document.getElementById("dmTollBase").value=data.tollRoad.trafficBase;document.getElementById("dmTollRate").value=data.tollRoad.tollRate;document.getElementById("dmWinterTraffic").value=data.tollRoad.winterFactor;document.getElementById("dmTradeMargin").value=data.tradeSaleMargin;document.getElementById("dmMerchantBonus").value=data.merchantBonusPer;document.getElementById("dmMaxMerchants").value=data.maxMerchants;document.getElementById("dmFoodUse").value=data.foodUsePerPerson;document.getElementById("dmFirewoodUse").value=data.firewoodUse;document.getElementById("dmRepairGold").value=data.repairWalls.gold;document.getElementById("dmRepairStone").value=data.repairWalls.stone;document.getElementById("dmRepairWood").value=data.repairWalls.wood;document.getElementById("dmRepairRestore").value=data.repairWalls.restore;document.getElementById("dmMonth").innerHTML=MONTHS.map((m,i)=>`<option value="${i}" ${i===data.monthIndex?"selected":""}>${m}</option>`).join("");
+  document.getElementById("villageDM").innerHTML=`<table><tr><th>Village</th><th>Base Income</th></tr>${data.villages.map((v,i)=>`<tr><td>${v.name}</td><td><input type="number" value="${v.baseIncome}" onchange="updateVillageBase(${i},this.value)"></td></tr>`).join("")}</table>`;
+  document.getElementById("itemValueList").innerHTML=`<table><tr><th>Category</th><th>Item</th><th>Base Value (gp)</th></tr>${ITEM_CATALOG.map(i=>`<tr><td>${i.category}</td><td>${i.name}</td><td><input type="number" min="0" value="${itemValue(i.id)}" onchange="updateItemValue('${i.id}',this.value)"></td></tr>`).join("")}</table>`;
+  document.getElementById("dmBuildingList").innerHTML=`<table><tr><th>Building</th><th>Condition</th><th>Space</th><th>Base Maintenance</th><th>Walls?</th><th></th></tr>${data.buildings.map((b,i)=>`<tr><td>${b.name}</td><td><input type="number" min="0" max="100" value="${b.condition}" onchange="dmEditBuildingField(${i},'condition',this.value)"></td><td><input type="number" min="0" value="${b.space}" onchange="dmEditBuildingField(${i},'space',this.value)"></td><td><input type="number" min="0" value="${b.baseMaintenance}" onchange="dmEditBuildingField(${i},'baseMaintenance',this.value)"></td><td>${b.isWalls?"Yes":"No"}</td><td><button class="danger" onclick="removeBuilding(${i})">Remove</button></td></tr>`).join("")}</table>`;
 }
-function saveDMSettings(){
-  data.keepName=document.getElementById("dmKeepName").value.trim()||data.keepName;
-  data.year=Number(document.getElementById("dmYear").value)||1;
-  data.monthIndex=Number(document.getElementById("dmMonth").value);
-  data.taxRate=Math.max(0,Number(document.getElementById("dmTax").value)||0);
-  addLog("DM updated campaign settings.");render();
-}
-function setOrder(){data.publicOrder=Math.max(0,Math.min(100,Number(document.getElementById("dmOrder").value)||0));addLog(`Public order set to ${data.publicOrder}.`);render()}
-function setCapacity(){data.baseStoreCapacity=Math.max(0,Number(document.getElementById("dmBaseCapacity").value)||0);render()}
-function updateVillage(i,key,value){data.villages[i][key]=Math.max(0,Number(value)||0);addLog(`DM updated ${data.villages[i].name} ${key}.`);render()}
+function saveDMSettings(){data.keepName=document.getElementById("dmKeepName").value.trim()||data.keepName;data.year=Number(document.getElementById("dmYear").value)||1;data.monthIndex=Number(document.getElementById("dmMonth").value);data.taxRate=Math.max(0,Number(document.getElementById("dmTax").value)||0);addLog("DM updated campaign settings.");render()}
+function saveDMCore(){data.publicOrder=clamp(Number(document.getElementById("dmOrder").value)||0,0,100);data.baseStoreCapacity=Math.max(0,Number(document.getElementById("dmStoreCapacity").value)||0);data.keepSpaceBase=Math.max(0,Number(document.getElementById("dmKeepSpace").value)||0);data.tradeCapacityBase=Math.max(1,Number(document.getElementById("dmTradeCapacity").value)||100);addLog("DM updated core campaign values.");render()}
+function saveTollRules(){data.tollRoad.trafficBase=Math.max(0,Number(document.getElementById("dmTollBase").value)||0);data.tollRoad.tollRate=Math.max(0,Number(document.getElementById("dmTollRate").value)||0);data.tollRoad.winterFactor=Math.max(0,Number(document.getElementById("dmWinterTraffic").value)||0);addLog("DM updated toll road rules.");render()}
+function saveTradeRules(){data.tradeSaleMargin=Math.max(0,Number(document.getElementById("dmTradeMargin").value)||0);data.merchantBonusPer=Math.max(0,Number(document.getElementById("dmMerchantBonus").value)||0);data.maxMerchants=Math.max(1,Number(document.getElementById("dmMaxMerchants").value)||5);addLog("DM updated trade rules.");render()}
+function saveStoreRules(){data.foodUsePerPerson=Math.max(0,Number(document.getElementById("dmFoodUse").value)||0);data.firewoodUse=Math.max(0,Number(document.getElementById("dmFirewoodUse").value)||0);addLog("DM updated food and firewood rules.");render()}
+function saveRepairRules(){data.repairWalls.gold=Math.max(0,Number(document.getElementById("dmRepairGold").value)||0);data.repairWalls.stone=Math.max(0,Number(document.getElementById("dmRepairStone").value)||0);data.repairWalls.wood=Math.max(0,Number(document.getElementById("dmRepairWood").value)||0);data.repairWalls.restore=Math.max(0,Number(document.getElementById("dmRepairRestore").value)||0);addLog("DM updated wall repair rules.");render()}
+function updateItemValue(id,value){data.itemValues[id]=Math.max(0,Number(value)||0);render()}
+function dmEditBuildingField(i,field,value){if(!requireDM())return;const b=data.buildings[i],v=field==="condition"?clamp(Number(value)||0,0,100):Math.max(0,Number(value)||0);if(field==="space"&&keepSpaceUsed()-b.space+v>keepSpaceAvailable()){alert("That would exceed keep space.");return}b[field]=v;render()}
+function removeBuilding(i){if(!requireDM())return;const b=data.buildings[i];if(data.maintenance.some(x=>x.buildingId===b.id)||data.ongoingUpgrades.some(x=>x.buildingId===b.id)){alert("This building still has linked maintenance or upgrades.");return}if(!confirm(`Remove ${b.name}?`))return;data.buildings.splice(i,1);addLog(`DM removed building/facility: ${b.name}.`);render()}
 
 function openAdvance(){
-  const net=monthlyNet();
-  document.getElementById("advancePreview").innerHTML=`<div class="alert ${net>=0?"good":"warning"}">Expected monthly result: <b>${net>=0?"+":""}${money(net)}</b></div><p>Staff training and ongoing upgrades will progress by one turn. Inventory consumption and building deterioration will be applied.</p>`;
+  const trade=tradeProfitThisTurn(),settle=settlementNetExcludingTrade(),net=monthlyNet();
+  const food=getStore("resource_food")?.qty||0,need=foodNeed(),short=Math.max(0,need-food);
+  document.getElementById("advancePreview").innerHTML=`<div class="alert ${net>=0?"good":"warning"}">Expected monthly result: <b>${net>=0?"+":""}${money(net)}</b>.</div><p>Recurring settlement (excluding already-settled trade): <b>${settle>=0?"+":""}${money(settle)}</b>.</p><p>Trade profit already realised this turn: <b>${money(trade)}</b>.</p>${short?`<div class="alert warning">Food shortage: ${short} people worth of food is missing. Random staff may desert.</div>`:""}<p>One turn of food/firewood use, building maintenance attrition, training and upgrade progress will be applied.</p>`;
   document.getElementById("advanceModal").classList.add("show");
 }
 function advanceTurn(){
-  const inc=monthlyIncome(),exp=monthlyExpenses(),net=inc-exp;
-  data.balance+=net;
-
-  data.stores.forEach(s=>{if(s.monthlyUse>0)s.qty=Math.max(0,s.qty-s.monthlyUse)});
-
-  data.buildings.forEach(b=>{
-    let decay=1.5;
-    if(season()==="Winter")decay*=1.5;
-    b.condition=Math.max(0,b.condition-decay);
-  });
-
-  data.staff.forEach(s=>{
-    if(s.trainingRemaining>0){s.trainingRemaining--;if(s.trainingRemaining===0){s.training++;addLog(`${s.name} completed training level ${s.training}.`)}}
-  });
-
-  data.ongoingUpgrades.forEach(u=>u.remaining--);
-  const complete=data.ongoingUpgrades.filter(u=>u.remaining<=0);
-  complete.forEach(u=>{
-    const b=data.buildings.find(b=>b.name===u.building);if(b)b.level++;
-    data.completedUpgrades.push({name:u.name,building:u.building,completed:`${monthName()}, Year ${data.year}`});
-    addLog(`Upgrade completed: ${u.name}.`);
-  });
-  data.ongoingUpgrades=data.ongoingUpgrades.filter(u=>u.remaining>0);
-
-  data.history.push({year:data.year,monthIndex:data.monthIndex,income:inc,expenses:exp,net,balance:data.balance});
-  data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:"Monthly settlement",amount:Math.abs(net),type:net>=0?"income":"expense"});
-  addLog(`Turn ${data.turn} completed: income ${money(inc)}, expenses ${money(exp)}, net ${net>=0?"+":""}${money(net)}.`);
-
-  data.turn++;
-  data.monthIndex++;
-  if(data.monthIndex>=12){data.monthIndex=0;data.year++}
-
-  closeModal("advanceModal");render();
+  const incTotal=monthlyIncome(),exp=monthlyExpenses(),trade=tradeProfitThisTurn(),settle=settlementNetExcludingTrade(),food=ensureStore("resource_food",0),need=foodNeed(),beforeStaff=data.staff.length;
+  data.balance+=settle;
+  if(food.qty>=need){food.qty-=need}else{
+    const deficit=need-food.qty;food.qty=0;let pool=[...data.staff];for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}const deserts=Math.min(deficit,pool.length);const leaving=pool.slice(0,deserts).map(s=>s.name);data.staff=data.staff.filter(s=>!leaving.includes(s));if(deserts){addLog(`Food shortage caused ${deserts} staff to desert: ${leaving.join(", ")}.`)}if(deficit>beforeStaff)addLog(`Food shortage exceeded the available staff. The party still faces ${deficit-beforeStaff} missing food.`)}
+  const fire=ensureStore("resource_firewood",0),fireUse=Number(data.firewoodUse||0);if(fire.qty>=fireUse)fire.qty-=fireUse;else{const short=fireUse-fire.qty;fire.qty=0;addLog(`Firewood shortage: ${short} unit(s) missing this turn.`)}
+  const req=maintenanceRequired(),budget=Number(data.maintenanceBudget||0);let shortfall=req>0?clamp((req-budget)/req,0,1):0;if(shortfall>0){data.buildings.forEach(b=>{let decay=5*shortfall;if(season()==="Winter")decay*=1.5;b.condition=clamp(b.condition-decay,0,100)});addLog(`Maintenance was underfunded. Buildings deteriorated this turn.`)}
+  data.staff.forEach(s=>{if(s.trainingRemaining>0){s.trainingRemaining--;if(s.trainingRemaining===0){s.training++;addLog(`${s.name} completed training level ${s.training}.`)}}});
+  data.ongoingUpgrades.forEach(u=>u.remaining--);const finished=data.ongoingUpgrades.filter(u=>u.remaining<=0);finished.forEach(u=>{if(u.buildingId){const b=data.buildings.find(b=>b.id===u.buildingId);if(b){b.upgradeMaintenance+=Number(u.maintenanceIncrease||0);b.condition=clamp(b.condition+Number(u.conditionIncrease||0),0,100)}}data.keepSpaceBonus+=Number(u.spaceIncrease||0);data.completedUpgrades.push({name:u.name,completed:`${monthName()}, Year ${data.year}`,maintenanceIncrease:Number(u.maintenanceIncrease||0),spaceIncrease:Number(u.spaceIncrease||0)});addLog(`Upgrade completed: ${u.name}.`)});data.ongoingUpgrades=data.ongoingUpgrades.filter(u=>u.remaining>0);
+  data.history.push({year:data.year,monthIndex:data.monthIndex,turn:data.turn,income:incTotal,expenses:exp,tradeProfit:trade,net:incTotal-exp,balance:data.balance});addLog(`Turn ${data.turn} completed: income ${money(incTotal)}, expenses ${money(exp)}, net ${incTotal-exp>=0?"+":""}${money(incTotal-exp)}.`);
+  data.turn++;data.monthIndex++;if(data.monthIndex>=12){data.monthIndex=0;data.year++}data.tradeUsed=0;data.tradePurchaseCost=0;data.tradeSalesRevenue=0;data.tradeMerchantBonus=0;closeModal("advanceModal");render();
 }
 
-function exportSave(){
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");
-  a.href=url;a.download="mountain-keep-save.json";a.click();URL.revokeObjectURL(url);
-}
-function importSave(e){
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();r.onload=()=>{try{data=JSON.parse(r.result);normalize();save();render();alert("Campaign imported.")}catch{alert("Invalid save file.")}};r.readAsText(f);
-}
-function resetCampaign(){
-  if(confirm("Erase this campaign from this browser?")){localStorage.removeItem("mountainKeep");location.reload()}
+function exportSave(){const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="mountain-keep-save.json";a.click();URL.revokeObjectURL(url)}
+function importSave(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{data=JSON.parse(r.result);normalizeData();save();render();alert("Campaign imported.")}catch{alert("Invalid save file.")}};r.readAsText(f)}
+function resetCampaign(){if(confirm("Erase this campaign from this browser?")){localStorage.removeItem("mountainKeep");location.reload()}}
+
+function normalizeData(){
+  const old=data||{};
+  for(const k of Object.keys(DEFAULT_DATA))if(old[k]===undefined)data[k]=CLONE(DEFAULT_DATA[k]);
+  data.schemaVersion=SCHEMA_VERSION;
+  if(!data.tollRoad)data.tollRoad=CLONE(DEFAULT_DATA.tollRoad);
+  if(!data.repairWalls)data.repairWalls=CLONE(DEFAULT_DATA.repairWalls);
+  if(!data.rankWages)data.rankWages=CLONE(DEFAULT_RANK_WAGES);
+  if(!data.itemValues)data.itemValues=Object.fromEntries(ITEM_CATALOG.map(i=>[i.id,i.value]));
+  ITEM_CATALOG.forEach(i=>{if(data.itemValues[i.id]===undefined)data.itemValues[i.id]=i.value});
+  if(data.keepSpaceBonus===undefined)data.keepSpaceBonus=0;
+  if(data.tradeUsed===undefined)data.tradeUsed=0;if(data.tradePurchaseCost===undefined)data.tradePurchaseCost=0;if(data.tradeSalesRevenue===undefined)data.tradeSalesRevenue=0;if(data.tradeMerchantBonus===undefined)data.tradeMerchantBonus=0;
+  if(data.tradeSaleMargin===undefined)data.tradeSaleMargin=25;if(data.merchantBonusPer===undefined)data.merchantBonusPer=5;if(data.maxMerchants===undefined)data.maxMerchants=5;
+  if(data.foodUsePerPerson===undefined)data.foodUsePerPerson=1;if(data.firewoodUse===undefined)data.firewoodUse=8;
+  if(!Array.isArray(data.income))data.income=[];if(!Array.isArray(data.otherExpenses))data.otherExpenses=[];if(!Array.isArray(data.staff))data.staff=[];if(!Array.isArray(data.stores))data.stores=[];if(!Array.isArray(data.buildings))data.buildings=[];if(!Array.isArray(data.maintenance))data.maintenance=[];if(!Array.isArray(data.possibleUpgrades))data.possibleUpgrades=[];if(!Array.isArray(data.ongoingUpgrades))data.ongoingUpgrades=[];if(!Array.isArray(data.completedUpgrades))data.completedUpgrades=[];if(!Array.isArray(data.factions))data.factions=[];if(!Array.isArray(data.villages))data.villages=[];if(!Array.isArray(data.history))data.history=[];if(!Array.isArray(data.transactions))data.transactions=[];if(!Array.isArray(data.log))data.log=[];
+  const legacy=data.otherExpenses.find(x=>/maintenance reserve/i.test(x.name||""));if(legacy){data.maintenanceBudget=Number(legacy.amount)||data.maintenanceBudget;data.otherExpenses=data.otherExpenses.filter(x=>x!==legacy)}data.otherExpenses=data.otherExpenses.filter(x=>!/maintenance$/i.test(x.name||""));
+  data.income=data.income.filter(x=>!((x.type==="toll")||/toll road/i.test(x.name||"")));
+  if(old.merchant===true&&!data.staff.some(s=>s.type==="Merchant"))data.staff.push({name:"Merchant",type:"Merchant",rank:ROLE_DEFAULTS.Merchant,wage:Number(data.rankWages[ROLE_DEFAULTS.Merchant]),equipment:0,training:0,trainingRemaining:0});
+  data.staff.forEach(s=>{if(!ROLE_DEFAULTS[s.type])s.type="Steward";if(!s.rank)s.rank=ROLE_DEFAULTS[s.type];s.wage=Number(data.rankWages[s.rank]??DEFAULT_RANK_WAGES[s.rank]??20);s.equipment=Number(s.equipment||0);s.training=Number(s.training||0);s.trainingRemaining=Number(s.trainingRemaining||0)});
+  const legacyMap={"food":"resource_food","firewood":"resource_firewood","light armour":"armour_light","spears":"weapon_simple","chain shirt":"armour_chain_shirt","simple weapon":"weapon_simple","chainmail":"armour_chainmail","breastplate":"armour_breastplate","martial weapon":"weapon_martial","stone":"resource_stone","wood":"resource_wood"};
+  const migrated=[];data.stores.forEach(s=>{let id=s.itemId;if(!id){const raw=String(s.name||"").trim().toLowerCase();id=legacyMap[raw]||ITEM_CATALOG.find(i=>i.label.toLowerCase()===raw||i.name.toLowerCase()===raw)?.id}if(!id||!CATALOG_BY_ID[id])return;const existing=migrated.find(x=>x.itemId===id);if(existing)existing.qty+=Number(s.qty||s.quantity||0);else migrated.push({itemId:id,qty:Number(s.qty??s.quantity??0),unitCap:Math.max(1,Number(s.unitCap||1))})});
+  if(!migrated.some(s=>s.itemId==="resource_food"))migrated.push({itemId:"resource_food",qty:100,unitCap:1});if(!migrated.some(s=>s.itemId==="resource_firewood"))migrated.push({itemId:"resource_firewood",qty:50,unitCap:1});data.stores=migrated;
+  data.buildings.forEach((b,i)=>{if(!b.id)b.id="b_"+(Date.now()+i);if(b.space===undefined)b.space=b.name?.toLowerCase().includes("wall")?16:8;if(b.baseMaintenance===undefined)b.baseMaintenance=Number(b.maintenance||10);if(b.upgradeMaintenance===undefined)b.upgradeMaintenance=0;if(b.isWalls===undefined)b.isWalls=/wall|gate/i.test(b.name||"");if(b.condition===undefined)b.condition=75});
+  data.maintenance.forEach((m,i)=>{if(!m.id)m.id="m_"+(Date.now()+i);if(!m.buildingId){const b=data.buildings.find(b=>b.name===m.building);m.buildingId=b?.id} });
+  data.possibleUpgrades.forEach((u,i)=>{if(!u.id)u.id="u_"+(Date.now()+i);if(u.buildingId===undefined&&u.building)u.buildingId=data.buildings.find(b=>b.name===u.building)?.id||null;if(u.maintenanceIncrease===undefined)u.maintenanceIncrease=0;if(u.spaceIncrease===undefined)u.spaceIncrease=0;if(u.conditionIncrease===undefined)u.conditionIncrease=0});
+  data.ongoingUpgrades.forEach(u=>{if(u.buildingId===undefined&&u.building)u.buildingId=data.buildings.find(b=>b.name===u.building)?.id||null;if(u.remaining===undefined)u.remaining=u.turns||1});
 }
 
-nav();render();
+nav();normalizeData();render();
 </script>
 </body>
 </html>
