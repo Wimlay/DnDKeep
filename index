@@ -1,0 +1,3805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mountain Keep</title>
+
+<style>
+
+/* =========================================================
+   BASIC
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f3f1;
+    color: #222;
+}
+
+header {
+    background: #242424;
+    color: white;
+    padding: 18px 24px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+header p {
+    margin: 4px 0 0;
+    color: #aaa;
+    font-size: 13px;
+}
+
+nav {
+    display: flex;
+    background: white;
+    border-bottom: 1px solid #ddd;
+    padding: 0 20px;
+    overflow-x: auto;
+}
+
+nav button {
+    border: none;
+    background: none;
+    padding: 14px 18px;
+    color: #666;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+nav button.active {
+    color: #222;
+    border-bottom: 2px solid #222;
+}
+
+main {
+    max-width: 1200px;
+    margin: 25px auto;
+    padding: 0 20px;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.grid {
+    display: grid;
+    gap: 15px;
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 18px;
+}
+
+.card h2 {
+    margin: 0 0 15px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.section-title {
+    margin: 28px 0 12px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   METRICS
+   ========================================================= */
+
+.metric {
+    font-size: 27px;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.label {
+    font-size: 11px;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+.positive {
+    color: #31734b;
+}
+
+.negative {
+    color: #9a3939;
+}
+
+.warning-text {
+    color: #876522;
+}
+
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th {
+    text-align: left;
+    color: #777;
+    font-size: 12px;
+    font-weight: normal;
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+}
+
+td {
+    padding: 9px 8px;
+    border-bottom: 1px solid #eee;
+}
+
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    font-family: inherit;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 8px;
+    align-items: end;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+    font-family: inherit;
+}
+
+.primary {
+    background: #222;
+    color: white;
+    border: none;
+    padding: 9px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.secondary {
+    background: white;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px 13px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.danger {
+    color: #9a3939;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.primary:hover,
+.secondary:hover {
+    opacity: .8;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+    display: inline-block;
+    padding: 3px 7px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+.status.good {
+    background: #e4eee7;
+    color: #31734b;
+}
+
+.status.warning {
+    background: #f3ead8;
+    color: #876522;
+}
+
+.status.bad {
+    background: #f2e0e0;
+    color: #9a3939;
+}
+
+.status.neutral {
+    background: #eee;
+    color: #666;
+}
+
+
+/* =========================================================
+   ALERTS
+   ========================================================= */
+
+.alert {
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.alert.warning {
+    background: #f5ecd9;
+    color: #76591c;
+}
+
+.alert.danger {
+    background: #f3e0e0;
+    color: #8b3333;
+}
+
+.alert.good {
+    background: #e4eee7;
+    color: #356b49;
+}
+
+
+/* =========================================================
+   MONTH CONTROL
+   ========================================================= */
+
+.turn-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.turn-title {
+    font-size: 18px;
+}
+
+.turn-title span {
+    color: #777;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 22px;
+    border-radius: 5px;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+
+/* =========================================================
+   LOG
+   ========================================================= */
+
+.log-entry {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+}
+
+.log-date {
+    color: #888;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width: 850px) {
+
+    .grid-4,
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 500px) {
+
+    .grid-4,
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    main {
+        padding: 0 12px;
+    }
+
+    header {
+        padding: 15px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<header>
+
+    <h1 id="keepName">
+        The Mountain Keep
+    </h1>
+
+    <p>
+        Keep Management Ledger
+    </p>
+
+</header>
+
+
+<!-- =========================================================
+     NAVIGATION
+     ========================================================= -->
+
+<nav>
+
+    <button
+        class="nav-button active"
+        onclick="showPage('overview', this)">
+        Overview
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="showPage('finance', this)">
+        Finance
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="showPage('keep', this)">
+        Keep
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="showPage('staff', this)">
+        Staff & Stores
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="showPage('log', this)">
+        Log
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="openDM()">
+        DM
+    </button>
+
+</nav>
+
+
+<main>
+
+
+<!-- =========================================================
+     OVERVIEW
+     ========================================================= -->
+
+<section
+    id="overview"
+    class="page active">
+
+
+    <div class="turn-control">
+
+        <div class="turn-title">
+
+            <strong id="monthName">
+                Month 1
+            </strong>
+
+            <span id="seasonName">
+                Spring
+            </span>
+
+        </div>
+
+        <button
+            class="primary"
+            onclick="openAdvanceModal()">
+
+            Advance Month
+
+        </button>
+
+    </div>
+
+
+    <!-- FINANCIAL METRICS -->
+
+    <div class="grid grid-4">
+
+        <div class="card">
+
+            <div class="label">
+                Current Balance
+            </div>
+
+            <div
+                id="balance"
+                class="metric">
+                0 gp
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="label">
+                Monthly Income
+            </div>
+
+            <div
+                id="monthlyIncome"
+                class="metric positive">
+                0 gp
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="label">
+                Monthly Expenses
+            </div>
+
+            <div
+                id="monthlyExpenses"
+                class="metric negative">
+                0 gp
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="label">
+                Expected Monthly Net
+            </div>
+
+            <div
+                id="monthlyNet"
+                class="metric">
+                0 gp
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ALERTS -->
+
+    <h2 class="section-title">
+        Keep Status
+    </h2>
+
+    <div id="alerts"></div>
+
+
+    <!-- INCOME / EXPENSES -->
+
+    <div
+        class="grid grid-2"
+        style="margin-top:15px;">
+
+        <div class="card">
+
+            <h2>
+                Income Streams
+            </h2>
+
+            <div id="overviewIncome"></div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>
+                Regular Expenditures
+            </h2>
+
+            <div id="overviewExpenses"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NEXT MONTH -->
+
+    <h2 class="section-title">
+        Next Month Forecast
+    </h2>
+
+    <div class="card">
+
+        <div id="forecast"></div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     FINANCE
+     ========================================================= -->
+
+<section
+    id="finance"
+    class="page">
+
+
+    <h2 class="section-title">
+        Finance
+    </h2>
+
+
+    <!-- BALANCE -->
+
+    <div class="card">
+
+        <h2>
+            Current Balance
+        </h2>
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label>
+                    Balance
+                </label>
+
+                <input
+                    id="startingBalance"
+                    type="number">
+
+            </div>
+
+            <div></div>
+            <div></div>
+
+            <button
+                class="primary"
+                onclick="setBalance()">
+
+                Update
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- TRANSACTION -->
+
+    <div
+        class="card"
+        style="margin-top:15px;">
+
+        <h2>
+            Record Transaction
+        </h2>
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <input
+                    id="transactionName"
+                    placeholder="e.g. Merchant caravan">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Amount
+                </label>
+
+                <input
+                    id="transactionAmount"
+                    type="number"
+                    placeholder="0">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Type
+                </label>
+
+                <select id="transactionType">
+
+                    <option value="income">
+                        Income
+                    </option>
+
+                    <option value="expense">
+                        Expense
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                class="primary"
+                onclick="addTransaction()">
+
+                Add
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- RECURRING -->
+
+    <div
+        class="grid grid-2"
+        style="margin-top:15px;">
+
+
+        <div class="card">
+
+            <h2>
+                Recurring Income
+            </h2>
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Income Stream
+                    </label>
+
+                    <input
+                        id="incomeName"
+                        placeholder="e.g. Toll Road">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Monthly
+                    </label>
+
+                    <input
+                        id="incomeAmount"
+                        type="number">
+
+                </div>
+
+
+                <button
+                    class="primary"
+                    onclick="addIncome()">
+
+                    Add
+
+                </button>
+
+            </div>
+
+            <div id="incomeList"></div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h2>
+                Recurring Expenses
+            </h2>
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Expenditure
+                    </label>
+
+                    <input
+                        id="expenseName"
+                        placeholder="e.g. Guards">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Monthly
+                    </label>
+
+                    <input
+                        id="expenseAmount"
+                        type="number">
+
+                </div>
+
+
+                <button
+                    class="primary"
+                    onclick="addExpense()">
+
+                    Add
+
+                </button>
+
+            </div>
+
+            <div id="expenseList"></div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     KEEP
+     ========================================================= -->
+
+<section
+    id="keep"
+    class="page">
+
+
+    <h2 class="section-title">
+        Buildings & Facilities
+    </h2>
+
+
+    <div class="card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Facility
+                    </th>
+
+                    <th>
+                        Condition
+                    </th>
+
+                    <th>
+                        Maintenance
+                    </th>
+
+                    <th>
+                        Upgrade
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody
+                id="buildingList">
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <h2 class="section-title">
+        Maintenance
+    </h2>
+
+
+    <div class="card">
+
+        <div id="maintenanceList"></div>
+
+    </div>
+
+
+    <h2 class="section-title">
+        Available Upgrades
+    </h2>
+
+
+    <div class="card">
+
+        <div id="upgradeList"></div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     STAFF & STORES
+     ========================================================= -->
+
+<section
+    id="staff"
+    class="page">
+
+
+    <h2 class="section-title">
+        Staff
+    </h2>
+
+
+    <div class="card">
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label>
+                    Name
+                </label>
+
+                <input
+                    id="staffName"
+                    placeholder="Name">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Role
+                </label>
+
+                <input
+                    id="staffRole"
+                    placeholder="Guard">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Monthly Wage
+                </label>
+
+                <input
+                    id="staffWage"
+                    type="number">
+
+            </div>
+
+
+            <button
+                class="primary"
+                onclick="addStaff()">
+
+                Add
+
+            </button>
+
+        </div>
+
+
+        <div
+            style="margin-top:15px;"
+            id="staffList">
+        </div>
+
+    </div>
+
+
+    <h2 class="section-title">
+        Stores
+    </h2>
+
+
+    <div class="card">
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label>
+                    Item
+                </label>
+
+                <input
+                    id="storeName"
+                    placeholder="Food">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Quantity
+                </label>
+
+                <input
+                    id="storeQuantity"
+                    type="number">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Capacity
+                </label>
+
+                <input
+                    id="storeCapacity"
+                    type="number">
+
+            </div>
+
+
+            <button
+                class="primary"
+                onclick="addStore()">
+
+                Add
+
+            </button>
+
+        </div>
+
+
+        <div
+            style="margin-top:15px;"
+            id="storeList">
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     LOG
+     ========================================================= -->
+
+<section
+    id="log"
+    class="page">
+
+
+    <h2 class="section-title">
+        Keep Log
+    </h2>
+
+
+    <div class="card">
+
+        <div id="eventLog"></div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     DM
+     ========================================================= -->
+
+<section
+    id="dm"
+    class="page">
+
+
+    <h2 class="section-title">
+        DM Control
+    </h2>
+
+
+    <div class="card">
+
+        <h2>
+            Campaign
+        </h2>
+
+        <div class="form-group">
+
+            <label>
+                Keep Name
+            </label>
+
+            <input
+                id="dmKeepName">
+
+        </div>
+
+
+        <br>
+
+
+        <button
+            class="primary"
+            onclick="saveCampaignSettings()">
+
+            Save
+
+        </button>
+
+    </div>
+
+
+    <div
+        class="card"
+        style="margin-top:15px;">
+
+        <h2>
+            Game State
+        </h2>
+
+        <p>
+            Month:
+            <strong id="dmMonth"></strong>
+        </p>
+
+        <p>
+            Season:
+            <strong id="dmSeason"></strong>
+        </p>
+
+        <button
+            class="secondary"
+            onclick="openAdvanceModal()">
+
+            Advance Month
+
+        </button>
+
+    </div>
+
+
+    <div
+        class="card"
+        style="margin-top:15px;">
+
+        <h2>
+            Save Data
+        </h2>
+
+        <button
+            class="secondary"
+            onclick="exportSave()">
+
+            Export Campaign
+
+        </button>
+
+        <button
+            class="secondary"
+            onclick="document.getElementById('importFile').click()">
+
+            Import Campaign
+
+        </button>
+
+        <input
+            id="importFile"
+            type="file"
+            accept=".json"
+            style="display:none"
+            onchange="importSave(event)">
+
+        <br><br>
+
+        <button
+            class="danger"
+            onclick="resetCampaign()">
+
+            Reset Campaign
+
+        </button>
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     ADVANCE MONTH MODAL
+     ========================================================= -->
+
+<div
+    id="advanceModal"
+    class="modal">
+
+
+    <div class="modal-content">
+
+        <h2>
+            Advance Month
+        </h2>
+
+        <p>
+            The following will happen:
+        </p>
+
+        <ul>
+
+            <li>
+                Recurring income will be collected.
+            </li>
+
+            <li>
+                Staff wages will be paid.
+            </li>
+
+            <li>
+                Recurring expenses will be paid.
+            </li>
+
+            <li>
+                Inventory will be consumed.
+            </li>
+
+            <li>
+                Buildings may deteriorate.
+            </li>
+
+            <li>
+                The campaign will move to the next month.
+            </li>
+
+        </ul>
+
+
+        <div
+            id="advancePreview"
+            class="alert warning">
+        </div>
+
+
+        <button
+            class="primary"
+            onclick="advanceMonth()">
+
+            Advance Month
+
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="closeModal('advanceModal')">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     DM LOGIN
+     ========================================================= -->
+
+<div
+    id="dmModal"
+    class="modal">
+
+
+    <div class="modal-content">
+
+        <h2>
+            DM Access
+        </h2>
+
+        <p>
+            Enter the DM PIN.
+        </p>
+
+        <input
+            id="dmPin"
+            type="password"
+            placeholder="PIN">
+
+
+        <br><br>
+
+
+        <button
+            class="primary"
+            onclick="checkDM()">
+
+            Enter
+
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="closeModal('dmModal')">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   GAME DATA
+   ========================================================= */
+
+let data =
+JSON.parse(localStorage.getItem("mountainKeep")) || {
+
+    keepName: "The Mountain Keep",
+
+    month: 1,
+
+    seasonIndex: 0,
+
+    balance: 1000,
+
+
+    /*
+       Seasonal multipliers.
+
+       These can be changed by the DM.
+    */
+
+    seasons: [
+
+        {
+            name: "Spring",
+            incomeMultiplier: 1.00,
+            expenseMultiplier: 1.00
+        },
+
+        {
+            name: "Summer",
+            incomeMultiplier: 1.20,
+            expenseMultiplier: 0.90
+        },
+
+        {
+            name: "Autumn",
+            incomeMultiplier: 0.70,
+            expenseMultiplier: 1.00
+        },
+
+        {
+            name: "Winter",
+            incomeMultiplier: 0.20,
+            expenseMultiplier: 1.30
+        }
+
+    ],
+
+
+    /*
+       Regular income.
+    */
+
+    income: [
+
+        {
+            name: "Mountain Toll Road",
+            amount: 120
+        },
+
+        {
+            name: "Mine Lease",
+            amount: 80
+        }
+
+    ],
+
+
+    /*
+       Regular expenses.
+    */
+
+    expenses: [
+
+        {
+            name: "Food",
+            amount: 60
+        },
+
+        {
+            name: "Maintenance",
+            amount: 40
+        }
+
+    ],
+
+
+    /*
+       Staff.
+    */
+
+    staff: [
+
+        {
+            name: "Edric",
+            role: "Castellan",
+            wage: 30
+        },
+
+        {
+            name: "Hilda",
+            role: "Cook",
+            wage: 15
+        },
+
+        {
+            name: "Gregor",
+            role: "Guard",
+            wage: 20
+        }
+
+    ],
+
+
+    /*
+       Inventory.
+    */
+
+    stores: [
+
+        {
+            name: "Food",
+            quantity: 74,
+            capacity: 100,
+            monthlyUse: 10
+        },
+
+        {
+            name: "Firewood",
+            quantity: 18,
+            capacity: 50,
+            monthlyUse: 8
+        },
+
+        {
+            name: "Iron",
+            quantity: 12,
+            capacity: 25,
+            monthlyUse: 1
+        }
+
+    ],
+
+
+    /*
+       Buildings.
+    */
+
+    buildings: [
+
+        {
+            name: "Great Hall",
+            condition: 90,
+            maintenance: 20,
+            deterioration: 2
+        },
+
+        {
+            name: "Outer Walls",
+            condition: 65,
+            maintenance: 30,
+            deterioration: 4
+        },
+
+        {
+            name: "Stables",
+            condition: 85,
+            maintenance: 15,
+            deterioration: 2
+        },
+
+        {
+            name: "Granary",
+            condition: 95,
+            maintenance: 10,
+            deterioration: 1
+        }
+
+    ],
+
+
+    /*
+       Maintenance jobs.
+    */
+
+    maintenance: [
+
+        {
+            name: "Repair eastern wall",
+            cost: 150,
+            target: "Outer Walls",
+            condition: 15
+        }
+
+    ],
+
+
+    /*
+       Upgrades.
+    */
+
+    upgrades: [
+
+        {
+            name: "Reinforced Gate",
+            cost: 500,
+            effect: "Improves keep defence",
+            purchased: false
+        },
+
+        {
+            name: "Expanded Granary",
+            cost: 250,
+            effect: "+50 food capacity",
+            purchased: false
+        },
+
+        {
+            name: "Stone Roofs",
+            cost: 400,
+            effect: "Reduces winter deterioration",
+            purchased: false
+        }
+
+    ],
+
+
+    /*
+       Transaction history.
+    */
+
+    transactions: [],
+
+
+    /*
+       Event log.
+    */
+
+    log: []
+
+};
+
+
+/* =========================================================
+   SAVE
+   ========================================================= */
+
+function save() {
+
+    localStorage.setItem(
+        "mountainKeep",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* =========================================================
+   MONTH / SEASON
+   ========================================================= */
+
+function getSeason() {
+
+    return data.seasons[data.seasonIndex];
+
+}
+
+
+function getSeasonName() {
+
+    return getSeason().name;
+
+}
+
+
+/* =========================================================
+   FINANCE CALCULATIONS
+   ========================================================= */
+
+function calculateStaffWages() {
+
+    return data.staff.reduce(
+        (total, staff) =>
+            total + Number(staff.wage),
+        0
+    );
+
+}
+
+
+function calculateIncome() {
+
+    const season =
+        getSeason();
+
+    return data.income.reduce(
+        (total, item) =>
+            total +
+            Number(item.amount) *
+            season.incomeMultiplier,
+        0
+    );
+
+}
+
+
+function calculateExpenses() {
+
+    const season =
+        getSeason();
+
+    const recurring =
+        data.expenses.reduce(
+            (total, item) =>
+                total +
+                Number(item.amount),
+            0
+        );
+
+
+    const wages =
+        calculateStaffWages();
+
+
+    return (
+        recurring +
+        wages
+    ) *
+    season.expenseMultiplier;
+
+}
+
+
+function calculateNet() {
+
+    return (
+        calculateIncome() -
+        calculateExpenses()
+    );
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+function showPage(page, button) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(p =>
+            p.classList.remove("active")
+        );
+
+
+    document
+        .getElementById(page)
+        .classList.add("active");
+
+
+    document
+        .querySelectorAll(".nav-button")
+        .forEach(b =>
+            b.classList.remove("active")
+        );
+
+
+    button.classList.add("active");
+
+}
+
+
+/* =========================================================
+   BALANCE
+   ========================================================= */
+
+function setBalance() {
+
+    const value =
+        Number(
+            document.getElementById(
+                "startingBalance"
+            ).value
+        );
+
+
+    if (!isNaN(value)) {
+
+        data.balance = value;
+
+        addLog(
+            "DM manually changed the balance."
+        );
+
+        save();
+        render();
+
+    }
+
+}
+
+
+/* =========================================================
+   TRANSACTIONS
+   ========================================================= */
+
+function addTransaction() {
+
+    const name =
+        document.getElementById(
+            "transactionName"
+        ).value.trim();
+
+
+    const amount =
+        Number(
+            document.getElementById(
+                "transactionAmount"
+            ).value
+        );
+
+
+    const type =
+        document.getElementById(
+            "transactionType"
+        ).value;
+
+
+    if (!name || !amount) return;
+
+
+    if (type === "income") {
+
+        data.balance += amount;
+
+    } else {
+
+        data.balance -= amount;
+
+    }
+
+
+    data.transactions.unshift({
+
+        name: name,
+
+        amount: amount,
+
+        type: type,
+
+        month: data.month,
+
+        season: getSeasonName(),
+
+        date:
+            new Date()
+            .toLocaleDateString()
+
+    });
+
+
+    addLog(
+
+        `${type === "income"
+            ? "Income"
+            : "Expense"} recorded: ${name} (${amount} gp).`
+
+    );
+
+
+    document.getElementById(
+        "transactionName"
+    ).value = "";
+
+
+    document.getElementById(
+        "transactionAmount"
+    ).value = "";
+
+
+    save();
+    render();
+
+}
+
+
+/* =========================================================
+   RECURRING INCOME
+   ========================================================= */
+
+function addIncome() {
+
+    const name =
+        document.getElementById(
+            "incomeName"
+        ).value.trim();
+
+
+    const amount =
+        Number(
+            document.getElementById(
+                "incomeAmount"
+            ).value
+        );
+
+
+    if (!name || !amount) return;
+
+
+    data.income.push({
+
+        name: name,
+
+        amount: amount
+
+    });
+
+
+    document.getElementById(
+        "incomeName"
+    ).value = "";
+
+
+    document.getElementById(
+        "incomeAmount"
+    ).value = "";
+
+
+    save();
+    render();
+
+}
+
+
+function deleteIncome(index) {
+
+    data.income.splice(
+        index,
+        1
+    );
+
+    save();
+    render();
+
+}
+
+
+/* =========================================================
+   RECURRING EXPENSE
+   ========================================================= */
+
+function addExpense() {
+
+    const name =
+        document.getElementById(
+            "expenseName"
+        ).value.trim();
+
+
+    const amount =
+        Number(
+            document.getElementById(
+                "expenseAmount"
+            ).value
+        );
+
+
+    if (!name || !amount) return;
+
+
+    data.expenses.push({
+
+        name: name,
+
+        amount: amount
+
+    });
+
+
+    document.getElementById(
+        "expenseName"
+    ).value = "";
+
+
+    document.getElementById(
+        "expenseAmount"
+    ).value = "";
+
+
+    save();
+    render();
+
+}
+
+
+function deleteExpense(index) {
+
+    data.expenses.splice(
+        index,
+        1
+    );
+
+    save();
+    render();
+
+}
+
+
+/* =========================================================
+   STAFF
+   ========================================================= */
+
+function addStaff() {
+
+    const name =
+        document.getElementById(
+            "staffName"
+        ).value.trim();
+
+
+    const role =
+        document.getElementById(
+            "staffRole"
+        ).value.trim();
+
+
+    const wage =
+        Number(
+            document.getElementById(
+                "staffWage"
+            ).value
+        );
+
+
+    if (!name || !role || !wage)
+        return;
+
+
+    data.staff.push({
+
+        name: name,
+
+        role: role,
+
+        wage: wage
+
+    });
+
+
+    addLog(
+        `${name} joined the keep as ${role}.`
+    );
+
+
+    document.getElementById(
+        "staffName"
+    ).value = "";
+
+
+    document.getElementById(
+        "staffRole"
+    ).value = "";
+
+
+    document.getElementById(
+        "staffWage"
+    ).value = "";
+
+
+    save();
+    render();
+
+}
+
+
+function removeStaff(index) {
+
+    const name =
+        data.staff[index].name;
+
+
+    data.staff.splice(
+        index,
+        1
+    );
+
+
+    addLog(
+        `${name} left the keep staff.`
+    );
+
+
+    save();
+    render();
+
+}
+
+
+/* =========================================================
+   STORES
+   ========================================================= */
+
+function addStore() {
+
+    const name =
+        document.getElementById(
+            "storeName"
+        ).value.trim();
+
+
+    const quantity =
+        Number(
+            document.getElementById(
+                "storeQuantity"
+            ).value
+        );
+
+
+    const capacity =
+        Number(
+            document.getElementById(
+                "storeCapacity"
+            ).value
+        );
+
+
+    if (
+        !name ||
+        isNaN(quantity) ||
+        isNaN(capacity)
+    ) return;
+
+
+    data.stores.push({
+
+        name: name,
+
+        quantity: quantity,
+
+        capacity: capacity,
+
+        monthlyUse: 0
+
+    });
+
+
+    document.getElementById(
+        "storeName"
+    ).value = "";
+
+
+    document.getElementById(
+        "storeQuantity"
+    ).value = "";
+
+
+    document.getElementById(
+        "storeCapacity"
+    ).value = "";
+
+
+    save();
+    render();
+
+}
+
+
+/* =========================================================
+   BUILDING CONDITION
+   ========================================================= */
+
+function conditionStatus(condition) {
+
+    if (condition >= 75)
+        return {
+            text: "Good",
+            class: "good"
+        };
+
+    if (condition >= 40)
+        return {
+            text: "Needs Attention",
+            class: "warning"
+        };
+
+    return {
+        text: "Poor",
+        class: "bad"
+    };
+
+}
+
+
+/* =========================================================
+   MAINTENANCE
+   ========================================================= */
+
+function completeMaintenance(index) {
+
+    const job =
+        data.maintenance[index];
+
+
+    if (data.balance < job.cost) {
+
+        alert(
+            "The keep cannot afford this maintenance."
+        );
+
+        return;
+
+    }
+
+
+    data.balance -= job.cost;
+
+
+    const building =
+        data.buildings.find(
+            b => b.name === job.target
+        );
+
+
+    if (building) {
+
+        building.condition =
+            Math.min(
+                100,
+                building.condition +
+                job.condition
+            );
+
+    }
+
+
+    addLog(
+        `Completed maintenance: ${job.name} (-${job.cost} gp).`
+    );
+
+
+    data.maintenance.splice(
+        index,
+        1
+    );
+
+
+    save();
+    render();
+
+}
+
+
+/* =========================================================
+   UPGRADES
+   ========================================================= */
+
+function purchaseUpgrade(index) {
+
+    const upgrade =
+        data.upgrades[index];
+
+
+    if (upgrade.purchased)
+        return;
+
+
+    if (data.balance < upgrade.cost) {
+
+        alert(
+            "The keep cannot afford this upgrade."
+        );
+
+        return;
+
+    }
+
+
+    data.balance -=
+        upgrade.cost;
+
+
+    upgrade.purchased = true;
+
+
+    if (
+        upgrade.name ===
+        "Expanded Granary"
+    ) {
+
+        const granary =
+            data.stores.find(
+                s => s.name === "Food"
+            );
+
+
+        if (granary) {
+
+            granary.capacity += 50;
+
+        }
+
+    }
+
+
+    addLog(
+        `Purchased upgrade: ${upgrade.name} (-${upgrade.cost} gp).`
+    );
+
+
+    save();
+    render();
+
+}
+
+
+/* =========================================================
+   ADVANCE MONTH
+   ========================================================= */
+
+function openAdvanceModal() {
+
+    const net =
+        calculateNet();
+
+
+    const text =
+        `Expected monthly result: ${
+            net >= 0 ? "+" : ""
+        }${Math.round(net)} gp.`;
+
+
+    document.getElementById(
+        "advancePreview"
+    ).textContent = text;
+
+
+    document
+        .getElementById(
+            "advanceModal"
+        )
+        .classList.add("show");
+
+}
+
+
+function closeModal(id) {
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+
+}
+
+
+function advanceMonth() {
+
+    const income =
+        Math.round(
+            calculateIncome()
+        );
+
+
+    const expenses =
+        Math.round(
+            calculateExpenses()
+        );
+
+
+    const net =
+        income - expenses;
+
+
+    /* Apply finance */
+
+    data.balance += net;
+
+
+    /* Inventory */
+
+    data.stores.forEach(store => {
+
+        if (
+            store.monthlyUse &&
+            store.monthlyUse > 0
+        ) {
+
+            store.quantity =
+                Math.max(
+                    0,
+                    store.quantity -
+                    store.monthlyUse
+                );
+
+        }
+
+    });
+
+
+    /* Building deterioration */
+
+    const winter =
+        getSeasonName() === "Winter";
+
+
+    data.buildings.forEach(building => {
+
+        let deterioration =
+            building.deterioration;
+
+
+        if (winter)
+            deterioration *= 1.5;
+
+
+        const stoneRoofs =
+            data.upgrades.find(
+                u =>
+                    u.name ===
+                    "Stone Roofs" &&
+                    u.purchased
+            );
+
+
+        if (
+            winter &&
+            stoneRoofs
+        ) {
+
+            deterioration *= 0.5;
+
+        }
+
+
+        building.condition =
+            Math.max(
+                0,
+                building.condition -
+                deterioration
+            );
+
+    });
+
+
+    /* Record transactions */
+
+    if (income > 0) {
+
+        data.transactions.unshift({
+
+            name:
+                `Monthly income - ${getSeasonName()}`,
+
+            amount: income,
+
+            type: "income",
+
+            month: data.month,
+
+            season: getSeasonName(),
+
+            date:
+                new Date()
+                .toLocaleDateString()
+
+        });
+
+    }
+
+
+    if (expenses > 0) {
+
+        data.transactions.unshift({
+
+            name:
+                `Monthly expenses - ${getSeasonName()}`,
+
+            amount: expenses,
+
+            type: "expense",
+
+            month: data.month,
+
+            season: getSeasonName(),
+
+            date:
+                new Date()
+                .toLocaleDateString()
+
+        });
+
+    }
+
+
+    addLog(
+
+        `Month ${data.month} completed. ` +
+        `Income: ${income} gp. ` +
+        `Expenses: ${expenses} gp. ` +
+        `Net: ${net >= 0 ? "+" : ""}${net} gp.`
+
+    );
+
+
+    /* Advance month */
+
+    data.month++;
+
+
+    /*
+       Four seasons, each lasting
+       three months.
+    */
+
+    data.seasonIndex =
+        Math.floor(
+            ((data.month - 1) % 12) / 3
+        );
+
+
+    closeModal(
+        "advanceModal"
+    );
+
+
+    save();
+    render();
+
+}
+
+
+/* =========================================================
+   EVENT LOG
+   ========================================================= */
+
+function addLog(message) {
+
+    data.log.unshift({
+
+        month: data.month,
+
+        season: getSeasonName(),
+
+        message: message,
+
+        date:
+            new Date()
+            .toLocaleDateString()
+
+    });
+
+
+    /*
+       Keep the log manageable.
+    */
+
+    if (data.log.length > 200) {
+
+        data.log =
+            data.log.slice(0, 200);
+
+    }
+
+}
+
+
+/* =========================================================
+   ALERTS
+   ========================================================= */
+
+function generateAlerts() {
+
+    let alerts = [];
+
+
+    /* Low money */
+
+    if (data.balance < 0) {
+
+        alerts.push({
+
+            class: "danger",
+
+            text:
+                "The keep is in debt."
+
+        });
+
+    }
+
+
+    if (
+        data.balance >= 0 &&
+        data.balance < 100
+    ) {
+
+        alerts.push({
+
+            class: "warning",
+
+            text:
+                "Treasury reserves are dangerously low."
+
+        });
+
+    }
+
+
+    /* Buildings */
+
+    data.buildings.forEach(
+        building => {
+
+            if (
+                building.condition < 40
+            ) {
+
+                alerts.push({
+
+                    class: "danger",
+
+                    text:
+                        `${building.name} is in poor condition.`
+
+                });
+
+            }
+
+        }
+    );
+
+
+    /* Stores */
+
+    data.stores.forEach(
+        store => {
+
+            const percentage =
+                store.quantity /
+                store.capacity;
+
+
+            if (
+                percentage <= 0.20
+            ) {
+
+                alerts.push({
+
+                    class: "warning",
+
+                    text:
+                        `${store.name} stores are running low.`
+
+                });
+
+            }
+
+        }
+    );
+
+
+    return alerts;
+
+}
+
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+
+function render() {
+
+    const income =
+        calculateIncome();
+
+
+    const expenses =
+        calculateExpenses();
+
+
+    const net =
+        income - expenses;
+
+
+    const season =
+        getSeason();
+
+
+    /* Header */
+
+    document.getElementById(
+        "keepName"
+    ).textContent =
+        data.keepName;
+
+
+    document.getElementById(
+        "monthName"
+    ).textContent =
+        `Month ${data.month}`;
+
+
+    document.getElementById(
+        "seasonName"
+    ).textContent =
+        season.name;
+
+
+    /* Financial */
+
+    document.getElementById(
+        "balance"
+    ).textContent =
+        `${Math.round(data.balance)} gp`;
+
+
+    document.getElementById(
+        "monthlyIncome"
+    ).textContent =
+        `${Math.round(income)} gp`;
+
+
+    document.getElementById(
+        "monthlyExpenses"
+    ).textContent =
+        `${Math.round(expenses)} gp`;
+
+
+    const netElement =
+        document.getElementById(
+            "monthlyNet"
+        );
+
+
+    netElement.textContent =
+        `${net >= 0 ? "+" : ""}${Math.round(net)} gp`;
+
+
+    netElement.className =
+        `metric ${
+            net >= 0
+                ? "positive"
+                : "negative"
+        }`;
+
+
+    /* Forecast */
+
+    document.getElementById(
+        "forecast"
+    ).innerHTML = `
+
+        <strong>
+            Expected balance after next month:
+        </strong>
+
+        <span class="${
+            data.balance + net >= 0
+                ? "positive"
+                : "negative"
+        }">
+
+            ${Math.round(
+                data.balance + net
+            )} gp
+
+        </span>
+
+        <br><br>
+
+        <span style="color:#777;font-size:13px;">
+
+            Income is affected by the
+            ${season.name.toLowerCase()}
+            seasonal multiplier.
+
+            <br>
+
+            Income multiplier:
+            ${season.incomeMultiplier * 100}%
+
+            <br>
+
+            Expense multiplier:
+            ${season.expenseMultiplier * 100}%
+
+        </span>
+
+    `;
+
+
+    /* Overview income */
+
+    document.getElementById(
+        "overviewIncome"
+    ).innerHTML =
+
+        data.income.map(
+            item => `
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                padding:7px 0;
+                border-bottom:1px solid #eee;
+            ">
+
+                <span>
+                    ${item.name}
+                </span>
+
+                <strong>
+                    ${item.amount} gp
+                </strong>
+
+            </div>
+
+        `
+        ).join("");
+
+
+    /* Overview expenses */
+
+    document.getElementById(
+        "overviewExpenses"
+    ).innerHTML =
+
+        data.expenses.map(
+            item => `
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                padding:7px 0;
+                border-bottom:1px solid #eee;
+            ">
+
+                <span>
+                    ${item.name}
+                </span>
+
+                <strong>
+                    ${item.amount} gp
+                </strong>
+
+            </div>
+
+        `
+        ).join("") +
+
+        `
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            padding:8px 0;
+            color:#666;
+        ">
+
+            <span>
+                Staff wages
+            </span>
+
+            <strong>
+                ${calculateStaffWages()} gp
+            </strong>
+
+        </div>
+
+        `;
+
+
+    /* Alerts */
+
+    const alerts =
+        generateAlerts();
+
+
+    document.getElementById(
+        "alerts"
+    ).innerHTML =
+
+        alerts.length
+
+        ?
+
+        alerts.map(
+            alert => `
+
+                <div
+                    class="alert ${alert.class}">
+                    ${alert.text}
+                </div>
+
+            `
+        ).join("")
+
+        :
+
+        `<div class="alert good">
+            The keep is currently operating normally.
+        </div>`;
+
+
+    renderFinance();
+    renderBuildings();
+    renderStaff();
+    renderStores();
+    renderLog();
+
+}
+
+
+/* =========================================================
+   FINANCE RENDER
+   ========================================================= */
+
+function renderFinance() {
+
+    document.getElementById(
+        "startingBalance"
+    ).value =
+        data.balance;
+
+
+    document.getElementById(
+        "incomeList"
+    ).innerHTML = `
+
+        <table>
+
+            <tbody>
+
+                ${
+                    data.income.map(
+                        (item, index) => `
+
+                        <tr>
+
+                            <td>
+                                ${item.name}
+                            </td>
+
+                            <td>
+                                ${item.amount} gp
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="danger"
+                                    onclick="deleteIncome(${index})">
+
+                                    Remove
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    `
+                    ).join("")
+                }
+
+            </tbody>
+
+        </table>
+
+    `;
+
+
+    document.getElementById(
+        "expenseList"
+    ).innerHTML = `
+
+        <table>
+
+            <tbody>
+
+                ${
+                    data.expenses.map(
+                        (item, index) => `
+
+                        <tr>
+
+                            <td>
+                                ${item.name}
+                            </td>
+
+                            <td>
+                                ${item.amount} gp
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="danger"
+                                    onclick="deleteExpense(${index})">
+
+                                    Remove
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    `
+                    ).join("")
+                }
+
+            </tbody>
+
+        </table>
+
+    `;
+
+}
+
+
+/* =========================================================
+   BUILDINGS
+   ========================================================= */
+
+function renderBuildings() {
+
+    document.getElementById(
+        "buildingList"
+    ).innerHTML =
+
+        data.buildings.map(
+            building => {
+
+                const status =
+                    conditionStatus(
+                        building.condition
+                    );
+
+
+                return `
+
+                <tr>
+
+                    <td>
+                        ${building.name}
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="status ${status.class}">
+
+                            ${status.text}
+
+                        </span>
+
+                        ${Math.round(
+                            building.condition
+                        )}%
+
+                    </td>
+
+                    <td>
+                        ${building.maintenance} gp
+                    </td>
+
+                    <td>
+                        ${building.deterioration}
+                        condition/month
+                    </td>
+
+                </tr>
+
+                `;
+
+            }
+        ).join("");
+
+
+    document.getElementById(
+        "maintenanceList"
+    ).innerHTML =
+
+        data.maintenance.length
+
+        ?
+
+        `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Job
+                    </th>
+
+                    <th>
+                        Building
+                    </th>
+
+                    <th>
+                        Cost
+                    </th>
+
+                    <th>
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                ${
+                    data.maintenance.map(
+                        (job, index) => `
+
+                        <tr>
+
+                            <td>
+                                ${job.name}
+                            </td>
+
+                            <td>
+                                ${job.target}
+                            </td>
+
+                            <td>
+                                ${job.cost} gp
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="secondary"
+                                    onclick="completeMaintenance(${index})">
+
+                                    Complete
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    `
+                    ).join("")
+                }
+
+            </tbody>
+
+        </table>
+
+        `
+
+        :
+
+        `<div class="alert good">
+            No outstanding maintenance jobs.
+        </div>`;
+
+
+    document.getElementById(
+        "upgradeList"
+    ).innerHTML = `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Upgrade
+                    </th>
+
+                    <th>
+                        Cost
+                    </th>
+
+                    <th>
+                        Effect
+                    </th>
+
+                    <th>
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                ${
+                    data.upgrades.map(
+                        (upgrade, index) => `
+
+                        <tr>
+
+                            <td>
+                                ${upgrade.name}
+                            </td>
+
+                            <td>
+                                ${upgrade.cost} gp
+                            </td>
+
+                            <td>
+                                ${upgrade.effect}
+                            </td>
+
+                            <td>
+
+                                ${
+                                    upgrade.purchased
+
+                                    ?
+
+                                    `<span class="status good">
+                                        Purchased
+                                    </span>`
+
+                                    :
+
+                                    `<button
+                                        class="secondary"
+                                        onclick="purchaseUpgrade(${index})">
+
+                                        Purchase
+
+                                    </button>`
+                                }
+
+                            </td>
+
+                        </tr>
+
+                    `
+                    ).join("")
+                }
+
+            </tbody>
+
+        </table>
+
+    `;
+
+}
+
+
+/* =========================================================
+   STAFF
+   ========================================================= */
+
+function renderStaff() {
+
+    const wages =
+        calculateStaffWages();
+
+
+    document.getElementById(
+        "staffList"
+    ).innerHTML = `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Role
+                    </th>
+
+                    <th>
+                        Monthly Wage
+                    </th>
+
+                    <th>
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                ${
+                    data.staff.map(
+                        (staff, index) => `
+
+                        <tr>
+
+                            <td>
+                                ${staff.name}
+                            </td>
+
+                            <td>
+                                ${staff.role}
+                            </td>
+
+                            <td>
+                                ${staff.wage} gp
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="danger"
+                                    onclick="removeStaff(${index})">
+
+                                    Remove
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    `
+                    ).join("")
+                }
+
+            </tbody>
+
+            <tfoot>
+
+                <tr>
+
+                    <td colspan="2">
+                        <strong>
+                            Total wages
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${wages} gp
+                        </strong>
+                    </td>
+
+                    <td></td>
+
+                </tr>
+
+            </tfoot>
+
+        </table>
+
+    `;
+
+}
+
+
+/* =========================================================
+   STORES
+   ========================================================= */
+
+function renderStores() {
+
+    document.getElementById(
+        "storeList"
+    ).innerHTML = `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Item
+                    </th>
+
+                    <th>
+                        Quantity
+                    </th>
+
+                    <th>
+                        Capacity
+                    </th>
+
+                    <th>
+                        Monthly Use
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                ${
+                    data.stores.map(
+                        store => {
+
+                            const percentage =
+                                store.quantity /
+                                store.capacity;
+
+
+                            let status =
+                                "good";
+
+                            let text =
+                                "Adequate";
+
+
+                            if (
+                                percentage <= 0.2
+                            ) {
+
+                                status =
+                                    "bad";
+
+                                text =
+                                    "Low";
+
+                            }
+
+                            else if (
+                                percentage <= 0.4
+                            ) {
+
+                                status =
+                                    "warning";
+
+                                text =
+                                    "Watch";
+
+                            }
+
+
+                            return `
+
+                            <tr>
+
+                                <td>
+                                    ${store.name}
+                                </td>
+
+                                <td>
+                                    ${store.quantity}
+                                </td>
+
+                                <td>
+                                    ${store.capacity}
+                                </td>
+
+                                <td>
+                                    ${store.monthlyUse}
+                                </td>
+
+                                <td>
+
+                                    <span
+                                        class="status ${status}">
+
+                                        ${text}
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                            `;
+
+                        }
+                    ).join("")
+                }
+
+            </tbody>
+
+        </table>
+
+    `;
+
+}
+
+
+/* =========================================================
+   LOG
+   ========================================================= */
+
+function renderLog() {
+
+    document.getElementById(
+        "eventLog"
+    ).innerHTML =
+
+        data.log.length
+
+        ?
+
+        data.log.map(
+            entry => `
+
+            <div class="log-entry">
+
+                <div class="log-date">
+
+                    Month ${entry.month}
+                    · ${entry.season}
+                    · ${entry.date}
+
+                </div>
+
+                ${entry.message}
+
+            </div>
+
+        `
+        ).join("")
+
+        :
+
+        `<div class="empty">
+            No events recorded.
+        </div>`;
+
+}
+
+
+/* =========================================================
+   DM MODE
+   ========================================================= */
+
+const DM_PIN = "1234";
+
+
+function openDM() {
+
+    document
+        .getElementById(
+            "dmModal"
+        )
+        .classList.add("show");
+
+}
+
+
+function checkDM() {
+
+    const pin =
+        document.getElementById(
+            "dmPin"
+        ).value;
+
+
+    if (pin !== DM_PIN) {
+
+        alert(
+            "Incorrect PIN."
+        );
+
+        return;
+
+    }
+
+
+    closeModal(
+        "dmModal"
+    );
+
+
+    /*
+       Find the DM navigation button.
+    */
+
+    const buttons =
+        document.querySelectorAll(
+            ".nav-button"
+        );
+
+
+    buttons.forEach(
+        button => {
+
+            button.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+
+    document
+        .querySelectorAll(
+            ".page"
+        )
+        .forEach(
+            page =>
+                page.classList.remove(
+                    "active"
+                )
+        );
+
+
+    document
+        .getElementById(
+            "dm"
+        )
+        .classList.add("active");
+
+
+    document.getElementById(
+        "dmKeepName"
+    ).value =
+        data.keepName;
+
+
+    document.getElementById(
+        "dmMonth"
+    ).textContent =
+        data.month;
+
+
+    document.getElementById(
+        "dmSeason"
+    ).textContent =
+        getSeasonName();
+
+}
+
+
+/* =========================================================
+   CAMPAIGN SETTINGS
+   ========================================================= */
+
+function saveCampaignSettings() {
+
+    const name =
+        document.getElementById(
+            "dmKeepName"
+        ).value.trim();
+
+
+    if (name) {
+
+        data.keepName =
+            name;
+
+    }
+
+
+    save();
+    render();
+
+}
+
+
+/* =========================================================
+   EXPORT SAVE
+   ========================================================= */
+
+function exportSave() {
+
+    const json =
+        JSON.stringify(
+            data,
+            null,
+            2
+        );
+
+
+    const blob =
+        new Blob(
+            [json],
+            {
+                type:
+                    "application/json"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const a =
+        document.createElement(
+            "a"
+        );
+
+
+    a.href = url;
+
+    a.download =
+        "mountain-keep-save.json";
+
+
+    a.click();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+/* =========================================================
+   IMPORT SAVE
+   ========================================================= */
+
+function importSave(event) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file)
+        return;
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(e) {
+
+            try {
+
+                const imported =
+                    JSON.parse(
+                        e.target.result
+                    );
+
+
+                data =
+                    imported;
+
+
+                save();
+
+                render();
+
+
+                alert(
+                    "Campaign imported successfully."
+                );
+
+
+            }
+
+            catch {
+
+                alert(
+                    "Invalid campaign file."
+                );
+
+            }
+
+        };
+
+
+    reader.readAsText(
+        file
+    );
+
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+function resetCampaign() {
+
+    const confirmed =
+        confirm(
+            "This will permanently erase the current campaign from this browser. Continue?"
+        );
+
+
+    if (!confirmed)
+        return;
+
+
+    localStorage.removeItem(
+        "mountainKeep"
+    );
+
+
+    location.reload();
+
+}
+
+
+/* =========================================================
+   INITIALISE
+   ========================================================= */
+
+render();
+
+</script>
+
+</body>
+</html>
