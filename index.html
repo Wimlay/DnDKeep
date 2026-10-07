@@ -342,29 +342,30 @@ canvas{width:100%;height:320px;border:1px solid #eee;background:#fff}
     </div>
     <div style="margin-top:10px" class="small">Use the publishable/anon key only. Never put a Supabase service-role key in this page.</div>
   </div>
-  <div class="card" style="margin-top:14px">
-    <h2>Account</h2>
-    <div class="form-grid">
-      <div class="form-group"><label>Email</label><input id="authEmail" type="email"></div>
-      <div class="form-group"><label>Password</label><input id="authPassword" type="password"></div>
-      <button class="primary" onclick="signInShared()">Sign In</button>
-      <button class="secondary" onclick="signUpShared()">Create Account</button>
-    </div>
-    <div style="margin-top:10px" class="inline"><span id="authStatus" class="status neutral">Not signed in</span><button class="secondary" onclick="signOutShared()">Sign Out</button></div>
-  </div>
   <div class="grid g2" style="margin-top:14px">
     <div class="card">
-      <h2>Create Campaign</h2>
-      <p class="small">Creating a campaign makes your account its DM account.</p>
-      <div class="form-group"><label>Keep / Campaign Name</label><input id="newCampaignName" value="The Mountain Keep"></div>
-      <div class="form-group" style="margin-top:8px"><label>Join Code</label><input id="newCampaignCode" placeholder="e.g. mountain7"></div>
-      <button class="primary" style="margin-top:10px" onclick="createSharedCampaign()">Create Campaign</button>
+      <h2>DM Account</h2>
+      <p class="small">Only the DM needs an email/password account. Players can join with a name and campaign code.</p>
+      <div class="form-group"><label>Email</label><input id="authEmail" type="email"></div>
+      <div class="form-group" style="margin-top:8px"><label>Password</label><input id="authPassword" type="password"></div>
+      <div class="inline" style="margin-top:10px"><button class="primary" onclick="signInShared()">DM Sign In</button><button class="secondary" onclick="signUpShared()">Create DM Account</button></div>
+      <div style="margin-top:10px" class="inline"><span id="authStatus" class="status neutral">Not connected</span><button class="secondary" onclick="signOutShared()">Sign Out</button></div>
     </div>
     <div class="card">
-      <h2>Join Campaign</h2>
-      <p class="small">Enter the join code supplied by the DM.</p>
-      <div class="form-group"><label>Join Code</label><input id="joinCampaignCode"></div>
+      <h2>Player Join</h2>
+      <p class="small">Players only need their name and the campaign code from the DM. No email or password is required.</p>
+      <div class="form-group"><label>Player Name</label><input id="playerJoinName" placeholder="e.g. Will"></div>
+      <div class="form-group" style="margin-top:8px"><label>Campaign Code</label><input id="joinCampaignCode" placeholder="e.g. mountain7"></div>
       <button class="primary" style="margin-top:10px" onclick="joinSharedCampaign()">Join Campaign</button>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <h2>Create Campaign</h2>
+    <p class="small">DMs sign in above, then create a campaign and share its join code with the players.</p>
+    <div class="form-grid">
+      <div class="form-group"><label>Keep / Campaign Name</label><input id="newCampaignName" value="The Mountain Keep"></div>
+      <div class="form-group"><label>Join Code</label><input id="newCampaignCode" placeholder="e.g. mountain7"></div>
+      <button class="primary" onclick="createSharedCampaign()">Create Campaign</button>
     </div>
   </div>
   <div class="card" style="margin-top:14px">
@@ -1120,7 +1121,7 @@ async function signInShared(){if(!(await initSupabaseClient(true)))return;const 
 async function signOutShared(){if(!supabaseClient)return;disconnectRealtimeOnly();await supabaseClient.auth.signOut();authSession=null;sharedUser=null;activeRole=null;activeCampaignId=null;localStorage.removeItem('mountainKeepActiveCampaign');localStorage.removeItem('mountainKeepActiveRole');dmUnlocked=false;refreshCollaborationUI();setSyncStatus('Local only','neutral');}
 async function loadMyCampaigns(){if(!supabaseClient||!authSession)return;const r=await supabaseClient.rpc('list_my_keep_campaigns');if(r.error){console.error(r.error);return;}const campaigns=r.data||[];const el=document.getElementById('myCampaignList');if(!el)return;el.innerHTML=campaigns.length?`<table><tr><th>Campaign</th><th>Role</th><th></th></tr>${campaigns.map(c=>`<tr><td>${c.name}</td><td>${c.role}</td><td><button class="secondary" onclick="activateCampaign('${c.id}','${c.role}')">Open</button></td></tr>`).join('')}</table>`:`<span class="muted">No campaigns yet.</span>`;}
 async function createSharedCampaign(){if(!authSession){alert('Sign in first.');return;}const name=document.getElementById('newCampaignName').value.trim()||'The Mountain Keep',code=document.getElementById('newCampaignCode').value.trim();if(code.length<4){alert('Use a join code of at least 4 characters.');return;}const initialCore=sharedCoreState();initialCore.keepName=name;const r=await supabaseClient.rpc('create_keep_campaign',{p_name:name,p_join_code:code,p_core:initialCore});if(r.error){alert(r.error.message);return;}const c=r.data?.[0]||r.data;await activateCampaign(c.id,'dm');await pushSharedCampaign(false);alert('Campaign created. Give your players the Join Code.');}
-async function joinSharedCampaign(){if(!authSession){alert('Sign in first.');return;}const code=document.getElementById('joinCampaignCode').value.trim();if(!code){alert('Enter a join code.');return;}const r=await supabaseClient.rpc('join_keep_campaign',{p_join_code:code});if(r.error){alert(r.error.message);return;}const c=r.data?.[0]||r.data;await activateCampaign(c.id,'player');}
+async function joinSharedCampaign(){if(!(await initSupabaseClient(true)))return;const name=document.getElementById('playerJoinName').value.trim(),code=document.getElementById('joinCampaignCode').value.trim();if(!name){alert('Enter your player name.');return;}if(!code){alert('Enter the campaign code.');return;}if(!authSession||!authSession.user?.is_anonymous){if(authSession){alert('You are currently signed in as a DM account. Sign out before using Player Join.');return;}const a=await supabaseClient.auth.signInAnonymously({options:{data:{player_name:name}}});if(a.error){alert('Player join could not start: '+a.error.message+'\n\nMake sure Anonymous Sign-Ins are enabled in Supabase Authentication settings.');return;}authSession=a.data.session;sharedUser=a.data.user;}const r=await supabaseClient.rpc('join_keep_campaign',{p_join_code:code,p_player_name:name});if(r.error){alert(r.error.message);return;}localStorage.setItem('mountainKeepPlayerName',name);const c=r.data?.[0]||r.data;await activateCampaign(c.id,'player');}
 async function activateCampaign(id,role=null){if(!supabaseClient||!authSession)return;disconnectRealtimeOnly();activeCampaignId=id;activeRole=role||null;localStorage.setItem('mountainKeepActiveCampaign',id);localStorage.setItem('mountainKeepActiveRole',activeRole||'');const r=await supabaseClient.rpc('get_keep_campaign',{p_id:id});if(r.error){alert(r.error.message);return;}if(!r.data){alert('Campaign could not be loaded.');return;}syncApplying=true;applySharedState(r.data);syncVersion=Number(r.data.version||1);syncApplying=false;render();await refreshActiveRole();subscribeToCampaign();await loadMyCampaigns();refreshCollaborationUI();}
 async function refreshActiveRole(){if(!activeCampaignId||!supabaseClient)return;const r=await supabaseClient.rpc('get_my_keep_campaign',{p_id:activeCampaignId});if(!r.error&&r.data?.[0]){activeRole=r.data[0].role;localStorage.setItem('mountainKeepActiveRole',activeRole);if(activeRole!=='dm')dmUnlocked=false;}}
 function subscribeToCampaign(){disconnectRealtimeOnly();if(!supabaseClient||!activeCampaignId)return;realtimeChannel=supabaseClient.channel('campaign:'+activeCampaignId).on('postgres_changes',{event:'UPDATE',schema:'public',table:'campaigns',filter:`id=eq.${activeCampaignId}`},payload=>{const remoteVersion=Number(payload.new?.version||0);if(remoteVersion&&remoteVersion!==syncVersion)pullSharedCampaign(false);}).subscribe(status=>{if(status==='SUBSCRIBED')setSyncStatus('Shared / live','good');else if(status==='CHANNEL_ERROR')setSyncStatus('Realtime error','warning');});syncTimer=setInterval(()=>pullSharedCampaign(false),30000);}
@@ -1129,7 +1130,7 @@ function scheduleSharedPush(){if(syncApplying||!supabaseReady())return;clearTime
 async function pullSharedCampaign(manual=true){if(!supabaseReady()){if(manual)alert('Sign in and select a shared campaign first.');return false;}const r=await supabaseClient.rpc('get_keep_campaign',{p_id:activeCampaignId});if(r.error){console.error(r.error);setSyncStatus('Sync error','bad');if(manual)alert(r.error.message);return false;}const remote=r.data;if(!remote)return false;const remoteVersion=Number(remote.version||0);if(remoteVersion!==syncVersion){syncApplying=true;applySharedState(remote);syncVersion=remoteVersion;syncApplying=false;render();}setSyncStatus('Shared / live','good');return true;}
 async function pushSharedCampaign(manual=true){if(!supabaseReady()){if(manual)alert('Sign in and select a shared campaign first.');return false;}const r=await supabaseClient.rpc('save_keep_campaign',{p_id:activeCampaignId,p_expected_version:syncVersion,p_state:serializeSharedState()});if(r.error){console.error(r.error);setSyncStatus('Sync error','bad');if(manual)alert(r.error.message);return false;}const result=r.data?.[0]||r.data;if(result?.ok===false){await pullSharedCampaign(false);if(manual)alert('The shared campaign changed elsewhere. Your page has been refreshed to the latest version.');return false;}syncVersion=Number(result.version||syncVersion+1);setSyncStatus('Shared / live','good');return true;}
 async function disconnectSharedCampaign(){disconnectRealtimeOnly();activeCampaignId=null;activeRole=null;dmUnlocked=false;localStorage.removeItem('mountainKeepActiveCampaign');localStorage.removeItem('mountainKeepActiveRole');setSyncStatus('Local only','neutral');refreshCollaborationUI();}
-async function refreshCollaborationUI(){const cfg=backendConfig();if(document.getElementById('authUrl'))document.getElementById('authUrl').value=cfg?.url||'';if(document.getElementById('authKey'))document.getElementById('authKey').value=cfg?.key||'';document.querySelectorAll('#authStatus').forEach(el=>{el.textContent=authSession?`Signed in as ${authSession.user.email}`:'Not signed in';el.className='status '+(authSession?'good':'neutral');});if(document.getElementById('currentCampaignInfo'))document.getElementById('currentCampaignInfo').innerHTML=activeCampaignId?`<b>${data.keepName}</b><br><span class="small">Campaign ID: ${activeCampaignId}<br>Role: ${activeRole||'unknown'}</span>`:'<span class="muted">No shared campaign selected.</span>';if(document.getElementById('dmSharedCampaignInfo'))renderDMSharedInfo();}
+async function refreshCollaborationUI(){const cfg=backendConfig();if(document.getElementById('authUrl'))document.getElementById('authUrl').value=cfg?.url||'';if(document.getElementById('authKey'))document.getElementById('authKey').value=cfg?.key||'';document.querySelectorAll('#authStatus').forEach(el=>{el.textContent=authSession?(authSession.user.is_anonymous?`Player: ${localStorage.getItem('mountainKeepPlayerName')||authSession.user.user_metadata?.player_name||'Guest'}`:`DM: ${authSession.user.email}`):'Not connected';el.className='status '+(authSession?'good':'neutral');});if(document.getElementById('currentCampaignInfo'))document.getElementById('currentCampaignInfo').innerHTML=activeCampaignId?`<b>${data.keepName}</b><br><span class="small">Campaign ID: ${activeCampaignId}<br>Role: ${activeRole||'unknown'}</span>`:'<span class="muted">No shared campaign selected.</span>';if(document.getElementById('dmSharedCampaignInfo'))renderDMSharedInfo();}
 async function renderDMSharedInfo(){
   const el=document.getElementById('dmSharedCampaignInfo'), members=document.getElementById('dmMemberList');
   if(!activeCampaignId||!supabaseClient||activeRole!=='dm'){
@@ -1141,8 +1142,8 @@ async function renderDMSharedInfo(){
   if(r.error){el.innerHTML='<span class="muted">Unable to load shared campaign details.</span>';return;}
   const info=r.data?.[0]||r.data;
   el.innerHTML='<p><b>Campaign:</b> '+(info?.name||data.keepName)+'</p><p><b>Join Code:</b> <code>'+(info?.join_code||'—')+'</code></p><p><b>Version:</b> '+syncVersion+'</p>';
-  const rows=(info?.members||[]).map(m=>'<tr><td>'+((m.email||m.user_id)||'')+'</td><td>'+((m.role)||'')+'</td></tr>').join('');
-  members.innerHTML=info?.members?.length?'<table><tr><th>Email</th><th>Role</th></tr>'+rows+'</table>':'<span class="muted">No members.</span>';
+  const rows=(info?.members||[]).map(m=>'<tr><td>'+((m.player_name||m.email||m.user_id)||'')+'</td><td>'+((m.role)||'')+'</td></tr>').join('');
+  members.innerHTML=info?.members?.length?'<table><tr><th>Member</th><th>Role</th></tr>'+rows+'</table>':'<span class="muted">No members.</span>';
 }
 function exportSave(){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='mountain-keep-save.json';a.click();URL.revokeObjectURL(url);}
 function importSave(e){if(!requireDM())return;const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{data=JSON.parse(r.result);normalizeData();save();render();alert('Campaign imported.');}catch{alert('Invalid save file.');}};r.readAsText(f);}
