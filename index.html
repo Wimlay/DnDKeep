@@ -184,45 +184,6 @@ canvas{width:100%;height:320px;border:1px solid #eee;background:#fff}
     <button class="primary" onclick="repairWalls()">Repair Walls</button>
   </div>
 
-  <div class="card" style="margin-top:14px">
-    <h2>Possible Buildings to Construct</h2>
-    <div class="form-grid5">
-      <div class="form-group"><label>Name</label><input id="dmPossibleBuildingName"></div>
-      <div class="form-group"><label>Category</label><select id="dmPossibleBuildingCategory"><option>Building</option><option>Facility</option><option>Infrastructure</option></select></div>
-      <div class="form-group"><label>Cost</label><input id="dmPossibleBuildingCost" type="number"></div>
-      <div class="form-group"><label>Base Turns</label><input id="dmPossibleBuildingTurns" type="number" min="1"></div>
-      <div class="form-group"><label>Space</label><input id="dmPossibleBuildingSpace" type="number" min="0" value="5"></div>
-    </div>
-    <div class="form-grid5" style="margin-top:8px">
-      <div class="form-group"><label>Starting Condition</label><input id="dmPossibleBuildingCondition" type="number" min="0" max="100" value="100"></div>
-      <div class="form-group"><label>Monthly Maintenance</label><input id="dmPossibleBuildingMaint" type="number" min="0" value="10"></div>
-      <div class="form-group"><label>Initial Level</label><input id="dmPossibleBuildingLevel" type="number" min="1" value="1"></div>
-      <div class="form-group"><label>Wall / Gate?</label><select id="dmPossibleBuildingWalls"><option value="no">No</option><option value="yes">Yes</option></select></div>
-      <div class="form-group"><label>Required Keep Staff Rank</label><select id="dmPossibleBuildingReqRank"><option value="0">None</option><option value="1">1 — Steward</option><option value="2">2 — Journeyman</option><option value="3">3 — Tradesman</option><option value="4">4 — Foreman</option><option value="5">5 — Artisan</option></select></div>
-    </div>
-    <div class="form-grid5" style="margin-top:8px">
-      <div class="form-group"><label>Required Staff Count</label><input id="dmPossibleBuildingReqCount" type="number" min="0" value="0"></div>
-      <div class="form-group"><label>Output Item</label><select id="dmPossibleBuildingOutputItem"></select></div>
-      <div class="form-group"><label>Output / Turn</label><input id="dmPossibleBuildingOutputQty" type="number" min="0" step="0.1" value="0"></div>
-      <div class="form-group"><label>Income Modifier %</label><input id="dmPossibleBuildingIncomeMod" type="number" step="0.1" value="0"></div>
-      <div class="form-group"><label>Expense Modifier %</label><input id="dmPossibleBuildingExpenseMod" type="number" step="0.1" value="0"></div>
-    </div>
-    <div class="form-grid5" style="margin-top:8px">
-      <div class="form-group"><label>Output Modifier %</label><input id="dmPossibleBuildingOutputMod" type="number" step="0.1" value="0"></div>
-      <div class="form-group"><label>Maintenance Modifier %</label><input id="dmPossibleBuildingMaintMod" type="number" step="0.1" value="0"></div>
-      <div class="form-group"><label>Condition Decay Modifier %</label><input id="dmPossibleBuildingDecayMod" type="number" step="0.1" value="0"></div>
-      <div class="form-group"><label>Public Order / Turn</label><input id="dmPossibleBuildingOrderMod" type="number" step="1" value="0"></div>
-      <div class="form-group"><label>Tradesmen Crew Minimum</label><input id="dmPossibleBuildingTradesmen" type="number" min="0" value="0"></div>
-    </div>
-    <div class="form-grid5" style="margin-top:8px">
-      <div class="form-group"><label>Resource 1</label><select id="dmPossibleBuildingRes1"></select></div>
-      <div class="form-group"><label>Qty</label><input id="dmPossibleBuildingRes1Qty" type="number" min="0" value="0"></div>
-      <div class="form-group"><label>Resource 2</label><select id="dmPossibleBuildingRes2"></select></div>
-      <div class="form-group"><label>Qty</label><input id="dmPossibleBuildingRes2Qty" type="number" min="0" value="0"></div>
-      <button class="primary" onclick="addPossibleBuilding()">Add Possible Building</button>
-    </div>
-    <div id="dmPossibleBuildingList" style="margin-top:12px"></div>
-  </div>
 
   <div class="card" style="margin-top:14px">
     <h2>Maintenance Tasks</h2>
@@ -618,6 +579,47 @@ canvas{width:100%;height:320px;border:1px solid #eee;background:#fff}
   </div>
 
   <div class="card" style="margin-top:14px">
+    <h2>Possible Buildings to Construct</h2>
+    <div class="form-grid5">
+      <div class="form-group"><label>Name</label><input id="dmPossibleBuildingName"></div>
+      <div class="form-group"><label>Category</label><select id="dmPossibleBuildingCategory"><option>Building</option><option>Facility</option><option>Infrastructure</option></select></div>
+      <div class="form-group"><label>Cost</label><input id="dmPossibleBuildingCost" type="number"></div>
+      <div class="form-group"><label>Base Turns</label><input id="dmPossibleBuildingTurns" type="number" min="1"></div>
+      <div class="form-group"><label>Space</label><input id="dmPossibleBuildingSpace" type="number" min="0" value="5"></div>
+    </div>
+    <div class="form-grid5" style="margin-top:8px">
+      <div class="form-group"><label>Starting Condition</label><input id="dmPossibleBuildingCondition" type="number" min="0" max="100" value="100"></div>
+      <div class="form-group"><label>Monthly Maintenance</label><input id="dmPossibleBuildingMaint" type="number" min="0" value="10"></div>
+      <div class="form-group"><label>Initial Level</label><input id="dmPossibleBuildingLevel" type="number" min="1" value="1"></div>
+      <div class="form-group"><label>Wall / Gate?</label><select id="dmPossibleBuildingWalls"><option value="no">No</option><option value="yes">Yes</option></select></div>
+      <div class="form-group"><label>Required Keep Staff Rank</label><select id="dmPossibleBuildingReqRank"><option value="0">None</option><option value="1">1 — Steward</option><option value="2">2 — Journeyman</option><option value="3">3 — Tradesman</option><option value="4">4 — Foreman</option><option value="5">5 — Artisan</option></select></div>
+    </div>
+    <div class="form-grid5" style="margin-top:8px">
+      <div class="form-group"><label>Required Staff Count</label><input id="dmPossibleBuildingReqCount" type="number" min="0" value="0"></div>
+      <div class="form-group"><label>Output Item</label><select id="dmPossibleBuildingOutputItem"></select></div>
+      <div class="form-group"><label>Output / Turn</label><input id="dmPossibleBuildingOutputQty" type="number" min="0" step="0.1" value="0"></div>
+      <div class="form-group"><label>Income Modifier %</label><input id="dmPossibleBuildingIncomeMod" type="number" step="0.1" value="0"></div>
+      <div class="form-group"><label>Expense Modifier %</label><input id="dmPossibleBuildingExpenseMod" type="number" step="0.1" value="0"></div>
+    </div>
+    <div class="form-grid5" style="margin-top:8px">
+      <div class="form-group"><label>Output Modifier %</label><input id="dmPossibleBuildingOutputMod" type="number" step="0.1" value="0"></div>
+      <div class="form-group"><label>Maintenance Modifier %</label><input id="dmPossibleBuildingMaintMod" type="number" step="0.1" value="0"></div>
+      <div class="form-group"><label>Condition Decay Modifier %</label><input id="dmPossibleBuildingDecayMod" type="number" step="0.1" value="0"></div>
+      <div class="form-group"><label>Public Order / Turn</label><input id="dmPossibleBuildingOrderMod" type="number" step="1" value="0"></div>
+      <div class="form-group"><label>Tradesmen Crew Minimum</label><input id="dmPossibleBuildingTradesmen" type="number" min="0" value="0"></div>
+    </div>
+    <div class="form-grid5" style="margin-top:8px">
+      <div class="form-group"><label>Resource 1</label><select id="dmPossibleBuildingRes1"></select></div>
+      <div class="form-group"><label>Qty</label><input id="dmPossibleBuildingRes1Qty" type="number" min="0" value="0"></div>
+      <div class="form-group"><label>Resource 2</label><select id="dmPossibleBuildingRes2"></select></div>
+      <div class="form-group"><label>Qty</label><input id="dmPossibleBuildingRes2Qty" type="number" min="0" value="0"></div>
+      <button class="primary" onclick="addPossibleBuilding()">Add Possible Building</button>
+    </div>
+    <div id="dmPossibleBuildingList" style="margin-top:12px"></div>
+  </div>
+
+
+  <div class="card" style="margin-top:14px">
     <h2>Possible Building Upgrades</h2>
     <div class="form-grid5">
       <div class="form-group"><label>Upgrade Name</label><input id="dmUpgradeName" placeholder="Reinforced Gate"></div>
@@ -908,9 +910,12 @@ function monthlyNet(){return monthlyIncome()-monthlyExpenses();}
 function ledgerEntry(description,amount,category="Other",immediate=true){if(immediate)data.balance+=amount;data.ledger.unshift({year:data.year,month:monthName(),turn:data.turn,description,amount,balance:data.balance,category});data.transactions.unshift({year:data.year,month:monthName(),turn:data.turn,name:description,amount:Math.abs(amount),type:amount>=0?"income":"expense"});}
 
 function nav(){
-  const items=[['overview','Overview'],['finance','Finance'],['keep','Keep'],['staff','Staff'],['stores','Stores'],['factions','Factions'],['quests','Quests'],['history','History'],['log','Log'],['collab','Shared'],['dm','DM']];
+  const items=[['overview','Overview'],['finance','Finance'],['keep','Keep'],['staff','Staff'],['stores','Stores'],['factions','Factions'],['quests','Quests'],['history','History'],['log','Log'],['collab','Shared']];
+  // In a shared campaign, only an authenticated campaign DM gets a DM tab.
+  // Local/offline mode keeps the legacy PIN-gated DM tab as a fallback.
+  if(!activeCampaignId || activeRole==='dm') items.push(['dm','DM']);
   document.getElementById('nav').innerHTML=items.map(([id,label])=>`<button class="nav-button" onclick="${id==='dm'?'openDM()':`showPage('${id}',this)`}">${label}</button>`).join('');
-  document.querySelectorAll('#nav button')[0].classList.add('active');
+  document.querySelectorAll('#nav button')[0]?.classList.add('active');
 }
 function showPage(id,button){if(id==='dm'&&!dmUnlocked){openDM();return;}document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));const page=document.getElementById(id);if(!page)return;page.classList.add('active');document.querySelectorAll('#nav button').forEach(b=>b.classList.remove('active'));if(button)button.classList.add('active');if(id==='history')drawHistory();}
 function openDM(){if(activeCampaignId&&activeRole==='dm'){dmUnlocked=true;const btn=[...document.querySelectorAll('#nav button')].find(b=>b.textContent.trim()==='DM');showPage('dm',btn);render();return;}if(activeCampaignId&&activeRole!=='dm'){alert('Your account is a player in this campaign and does not have DM access.');return;}const modal=document.getElementById('dmModal');modal.classList.add('show');setTimeout(()=>document.getElementById('dmPin').focus(),50);}
@@ -1118,18 +1123,18 @@ function supabaseReady(){return !!supabaseClient&&!!authSession&&!!activeCampaig
 async function initSupabaseClient(showMessage=false){const cfg=backendConfig();if(!window.supabase||!cfg?.url||!cfg?.key){if(showMessage)alert('Save the Supabase Project URL and Publishable Key first.');return false;}try{if(supabaseClient)return true;supabaseClient=window.supabase.createClient(cfg.url,cfg.key);const sessionResult=await supabaseClient.auth.getSession();if(sessionResult.error)throw sessionResult.error;authSession=sessionResult.data.session;sharedUser=authSession?.user||null;supabaseClient.auth.onAuthStateChange((_event,session)=>{authSession=session;sharedUser=session?.user||null;refreshCollaborationUI();if(session)loadMyCampaigns();else{activeCampaignId=null;activeRole=null;disconnectRealtimeOnly();}});if(authSession)await loadMyCampaigns();refreshCollaborationUI();if(showMessage)setSyncStatus(authSession?'Signed in':'Supabase connected — sign in','good');return true;}catch(err){console.error(err);supabaseClient=null;authSession=null;sharedUser=null;setSyncStatus('Backend error','bad');if(showMessage)alert('Could not initialise Supabase. Check the URL and publishable key.');return false;}}
 async function signUpShared(){if(!(await initSupabaseClient(true)))return;const email=document.getElementById('authEmail').value.trim(),password=document.getElementById('authPassword').value;if(!email||!password){alert('Enter an email and password.');return;}if(password.length<6){alert('Use a password of at least 6 characters.');return;}const r=await supabaseClient.auth.signUp({email,password});if(r.error){alert(r.error.message);return;}if(!r.data.session)alert('Account created. Check your email if Supabase requires email confirmation, then sign in.');else alert('Account created and signed in.');refreshCollaborationUI();}
 async function signInShared(){if(!(await initSupabaseClient(true)))return;const email=document.getElementById('authEmail').value.trim(),password=document.getElementById('authPassword').value;if(!email||!password){alert('Enter an email and password.');return;}const r=await supabaseClient.auth.signInWithPassword({email,password});if(r.error){alert(r.error.message);return;}authSession=r.data.session;sharedUser=r.data.user;await loadMyCampaigns();refreshCollaborationUI();}
-async function signOutShared(){if(!supabaseClient)return;disconnectRealtimeOnly();await supabaseClient.auth.signOut();authSession=null;sharedUser=null;activeRole=null;activeCampaignId=null;localStorage.removeItem('mountainKeepActiveCampaign');localStorage.removeItem('mountainKeepActiveRole');dmUnlocked=false;refreshCollaborationUI();setSyncStatus('Local only','neutral');}
+async function signOutShared(){if(!supabaseClient)return;disconnectRealtimeOnly();await supabaseClient.auth.signOut();authSession=null;sharedUser=null;activeRole=null;activeCampaignId=null;localStorage.removeItem('mountainKeepActiveCampaign');localStorage.removeItem('mountainKeepActiveRole');dmUnlocked=false;nav();refreshCollaborationUI();setSyncStatus('Local only','neutral');}
 async function loadMyCampaigns(){if(!supabaseClient||!authSession)return;const r=await supabaseClient.rpc('list_my_keep_campaigns');if(r.error){console.error(r.error);return;}const campaigns=r.data||[];const el=document.getElementById('myCampaignList');if(!el)return;el.innerHTML=campaigns.length?`<table><tr><th>Campaign</th><th>Role</th><th></th></tr>${campaigns.map(c=>`<tr><td>${c.name}</td><td>${c.role}</td><td><button class="secondary" onclick="activateCampaign('${c.id}','${c.role}')">Open</button></td></tr>`).join('')}</table>`:`<span class="muted">No campaigns yet.</span>`;}
 async function createSharedCampaign(){if(!authSession){alert('Sign in first.');return;}const name=document.getElementById('newCampaignName').value.trim()||'The Mountain Keep',code=document.getElementById('newCampaignCode').value.trim();if(code.length<4){alert('Use a join code of at least 4 characters.');return;}const initialCore=sharedCoreState();initialCore.keepName=name;const r=await supabaseClient.rpc('create_keep_campaign',{p_name:name,p_join_code:code,p_core:initialCore});if(r.error){alert(r.error.message);return;}const c=r.data?.[0]||r.data;await activateCampaign(c.id,'dm');await pushSharedCampaign(false);alert('Campaign created. Give your players the Join Code.');}
 async function joinSharedCampaign(){if(!(await initSupabaseClient(true)))return;const name=document.getElementById('playerJoinName').value.trim(),code=document.getElementById('joinCampaignCode').value.trim();if(!name){alert('Enter your player name.');return;}if(!code){alert('Enter the campaign code.');return;}if(!authSession||!authSession.user?.is_anonymous){if(authSession){alert('You are currently signed in as a DM account. Sign out before using Player Join.');return;}const a=await supabaseClient.auth.signInAnonymously({options:{data:{player_name:name}}});if(a.error){alert('Player join could not start: '+a.error.message+'\n\nMake sure Anonymous Sign-Ins are enabled in Supabase Authentication settings.');return;}authSession=a.data.session;sharedUser=a.data.user;}const r=await supabaseClient.rpc('join_keep_campaign',{p_join_code:code,p_player_name:name});if(r.error){alert(r.error.message);return;}localStorage.setItem('mountainKeepPlayerName',name);const c=r.data?.[0]||r.data;await activateCampaign(c.id,'player');}
 async function activateCampaign(id,role=null){if(!supabaseClient||!authSession)return;disconnectRealtimeOnly();activeCampaignId=id;activeRole=role||null;localStorage.setItem('mountainKeepActiveCampaign',id);localStorage.setItem('mountainKeepActiveRole',activeRole||'');const r=await supabaseClient.rpc('get_keep_campaign',{p_id:id});if(r.error){alert(r.error.message);return;}if(!r.data){alert('Campaign could not be loaded.');return;}syncApplying=true;applySharedState(r.data);syncVersion=Number(r.data.version||1);syncApplying=false;render();await refreshActiveRole();subscribeToCampaign();await loadMyCampaigns();refreshCollaborationUI();}
-async function refreshActiveRole(){if(!activeCampaignId||!supabaseClient)return;const r=await supabaseClient.rpc('get_my_keep_campaign',{p_id:activeCampaignId});if(!r.error&&r.data?.[0]){activeRole=r.data[0].role;localStorage.setItem('mountainKeepActiveRole',activeRole);if(activeRole!=='dm')dmUnlocked=false;}}
+async function refreshActiveRole(){if(!activeCampaignId||!supabaseClient)return;const r=await supabaseClient.rpc('get_my_keep_campaign',{p_id:activeCampaignId});if(!r.error&&r.data?.[0]){activeRole=r.data[0].role;localStorage.setItem('mountainKeepActiveRole',activeRole);if(activeRole!=='dm')dmUnlocked=false;nav();}}
 function subscribeToCampaign(){disconnectRealtimeOnly();if(!supabaseClient||!activeCampaignId)return;realtimeChannel=supabaseClient.channel('campaign:'+activeCampaignId).on('postgres_changes',{event:'UPDATE',schema:'public',table:'campaigns',filter:`id=eq.${activeCampaignId}`},payload=>{const remoteVersion=Number(payload.new?.version||0);if(remoteVersion&&remoteVersion!==syncVersion)pullSharedCampaign(false);}).subscribe(status=>{if(status==='SUBSCRIBED')setSyncStatus('Shared / live','good');else if(status==='CHANNEL_ERROR')setSyncStatus('Realtime error','warning');});syncTimer=setInterval(()=>pullSharedCampaign(false),30000);}
 function disconnectRealtimeOnly(){if(syncTimer){clearInterval(syncTimer);syncTimer=null;}if(realtimeChannel&&supabaseClient){supabaseClient.removeChannel(realtimeChannel);}realtimeChannel=null;}
 function scheduleSharedPush(){if(syncApplying||!supabaseReady())return;clearTimeout(syncSaveTimer);syncSaveTimer=setTimeout(()=>pushSharedCampaign(false),400);}
 async function pullSharedCampaign(manual=true){if(!supabaseReady()){if(manual)alert('Sign in and select a shared campaign first.');return false;}const r=await supabaseClient.rpc('get_keep_campaign',{p_id:activeCampaignId});if(r.error){console.error(r.error);setSyncStatus('Sync error','bad');if(manual)alert(r.error.message);return false;}const remote=r.data;if(!remote)return false;const remoteVersion=Number(remote.version||0);if(remoteVersion!==syncVersion){syncApplying=true;applySharedState(remote);syncVersion=remoteVersion;syncApplying=false;render();}setSyncStatus('Shared / live','good');return true;}
 async function pushSharedCampaign(manual=true){if(!supabaseReady()){if(manual)alert('Sign in and select a shared campaign first.');return false;}const r=await supabaseClient.rpc('save_keep_campaign',{p_id:activeCampaignId,p_expected_version:syncVersion,p_state:serializeSharedState()});if(r.error){console.error(r.error);setSyncStatus('Sync error','bad');if(manual)alert(r.error.message);return false;}const result=r.data?.[0]||r.data;if(result?.ok===false){await pullSharedCampaign(false);if(manual)alert('The shared campaign changed elsewhere. Your page has been refreshed to the latest version.');return false;}syncVersion=Number(result.version||syncVersion+1);setSyncStatus('Shared / live','good');return true;}
-async function disconnectSharedCampaign(){disconnectRealtimeOnly();activeCampaignId=null;activeRole=null;dmUnlocked=false;localStorage.removeItem('mountainKeepActiveCampaign');localStorage.removeItem('mountainKeepActiveRole');setSyncStatus('Local only','neutral');refreshCollaborationUI();}
+async function disconnectSharedCampaign(){disconnectRealtimeOnly();activeCampaignId=null;activeRole=null;dmUnlocked=false;localStorage.removeItem('mountainKeepActiveCampaign');localStorage.removeItem('mountainKeepActiveRole');nav();setSyncStatus('Local only','neutral');refreshCollaborationUI();}
 async function refreshCollaborationUI(){const cfg=backendConfig();if(document.getElementById('authUrl'))document.getElementById('authUrl').value=cfg?.url||'';if(document.getElementById('authKey'))document.getElementById('authKey').value=cfg?.key||'';document.querySelectorAll('#authStatus').forEach(el=>{el.textContent=authSession?(authSession.user.is_anonymous?`Player: ${localStorage.getItem('mountainKeepPlayerName')||authSession.user.user_metadata?.player_name||'Guest'}`:`DM: ${authSession.user.email}`):'Not connected';el.className='status '+(authSession?'good':'neutral');});if(document.getElementById('currentCampaignInfo'))document.getElementById('currentCampaignInfo').innerHTML=activeCampaignId?`<b>${data.keepName}</b><br><span class="small">Campaign ID: ${activeCampaignId}<br>Role: ${activeRole||'unknown'}</span>`:'<span class="muted">No shared campaign selected.</span>';if(document.getElementById('dmSharedCampaignInfo'))renderDMSharedInfo();}
 async function renderDMSharedInfo(){
   const el=document.getElementById('dmSharedCampaignInfo'), members=document.getElementById('dmMemberList');
