@@ -447,6 +447,12 @@ canvas{width:100%;height:320px;border:1px solid #eee;background:#fff}
       <div class="form-group"><label>Public Order Penalty / 1% Rent Increase</label><input id="dmRentOrderPenalty" type="number" step=".1"></div>
       <div></div><button class="primary" onclick="saveRentRules()">Save Rent Rules</button>
     </div>
+    <div class="form-grid" style="margin-top:14px">
+      <div class="form-group"><label>New Village Name</label><input id="dmVillageName" placeholder="Village C"></div>
+      <div class="form-group"><label>Base Income</label><input id="dmVillageBase" type="number" min="0" value="100"></div>
+      <div class="form-group"><label>Rent Rate (%)</label><input id="dmVillageRate" type="number" min="0" max="100" value="10"></div>
+      <button class="primary" onclick="addVillage()">Add Village</button>
+    </div>
     <div id="villageDM" style="margin-top:14px"></div>
   </div>
 
@@ -710,7 +716,7 @@ canvas{width:100%;height:320px;border:1px solid #eee;background:#fff}
 <script>
 
 const DM_PIN = "1234";
-const SCHEMA_VERSION = 6;
+const SCHEMA_VERSION = 7;
 
 const GAME_RULES = {
   partyFoodPeople: 6,
@@ -796,6 +802,7 @@ const DEFAULT_DATA={
   taxRate:10, publicOrder:75, baseStoreCapacity:1000, keepSpaceBase:60, keepSpaceBonus:0, tradeCapacityBase:100,
   tradeUsed:0, tradePurchaseCost:0, tradeSalesRevenue:0, tradeMerchantBonus:0, tradeSaleMargin:25, merchantBonusPer:5, maxMerchants:5,
   foodUsePerPerson:1, firewoodUse:8, maintenanceBudget:100,
+  gameRules:{version:1,notes:"Campaign-adjustable rules are stored with the shared campaign. DM controls update these values so every connected player uses the same rules."},
   tollRoad:{trafficBase:1000,tollRate:10,seasonFactors:{Spring:1,Summer:1.2,Autumn:.7,Winter:.2},safetyFloor:.5,weights:{publicOrder:.4,wall:.4,reputation:.2}},
   rentConsequences:{repPenaltyPerPercent:.5,orderPenaltyPerPercent:.25},
   repairWalls:CLONE(GAME_RULES.repairWalls),
@@ -1056,7 +1063,7 @@ function renderDM(){
   document.getElementById('dmTradeMargin').value=data.tradeSaleMargin;document.getElementById('dmMerchantBonus').value=data.merchantBonusPer;document.getElementById('dmMaxMerchants').value=data.maxMerchants;document.getElementById('dmFoodUse').value=data.foodUsePerPerson;document.getElementById('dmFirewoodUse').value=data.firewoodUse;document.getElementById('dmRepairGold').value=data.repairWalls.gold;document.getElementById('dmRepairStone').value=data.repairWalls.stone;document.getElementById('dmRepairWood').value=data.repairWalls.wood;document.getElementById('dmRepairRestore').value=data.repairWalls.restore;document.getElementById('dmMaintenanceMaxLoss').value=data.maintenanceMaxConditionLoss;document.getElementById('dmBuffGood').value=Math.round((data.conditionBuffMultipliers.good||1)*100);document.getElementById('dmBuffDamaged').value=Math.round((data.conditionBuffMultipliers.damaged||.75)*100);document.getElementById('dmBuffSevere').value=Math.round((data.conditionBuffMultipliers.severe||.5)*100);document.getElementById('dmBuffDestroyed').value=Math.round((data.conditionBuffMultipliers.destroyed||0)*100);document.getElementById('dmTradesmanEfficiency').value=data.keepStaffConstruction.tradesmanEfficiency;document.getElementById('dmForemanEfficiency').value=data.keepStaffConstruction.foremanEfficiency;document.getElementById('dmArtisanEfficiency').value=data.keepStaffConstruction.artisanEfficiency;document.getElementById('dmMaxConstructionReduction').value=data.keepStaffConstruction.maxReduction;
   document.getElementById('keepStaffRulesList').innerHTML=`<table><tr><th>Promote To</th><th>Training Required</th><th>Gold Required</th></tr>${[2,3,4,5].map(r=>`<tr><td>${keepStaffTitle(r)}</td><td><input type="number" min="0" value="${data.keepStaffPromotion[r]?.training||0}" onchange="updateKeepStaffPromotionRule(${r},'training',this.value)"></td><td><input type="number" min="0" value="${data.keepStaffPromotion[r]?.gold||0}" onchange="updateKeepStaffPromotionRule(${r},'gold',this.value)"></td></tr>`).join('')}</table>`;
   document.getElementById('dmMonth').innerHTML=MONTHS.map((m,i)=>`<option value="${i}" ${i===data.monthIndex?'selected':''}>${m}</option>`).join('');
-  document.getElementById('villageDM').innerHTML=`<table><tr><th>Village</th><th>Base Income</th><th>Rent Rate (%)</th><th>Current Rent</th></tr>${data.villages.map((v,i)=>`<tr><td>${v.name}</td><td><input type="number" value="${v.baseIncome}" onchange="updateVillageBase(${i},this.value)"></td><td><input type="number" value="${v.rentRate}" onchange="updateVillageRent(${i},this.value)"></td><td>${money(villageRent(v))}</td></tr>`).join('')}</table>`;
+  document.getElementById('villageDM').innerHTML=`<table><tr><th>Village</th><th>Base Income</th><th>Rent Rate (%)</th><th>Current Rent</th><th></th></tr>${data.villages.map((v,i)=>`<tr><td><input value="${v.name}" onchange="updateVillageName(${i},this.value)"></td><td><input type="number" min="0" value="${v.baseIncome}" onchange="updateVillageBase(${i},this.value)"></td><td><input type="number" min="0" max="100" value="${v.rentRate}" onchange="updateVillageRent(${i},this.value)"></td><td>${money(villageRent(v))}</td><td><button class="danger" onclick="removeVillage(${i})">Remove</button></td></tr>`).join('')}</table>`;
   const specOptions=[...(data.artisanSpecialisations||[]),...(data.customArtisanSpecialisations||[])];document.getElementById('staffSpecialisation').innerHTML='<option value="">None</option>'+specOptions.map(x=>`<option value="${x.id}">${x.name}</option>`).join('');const resourceItems=ITEM_CATALOG.filter(i=>i.category==='Resources');document.getElementById('dmUpgradeRes1').innerHTML='<option value="">None</option>'+resourceItems.map(i=>`<option value="${i.id}">${i.label}</option>`).join('');document.getElementById('dmUpgradeRes2').innerHTML='<option value="">None</option>'+resourceItems.map(i=>`<option value="${i.id}">${i.label}</option>`).join('');
   document.getElementById('dmUpgradeStaff').innerHTML='<option value="0">None</option>'+[1,2,3,4,5].map(r=>`<option value="${r}">${r} — ${keepStaffTitle(r)}</option>`).join('');document.getElementById('dmBuildingOutputItem').innerHTML='<option value="">None</option>'+ITEM_CATALOG.filter(i=>!i.storageExcluded).map(i=>`<option value="${i.id}">${i.label}</option>`).join('');
   document.getElementById('dmNewItemCategory').innerHTML=data.categories.map(c=>`<option value="${c}">${c}</option>`).join('');
@@ -1087,6 +1094,9 @@ function saveStoreRules(){if(!requireDM())return;data.foodUsePerPerson=Math.max(
 function saveMaintenanceRule(){if(!requireDM())return;data.maintenanceMaxConditionLoss=Math.max(0,Number(document.getElementById('dmMaintenanceMaxLoss').value)||0);render();}
 function saveRepairRules(){if(!requireDM())return;data.repairWalls.gold=Math.max(0,Number(document.getElementById('dmRepairGold').value)||0);data.repairWalls.stone=Math.max(0,Number(document.getElementById('dmRepairStone').value)||0);data.repairWalls.wood=Math.max(0,Number(document.getElementById('dmRepairWood').value)||0);data.repairWalls.restore=Math.max(0,Number(document.getElementById('dmRepairRestore').value)||0);render();}
 function updateVillageBase(i,value){if(!requireDM())return;data.villages[i].baseIncome=Math.max(0,Number(value)||0);render();}
+function updateVillageName(i,value){if(!requireDM())return;const name=String(value||'').trim();if(!name)return;const old=data.villages[i].name;data.villages[i].name=name;const faction=data.factions.find(f=>f.name===old);if(faction)faction.name=name;render();}
+function addVillage(){if(!requireDM())return;const name=document.getElementById('dmVillageName').value.trim();if(!name)return;if(data.villages.some(v=>v.name.toLowerCase()===name.toLowerCase())){alert('A village with that name already exists.');return;}data.villages.push({name,baseIncome:Math.max(0,Number(document.getElementById('dmVillageBase').value)||0),rentRate:clamp(document.getElementById('dmVillageRate').value,0,100)});if(!data.factions.some(f=>f.name.toLowerCase()===name.toLowerCase()))data.factions.push({name,rep:0});document.getElementById('dmVillageName').value='';render();}
+function removeVillage(i){if(!requireDM())return;const v=data.villages[i];if(!v)return;if(!confirm(`Remove ${v.name} from the village rent system?`))return;data.villages.splice(i,1);render();}
 function updateItemValue(id,value){if(!requireDM())return;data.itemValues[id]=Math.max(0,Number(value)||0);render();}
 function updateStoreMonthlyUse(id,value){if(!requireDM())return;const s=ensureStore(id,0);s.monthlyUseOverride=Math.max(0,Number(value)||0);render();}
 function storeMonthlyUseSetting(id){const s=getStore(id);if(s?.monthlyUseOverride!==undefined)return Number(s.monthlyUseOverride);if(id==='resource_food')return baseFoodNeed();if(id==='resource_firewood')return baseFirewoodNeed();return 0;}
@@ -1139,10 +1149,19 @@ function importSave(e){if(!requireDM())return;const f=e.target.files[0];if(!f)re
 function resetCampaign(){if(!requireDM())return;if(confirm('Reset the local/browser copy? This does not erase the shared Supabase campaign.')){localStorage.removeItem('mountainKeep');location.reload();}}
 
 function normalizeData(){
+  const previousSchema=Number(data.schemaVersion||0);
   Object.keys(DEFAULT_DATA).forEach(k=>{if(data[k]===undefined)data[k]=CLONE(DEFAULT_DATA[k]);});
+  // Schema 7 repairs campaigns that lost the original starter villages/buildings during shared-state migration.
+  if(previousSchema<7){
+    if(!Array.isArray(data.villages)||data.villages.length===0)data.villages=CLONE(DEFAULT_DATA.villages);
+    if(!Array.isArray(data.buildings)||data.buildings.length===0)data.buildings=CLONE(DEFAULT_DATA.buildings);
+    const starterFactionNames=['Village A','Village B'];
+    starterFactionNames.forEach(name=>{if(!data.factions?.some(f=>f.name===name)){if(!Array.isArray(data.factions))data.factions=[];data.factions.push({name,rep:20});}});
+  }
   data.schemaVersion=SCHEMA_VERSION;
-  if(data.schemaVersion<6){}
   if(!data.turnStartBalance)data.turnStartBalance=data.balance;
+  if(!data.gameRules)data.gameRules=CLONE(DEFAULT_DATA.gameRules);
+  data.gameRules.version=1;
   data.taxRate=Number(data.taxRate??10);data.publicOrder=clamp(data.publicOrder,0,100);data.baseStoreCapacity=Number(data.baseStoreCapacity??GAME_RULES.storeBaseCapacity);data.keepSpaceBase=Number(data.keepSpaceBase??GAME_RULES.keepBaseSpace);data.keepSpaceBonus=Number(data.keepSpaceBonus||0);data.tradeCapacityBase=Number(data.tradeCapacityBase??GAME_RULES.tradeBaseCapacity);data.maxMerchants=Math.min(GAME_RULES.maxMerchants,Number(data.maxMerchants??GAME_RULES.maxMerchants));data.merchantBonusPer=Number(data.merchantBonusPer??5);data.tradeSaleMargin=Number(data.tradeSaleMargin??GAME_RULES.tradeSellMargin);data.foodUsePerPerson=Number(data.foodUsePerPerson??GAME_RULES.foodUsePerPerson);data.firewoodUse=Number(data.firewoodUse??GAME_RULES.firewoodUse);data.maintenanceBudget=Number(data.maintenanceBudget??100);
   if(!data.tollRoad)data.tollRoad=CLONE(DEFAULT_DATA.tollRoad);if(!data.tollRoad.seasonFactors)data.tollRoad.seasonFactors={Spring:data.tollRoad.springFactor??1,Summer:1.2,Autumn:.7,Winter:data.tollRoad.winterFactor??.2};if(!data.tollRoad.weights)data.tollRoad.weights=CLONE(GAME_RULES.tollWeights);data.tollRoad.weights.reputation=0;if(data.tollRoad.safetyFloor===undefined)data.tollRoad.safetyFloor=GAME_RULES.tollSafetyFloor;
   if(!data.rentConsequences)data.rentConsequences=CLONE(DEFAULT_DATA.rentConsequences);if(data.rentConsequences.repPenaltyPerPercent===undefined)data.rentConsequences.repPenaltyPerPercent=GAME_RULES.villageRentRepPenaltyPerPercent;if(data.rentConsequences.orderPenaltyPerPercent===undefined)data.rentConsequences.orderPenaltyPerPercent=GAME_RULES.villageRentOrderPenaltyPerPercent;
