@@ -1404,8 +1404,8 @@ const SHARED_ARRAY_KEYS=['income','otherExpenses','buildings','maintenance','pos
 // SHARED BACKEND CONFIGURATION
 // Paste your Supabase Project URL and PUBLISHABLE/ANON key here once before uploading to GitHub.
 // Never use a service_role or secret key in browser code.
-const SUPABASE_PROJECT_URL = 'PASTE_YOUR_SUPABASE_PROJECT_URL_HERE';
-const SUPABASE_PUBLISHABLE_KEY = 'PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE';
+const SUPABASE_PROJECT_URL = 'https://acvwrzmkngnzcufsfypv.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_jZ8KKn1eQ1NeNtT55tFryg_yPIDD4TG';
 function backendConfig(){
   const url=String(SUPABASE_PROJECT_URL||'').trim(),key=String(SUPABASE_PUBLISHABLE_KEY||'').trim();
   const configured=url.startsWith('https://')&&!url.includes('PASTE_YOUR_')&&key&&!key.includes('PASTE_YOUR_');
