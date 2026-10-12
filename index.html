@@ -1418,7 +1418,51 @@ function sharedCoreState(){const core=CLONE(data);SHARED_ARRAY_KEYS.forEach(k=>d
 function serializeSharedState(){const out={version:1,core:sharedCoreState()};SHARED_ARRAY_KEYS.forEach(k=>out[k]=CLONE(Array.isArray(data[k])?data[k]:[]));return out;}
 function applySharedState(snapshot){if(!snapshot)return;const core=snapshot.core||snapshot;data=Object.assign({},data,core);SHARED_ARRAY_KEYS.forEach(k=>{if(snapshot[k]!==undefined)data[k]=snapshot[k];});normalizeData();}
 function supabaseReady(){return !!supabaseClient&&!!authSession&&!!activeCampaignId;}
-async function initSupabaseClient(showMessage=false){const cfg=backendConfig();if(!window.supabase||!cfg?.url||!cfg?.key){if(showMessage)alert('The campaign server has not been configured in index.html yet. Ask the DM/site owner to add the Supabase Project URL and publishable key.');return false;}try{if(supabaseClient)return true;supabaseClient=window.supabase.createClient(cfg.url,cfg.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});const sessionResult=await supabaseClient.auth.getSession();if(sessionResult.error)throw sessionResult.error;authSession=sessionResult.data.session;sharedUser=authSession?.user||null;supabaseClient.auth.onAuthStateChange((_event,session)=>{authSession=session;sharedUser=session?.user||null;refreshCollaborationUI();if(session)loadMyCampaigns();else{activeCampaignId=null;activeRole=null;disconnectRealtimeOnly();}});if(authSession)await loadMyCampaigns();refreshCollaborationUI();if(showMessage)setSyncStatus(authSession?'Signed in':'Supabase connected — sign in','good');return true;}catch(err){console.error(err);supabaseClient=null;authSession=null;sharedUser=null;setSyncStatus('Backend error','bad');if(showMessage)alert('Could not initialise Supabase. Check the URL and publishable key.');return false;}}
+async function initSupabaseClient(showMessage=false){
+  const cfg=backendConfig();
+  if(!window.supabase||!cfg?.url||!cfg?.key){
+    if(showMessage)alert('Supabase is not available. Check the project settings and your internet connection.');
+    return false;
+  }
+  try{
+    if(supabaseClient)return true;
+    // A stable storage key keeps the same Supabase session across page reloads and deployments.
+    // Never store the password: Supabase stores and refreshes its own session tokens.
+    const storageKey='sb-'+new URL(cfg.url).hostname.split('.')[0]+'-auth-token';
+    supabaseClient=window.supabase.createClient(cfg.url,cfg.key,{
+      auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey,storage:window.localStorage}
+    });
+    // Restore the session before trying to load campaigns. A temporary auth event must
+    // not wipe the selected campaign while restoration is still underway.
+    const result=await supabaseClient.auth.getSession();
+    if(result.error)throw result.error;
+    authSession=result.data.session||null;
+    sharedUser=authSession?.user||null;
+    supabaseClient.auth.onAuthStateChange((event,session)=>{
+      authSession=session||null;
+      sharedUser=authSession?.user||null;
+      refreshCollaborationUI();
+      if(event==='SIGNED_OUT'){
+        disconnectRealtimeOnly();activeCampaignId=null;activeRole=null;dmUnlocked=false;
+        localStorage.removeItem('mountainKeepActiveCampaign');
+        localStorage.removeItem('mountainKeepActiveRole');
+        nav();
+      }else if(event==='SIGNED_IN'||event==='TOKEN_REFRESHED'){
+        // Supabase recommends not awaiting further Supabase calls inside this callback.
+        setTimeout(()=>{if(authSession)loadMyCampaigns();},0);
+      }
+    });
+    if(authSession)await loadMyCampaigns();
+    refreshCollaborationUI();
+    if(showMessage)setSyncStatus(authSession?'Signed in':'Supabase connected — sign in','good');
+    return true;
+  }catch(err){
+    console.error('Supabase session restoration failed:',err);
+    setSyncStatus('Sign-in restoration error','bad');
+    if(showMessage)alert('Could not restore the Supabase session: '+(err.message||String(err)));
+    return false;
+  }
+}
 async function signUpShared(){if(!(await initSupabaseClient(true)))return;const email=document.getElementById('authEmail').value.trim(),password=document.getElementById('authPassword').value;if(!email||!password){alert('Enter an email and password.');return;}if(password.length<6){alert('Use a password of at least 6 characters.');return;}const r=await supabaseClient.auth.signUp({email,password});if(r.error){alert(r.error.message);return;}if(!r.data.session)alert('Account created. Check your email if Supabase requires email confirmation, then sign in.');else alert('Account created and signed in.');refreshCollaborationUI();}
 async function signInShared(){if(!(await initSupabaseClient(true)))return;const email=document.getElementById('authEmail').value.trim(),password=document.getElementById('authPassword').value;if(!email||!password){alert('Enter an email and password.');return;}const r=await supabaseClient.auth.signInWithPassword({email,password});if(r.error){alert(r.error.message);return;}authSession=r.data.session;sharedUser=r.data.user;await loadMyCampaigns();refreshCollaborationUI();}
 async function signOutShared(){if(!supabaseClient)return;disconnectRealtimeOnly();await supabaseClient.auth.signOut();authSession=null;sharedUser=null;activeRole=null;activeCampaignId=null;localStorage.removeItem('mountainKeepActiveCampaign');localStorage.removeItem('mountainKeepActiveRole');dmUnlocked=false;localStorage.removeItem('mountainKeepLastPage');nav();refreshCollaborationUI();setSyncStatus('Local only','neutral');}
@@ -1803,11 +1847,12 @@ function renderManagementUI(){initManagementUI();const staff=managementStaffRows
  renderManagementHistory();
 }
 
-nav();normalizeData();document.getElementById('dm').classList.remove('active');render();initContentEditor();renderCampaignDashboard();
+nav();normalizeData();document.getElementById('dm').classList.remove('active');render();initContentEditor();renderCampaignDashboard();setSyncStatus('Restoring session…','neutral');
 (async()=>{
   const cfg=backendConfig();
   if(cfg?.url&&cfg?.key){
-    await initSupabaseClient(false);
+    const initialized=await initSupabaseClient(false);
+    if(initialized&&!authSession)setSyncStatus('Signed out — sign in once','warning');
     const savedId=localStorage.getItem('mountainKeepActiveCampaign');
     if(authSession&&savedId){
       // Verify campaign membership again on each load; never trust a cached DM role.
